@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>打印页</title>
+    <link rel="stylesheet" type="text/css" href="//img3.job1001.com/zhuanti/2018/nsrc_dbsys/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="//img3.job1001.com/myNew/2018/js/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="//img3.job1001.com/zhuanti/2018/nsrc_dbsys/css/style.css" />
+    <style>
+        #btn_box {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #aaa;
+        }
+        
+        #print_paper {
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: #fff;
+            background: #3E8EF7;
+        }
+        
+        .p_print {
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container p_print">
+        <div id="btn_box">
+            <a href="javascript:;" id="print_paper">打印问卷</a>
+            <a href="javascript:;" onclick="window.close()"></a>
+        </div>
+        <div class="body" id="content">
+            <!--xnz-->
+        </div>
+    </div>
+    <script type="text/html" id="template">
+        <table id="tb_a">
+            <tr class="tc strong">
+                <td colspan="8">A.单位基本情况</td>
+            </tr>
+            <!--A1 START-->
+            <tr>
+                <td class="order" rowspan="3">A1</td>
+                <td rowspan="3">单位注册信息</td>
+                <td>单位名称</td>
+                <td colspan="5">{{d.a1_1}}</td>
+            </tr>
+            <tr>
+                <td>法定代表人</td>
+                <td>{{d.a1_2}}</td>
+                <td>联系电话</td>
+                <td colspan="3">{{d.a1_3}}</td>
+            </tr>
+            <tr>
+                <td>单位HR联系人</td>
+                <td>{{d.a1_4}}</td>
+                <td>联系电话</td>
+                <td>{{d.a1_5}}</td>
+                <td>Email</td>
+                <td>{{d.a1_6}}</td>
+            </tr>
+            <!--A1 END-->
+            <!--A2 START-->
+            <tr>
+                <td class="order">A2</td>
+                <td colspan="2">
+                    <p class="strong">贵单位总部所在街道及区域</p>
+                    <p>（多选，最多选两个）</p>
+                </td>
+                <td colspan="5">
+                    <ul class="choise-list" data-choise="{{d.a2}}">
+                        <li>1.南头街道</li>
+                        <li>2.南山街道</li>
+                        <li>3.沙河街道</li>
+                        <li>4.蛇口街道</li>
+                        <li>5.招商街道</li>
+                        <li>6.粤海街道</li>
+                        <li>7.桃源街道</li>
+                        <li>8.西丽街道</li>
+                        <li>9.前海自贸区</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--A2 END-->
+            <!--A3 START-->
+            <tr>
+                <td class="order">A3</td>
+                <td colspan="2">
+                    <p class="strong">贵单位性质</p>
+                    <p>（单选）</p>
+                </td>
+                <td colspan="5">
+                    <ul class="choise-list" data-choise="{{d.a3}}">
+                        <li>1.国有企业</li>
+                        <li>2.集体企业</li>
+                        <li>3.股份合作企业</li>
+                        <li>4.联营企业</li>
+                        <li>5.有限责任公司</li>
+                        <li>6.股份有限公司</li>
+                        <li>7.私营企业</li>
+                        <li>8.港澳台投资企业</li>
+                        <li>9.外商投资企业</li>
+                        <li>10.个体经营</li>
+                        <li>11.事业单位</li>
+                        <li>12.机关单位</li>
+                        <li>13.其它：<span>{{d.a3_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--A3 END-->
+
+            <!--A4 START-->
+            <tr>
+                <td class="order">A4</td>
+                <td colspan="2">
+                    <p class="strong">贵单位所属行业类型</p>
+                    <p>（多选，不限制个数）</p>
+                </td>
+                <td colspan="5">
+                    <ul class="choise-list" data-choise="{{d.a4}}">
+                        <li>1.农、林、牧、渔业</li>
+                        <li>2.采矿业</li>
+                        <li>3.制造业</li>
+                        <li>4.电力、热力、燃气及水产和供应业</li>
+                        <li>5.建筑业</li>
+                        <li>6.批发和零售业</li>
+                        <li>7.交通运输、仓储和邮政业 </li>
+                        <li>8.住宿和餐饮业</li>
+                        <li>9.信息传输、软件和信息技术服务业</li>
+                        <li>10.金融业</li>
+                        <li>11.房地产业</li>
+                        <li>12.租赁和商务服务业</li>
+                        <li>13.科学研究和技术服务业</li>
+                        <li>14.水利、环境和公共设施管理业</li>
+                        <li>15.居民服务、修理和其他服务业</li>
+                        <li>16.教育</li>
+                        <li>17.卫生和社会工作</li>
+                        <li>18.文化、体育和娱乐业 </li>
+                        <li>19.公共管理、社会保障和社会组织</li>
+                        <li>20.国际组织</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--A4 END-->
+            <!--A5 START-->
+            <tr>
+                <td class="order">A5</td>
+                <td colspan="2">
+                    <p class="strong">贵单位是否属于南山区“十三五”期间重点发展的产业</p>
+                    <p>（多选，不限制个数）</p>
+                </td>
+                <td colspan="5">
+                    <ul class="choise-list" data-choise="{{d.a5}}">
+                        <li>1.信息技术产业</li>
+                        <li>2.文化创意产业</li>
+                        <li>3.互联网产业</li>
+                        <li>4.新材料产业</li>
+                        <li>5.新能源产业</li>
+                        <li>6.生物产业</li>
+                        <li>7.节能环保产业</li>
+                        <li>8.航空航天产业</li>
+                        <li>9.海洋产业</li>
+                        <li>10.生命健康产业</li>
+                        <li>11.信息技术产业</li>
+                        <li>12.金融业</li>
+                        <li>13.信息服务业</li>
+                        <li>14.科技服务业</li>
+                        <li>15.高端旅游业</li>
+                        <li>16.现代物流业</li>
+                        <li>17.专业服务和现代商贸业</li>
+                        <li>18.其它：<span>{{d.a5_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--A5 END-->
+            <!--A6 START-->
+            <tr>
+                <td class="order">A6</td>
+                <td colspan="2">
+                    <p class="strong">贵单位成立年限</p>
+                    <p>（单选）</p>
+                </td>
+                <td colspan="5">
+                    <ul class="choise-list" data-choise="{{d.a6}}">
+                        <li>1.1~3年</li>
+                        <li>2.4~7年</li>
+                        <li>3.8~10年</li>
+                        <li>4.10年以上</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--A6 END-->
+            <!--A7 START-->
+            <tr>
+                <td class="order">A7</td>
+                <td colspan="2">
+                    <p class="strong">贵单位上年度营业收入</p>
+                </td>
+                <td colspan="5"><span>{{d.a7}}</span>万元</td>
+            </tr>
+            <!--A7 END-->
+            <!--A8 START-->
+            <tr>
+                <td class="order">A8</td>
+                <td colspan="2">
+                    <p class="strong">贵单位上年度纳税额</p>
+                </td>
+                <td colspan="5"><span>{{d.a8}}</span>万元</td>
+            </tr>
+            <!--A8 END-->
+            <!--A9 START-->
+            <tr>
+                <td class="order">A9</td>
+                <td colspan="2">
+                    <p class="strong">贵单位上年度人工成本</p>
+                </td>
+                <td colspan="5"><span>{{d.a9}}</span>万元</td>
+            </tr>
+            <!--A9 END-->
+            <!--A10 START-->
+            <tr>
+                <td class="order" rowspan="2">A10</td>
+                <td colspan="2" rowspan="2">
+                    <p class="strong">贵单位盈利情况</p>
+                    <p>（单选）</p>
+                </td>
+                <td colspan="5">
+                    <span>本年度：</span>
+                    <ul class="choise-list" data-choise="{{d.a10_1}}">
+                        <li>1.持续盈利</li>
+                        <li>2.扭亏为盈</li>
+                        <li>3.亏损</li>
+                        <li>4.持续亏损</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <span>预计下年度：</span>
+                    <ul class="choise-list" data-choise="{{d.a10_2}}">
+                        <li>1.持续盈利</li>
+                        <li>2.扭亏为盈</li>
+                        <li>3.亏损</li>
+                        <li>4.持续亏损</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--A10 END-->
+            <!--A11 START-->
+            <tr>
+                <td class="order" rowspan="2">A11</td>
+                <td colspan="2" rowspan="2">
+                    <p class="strong">对贵单位生产经营影响最大的外部因素是：</p>
+                    <p>（单选）</p>
+                </td>
+                <td colspan="5">
+                    <ul class="choise-list" data-choise="{{d.a11}}">
+                        <li>1.国家的法律法规、国际公约等</li>
+                        <li>2.国家与地方政府的政策、方针与导向等</li>
+                        <li>3.国内外政治经济形势</li>
+                        <li>4.行业规范、标准、准则</li>
+                        <li>5.社会环境与公众责任</li>
+                        <li>6.市场环境与竞争，包括国际市场竞争</li>
+                        <li>7.客户需求与反馈</li>
+                        <li>8.其它：<span>{{d.a11_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--A11 END-->
+        </table>
+
+        <table id="tb_b">
+            <tr class="tc strong">
+                <td colspan="10">B.单位人才现状</td>
+            </tr>
+            <tr>
+                <td colspan="10">注：本问卷所称“人才”为大学专科及以上学历、或拥有技能等级证书的人员。</td>
+            </tr>
+            <!--B1 START-->
+            <tr>
+                <td class="order" rowspan="2">B1</td>
+                <td rowspan="2">
+                    <p class="strong">人员数量</p>
+                </td>
+                <td colspan="4">在岗员工总数</td>
+                <td colspan="4">南山区在岗员工数量</td>
+            </tr>
+            <tr>
+                <td colspan="4">{{d.b1_1}}</td>
+                <td colspan="4">{{d.b1_2}}</td>
+            </tr>
+            <!--B1 END-->
+            <!--B2 START-->
+            <tr>
+                <td class="order" rowspan="3">B2</td>
+                <td rowspan="3">
+                    <p class="strong">人才年龄、性别</p>
+                </td>
+                <td colspan="4">年龄分布</td>
+                <td colspan="4">性别分布</td>
+            </tr>
+            <tr>
+                <td>24岁及以下</td>
+                <td>25-34岁</td>
+                <td>35-44岁</td>
+                <td>45岁及以上</td>
+                <td colspan="2">男</td>
+                <td colspan="2">女</td>
+            </tr>
+            <tr>
+                <td>{{d.b2_1}}</td>
+                <td>{{d.b2_2}}</td>
+                <td>{{d.b2_3}}</td>
+                <td>{{d.b2_4}}</td>
+                <td colspan="2">{{d.b2_5}}</td>
+                <td colspan="2">{{d.b2_6}}</td>
+            </tr>
+            <!--B2 END-->
+            <!--B3 START-->
+            <tr>
+                <td class="order">B3</td>
+                <td>
+                    <p class="strong">人才专业</p>
+                </td>
+                <td colspan="2">
+                    <p>单位核心部门或核心业务的人才专业主要是：</p>
+                    <p>（多选，不限制个数）</p>
+                </td>
+                <td colspan="6">
+                    <ul class="choise-list" data-choise="{{d.b3}}">
+                        <li>1.哲学类</li>
+                        <li>2.法学类</li>
+                        <li>3.教育学类</li>
+                        <li>4.经济学类</li>
+                        <li>5.马克思主义理论类</li>
+                        <li>6.社会学类</li>
+                        <li>7.政治学类</li>
+                        <li>8.新闻传播学类</li>
+                        <li>9.历史学类</li>
+                        <li>10.数学类</li>
+                        <li>11.物理类</li>
+                        <li>12.化学类</li>
+                        <li>13.生物科学类</li>
+                        <li>14.天文学类</li>
+                        <li>15.地质学类</li>
+                        <li>16.地理科学类</li>
+                        <li>17.大气科学类</li>
+                        <li>18.海洋科学类</li>
+                        <li>19.电子信息科学类</li>
+                        <li>20.材料科学类</li>
+                        <li>21.环境科学类</li>
+                        <li>22.心理学类</li>
+                        <li>23.统计学类</li>
+                        <li>24.材料类</li>
+                        <li>25.机械类</li>
+                        <li>26.电气信息类</li>
+                        <li>27.土建类</li>
+                        <li>28.水利类</li>
+                        <li>29.交通运输类</li>
+                        <li>30.航空航天类</li>
+                        <li>31.医学类</li>
+                        <li>32.管理科学与工程类</li>
+                        <li>33.工商管理类</li>
+                        <li>34.公共管理类</li>
+                        <li>35.农学类</li>
+                        <li>36.文学类</li>
+                        <li>37.仪器仪表类</li>
+                        <li>38.能源动力类</li>
+                        <li>39.艺术类</li>
+                        <li>40.体育类</li>
+                        <li>41.其它<span>{{d.b3_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--B3 END-->
+            <!--B4 START-->
+            <tr>
+                <td class="order" rowspan="2">B4</td>
+                <td rowspan="2">
+                    <p class="strong">党建情况</p>
+                </td>
+                <td colspan="2">是否有党支部/党委</td>
+                <td colspan="6">党员人数（包含预备党员）</td>
+            </tr>
+            <tr>
+                <td colspan="2">{{d.b4_1}}</td>
+                <td colspan="6">{{d.b4_2}}</td>
+            </tr>
+            <!--B4 END-->
+            <!--B5 START-->
+            <tr>
+                <td class="order" rowspan="3">B5</td>
+                <td rowspan="3">
+                    <p class="strong">人才学历</p>
+                </td>
+                <td>学历分布</td>
+                <td>高中/中专/中技及以下</td>
+                <td>大专</td>
+                <td>本科</td>
+                <td colspan="2">硕士</td>
+                <td colspan="2">博士</td>
+            </tr>
+            <tr>
+                <td>在岗人才数量</td>
+                <td>{{d.b5_1}}</td>
+                <td>{{d.b5_2}}</td>
+                <td>{{d.b5_3}}</td>
+                <td colspan="2">{{d.b5_4}}</td>
+                <td colspan="2">{{d.b5_5}}</td>
+            </tr>
+            <tr>
+                <td>近一年人才需求数量</td>
+                <td>{{d.b5_6}}</td>
+                <td>{{d.b5_7}}</td>
+                <td>{{d.b5_8}}</td>
+                <td colspan="2">{{d.b5_9}}</td>
+                <td colspan="2">{{d.b5_10}}</td>
+            </tr>
+            <!--B5 END-->
+            <!--B6 START-->
+            <tr>
+                <td class="order" rowspan="3">B6</td>
+                <td rowspan="3">
+                    <p class="strong">职称情况</p>
+                </td>
+                <td>职称分布</td>
+                <td>正高级</td>
+                <td>副高级</td>
+                <td>中级</td>
+                <td colspan="2">初（助理）级</td>
+                <td colspan="2">初（员级）级</td>
+            </tr>
+            <tr>
+                <td>在岗人才数量</td>
+                <td>{{d.b6_1}}</td>
+                <td>{{d.b6_2}}</td>
+                <td>{{d.b6_3}}</td>
+                <td colspan="2">{{d.b6_4}}</td>
+                <td colspan="2">{{d.b6_5}}</td>
+            </tr>
+            <tr>
+                <td>近一年人才需求数量</td>
+                <td>{{d.b6_6}}</td>
+                <td>{{d.b6_7}}</td>
+                <td>{{d.b6_8}}</td>
+                <td colspan="2">{{d.b6_9}}</td>
+                <td colspan="2">{{d.b6_10}}</td>
+            </tr>
+            <!--B6 END-->
+            <!--B7 START-->
+            <tr>
+                <td class="order" rowspan="3">B7</td>
+                <td rowspan="3">
+                    <p class="strong">技能等级</p>
+                </td>
+                <td>技能等级分布</td>
+                <td>高级技师</td>
+                <td colspan="2">技师</td>
+                <td colspan="2">中级工</td>
+                <td colspan="2">初级工</td>
+            </tr>
+            <tr>
+                <td>在岗人才数量</td>
+                <td>{{d.b7_1}}</td>
+                <td colspan="2">{{d.b7_2}}</td>
+                <td colspan="2">{{d.b7_3}}</td>
+                <td colspan="2">{{d.b7_4}}</td>
+            </tr>
+            <tr>
+                <td>近一年人才需求数量</td>
+                <td>{{d.b7_5}}</td>
+                <td colspan="2">{{d.b7_6}}</td>
+                <td colspan="2">{{d.b7_7}}</td>
+                <td colspan="2">{{d.b7_8}}</td>
+            </tr>
+            <!--B7 END-->
+            <!--B8 START-->
+            <tr>
+                <td class="order" rowspan="4">B8</td>
+                <td rowspan="4">
+                    <p class="strong">人才来源</p>
+                </td>
+                <td rowspan="2">人才来源分布</td>
+                <td rowspan="2">外籍人才</td>
+                <td class="tc" colspan="6">国内人才</td>
+            </tr>
+            <tr>
+                <td colspan="2">留学归国人才</td>
+                <td colspan="2">国内应届毕业生</td>
+                <td colspan="2">国内社会招聘人才</td>
+            </tr>
+            <tr>
+                <td>在岗人才数量</td>
+                <td>{{d.b8_1}}</td>
+                <td colspan="2">{{d.b8_2}}</td>
+                <td colspan="2">{{d.b8_3}}</td>
+                <td colspan="2">{{d.b8_4}}</td>
+            </tr>
+            <tr>
+                <td>近一年人才需求数量</td>
+                <td>{{d.b8_5}}</td>
+                <td colspan="2">{{d.b8_6}}</td>
+                <td colspan="2">{{d.b8_7}}</td>
+                <td colspan="2">{{d.b8_8}}</td>
+            </tr>
+            <!--B8 END-->
+            <!--B9 START-->
+            <tr>
+                <td class="order" rowspan="3">B9</td>
+                <td rowspan="3">
+                    <p class="strong">人才岗位类别</p>
+                </td>
+                <td>岗位类别</td>
+                <td>管理岗</td>
+                <td>职能岗</td>
+                <td>营销岗</td>
+                <td>专业技术岗</td>
+                <td>生产岗</td>
+                <td>辅助岗</td>
+                <td>其它</td>
+            </tr>
+            <tr>
+                <td>在岗人才数量</td>
+                <td>{{d.b9_1}}</td>
+                <td>{{d.b9_2}}</td>
+                <td>{{d.b9_3}}</td>
+                <td>{{d.b9_4}}</td>
+                <td>{{d.b9_5}}</td>
+                <td>{{d.b9_6}}</td>
+                <td>{{d.b9_7}}</td>
+            </tr>
+            <tr>
+                <td>近一年人才需求数量</td>
+                <td>{{d.b9_8}}</td>
+                <td>{{d.b9_9}}</td>
+                <td>{{d.b9_10}}</td>
+                <td>{{d.b9_11}}</td>
+                <td>{{d.b9_12}}</td>
+                <td>{{d.b9_13}}</td>
+                <td>{{d.b9_14}}</td>
+            </tr>
+            <!--B9 END-->
+            <!--B10 START-->
+            <tr>
+                <td class="order" rowspan="4">B10</td>
+                <td rowspan="4">
+                    <p class="strong">人才户籍分布</p>
+                </td>
+                <td colspan="4">深户人才数量</td>
+                <td colspan="4">{{d.b10_1}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">非深户人才数量</td>
+                <td colspan="4">{{d.b10_2}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">港澳台地区人才数量</td>
+                <td colspan="4">{{d.b10_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">外国国籍人才数量</td>
+                <td colspan="4">{{d.b10_4}}</td>
+            </tr>
+            <!--B10 END-->
+            <!--B11 START-->
+            <tr>
+                <td class="order" rowspan="7">B11</td>
+                <td rowspan="7">
+                    <p class="strong">人才流动</p>
+                </td>
+                <td rowspan="2">人才流动情况</td>
+                <td colspan="3">本年度新招人才数量</td>
+                <td colspan="4">{{d.b11_1}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">本年度流失人才数量</td>
+                <td colspan="4">{{d.b11_2}}</td>
+            </tr>
+            <tr>
+                <td>近一年人才流动比例（单选）</td>
+                <td colspan="7">
+                    <ul class="choise-list" data-choise="{{d.b11_3}}">
+                        <li>1.小于等于2% </li>
+                        <li>2.大于2%，小于等于5%</li>
+                        <li>3.大于5%，小于等于10%</li>
+                        <li>4.大于10%，小于等于15%</li>
+                        <li>5.大于15%，小于等于20%</li>
+                        <li>6.大于20%，小于等于30%</li>
+                        <li>7.大于30%</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>流动最严重的前三个岗位</td>
+                <td colspan="3">岗位1</td>
+                <td colspan="2">岗位2</td>
+                <td colspan="2">岗位3</td>
+            </tr>
+            <tr>
+                <td>岗位名称</td>
+                <td colspan="3">{{d.b11_4}}</td>
+                <td colspan="2">{{d.b11_5}}</td>
+                <td colspan="2">{{d.b11_6}}</td>
+            </tr>
+            <tr>
+                <td>流失率</td>
+                <td colspan="3">{{d.b11_7}}</td>
+                <td colspan="2">{{d.b11_8}}</td>
+                <td colspan="2">{{d.b11_9}}</td>
+            </tr>
+            <tr>
+                <td>月工资中位数（元）</td>
+                <td colspan="3">{{d.b11_10}}</td>
+                <td colspan="2">{{d.b11_11}}</td>
+                <td colspan="2">{{d.b11_12}}</td>
+            </tr>
+            <!--B11 END-->
+            <!--B12 START-->
+            <tr>
+                <td class="order" rowspan="4">B12</td>
+                <td rowspan="4">
+                    <p class="strong">人才缺口</p>
+                </td>
+                <td>人才缺口最大的前三个岗位</td>
+                <td colspan="3">岗位1</td>
+                <td colspan="2">岗位2</td>
+                <td colspan="2">岗位3</td>
+            </tr>
+            <tr>
+                <td>岗位名称</td>
+                <td colspan="3">{{d.b12_1}}</td>
+                <td colspan="2">{{d.b12_2}}</td>
+                <td colspan="2">{{d.b12_3}}</td>
+            </tr>
+            <tr>
+                <td>紧缺人才数量</td>
+                <td colspan="3">{{d.b12_4}}</td>
+                <td colspan="2">{{d.b12_5}}</td>
+                <td colspan="2">{{d.b12_6}}</td>
+            </tr>
+            <tr>
+                <td>月工资中位数（元）</td>
+                <td colspan="3">{{d.b12_7}}</td>
+                <td colspan="2">{{d.b12_8}}</td>
+                <td colspan="2">{{d.b12_9}}</td>
+            </tr>
+            <!--B12 END-->
+            <!--B13 START-->
+            <tr>
+                <td class="order" rowspan="4">B13</td>
+                <td rowspan="4">
+                    <p class="strong">人才队伍建设</p>
+                    <p>（多选，最多选三项）</p>
+                </td>
+                <td>人才队伍建设存在的主要困难</td>
+                <td colspan="7">
+                    <ul class="choise-list" data-choise="{{d.b13}}">
+                        <li>1.暂时不存在困难</li>
+                        <li>2.人才总量不足</li>
+                        <li>3.人才结构不合理</li>
+                        <li>4.缺乏高层次人才</li>
+                        <li>5.缺乏高技能人才</li>
+                        <li>6.缺乏复合型人才</li>
+                        <li>7.人才流失严重</li>
+                        <li>8.人才需求不清晰</li>
+                        <li>9.缺乏有效的人才培养、激励手段</li>
+                        <li>10.其它：{{d.b13_0}}</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--B13 END-->
+        </table>
+        <table id="tb_c">
+            <tr class="tc strong">
+                <td colspan="10">C.人才引进与培养</td>
+            </tr>
+            <!--C1 START-->
+            <tr>
+                <td class="order" rowspan="5">C1</td>
+                <td rowspan="2">
+                    <p class="strong">贵单位人才引进计划：</p>
+                </td>
+                <td>本年度新引进人才数量</td>
+                <td>{{d.c1_1}}</td>
+            </tr>
+            <tr>
+                <td>下年度预计引进人才数量</td>
+                <td>{{d.c1_2}}</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <p class="strong">贵单位高校应届毕业生引进计划：</p>
+                </td>
+                <td>本年度新引进应届高校毕业生数量</td>
+                <td>{{d.c1_3}}</td>
+            </tr>
+            <tr>
+                <td>目前招聘高校毕业生人均工资水平（元/月）</td>
+                <td>{{d.c1_4}}</td>
+            </tr>
+            <tr>
+                <td>下年度预计引进应届毕业生数量</td>
+                <td>{{d.c1_5}}</td>
+            </tr>
+            <!--C1 END-->
+            <!--C2 START-->
+            <tr>
+                <td class="order" rowspan="4">C2</td>
+                <td rowspan="2">
+                    <p class="strong">贵单位人才招聘费用预算：</p>
+                </td>
+                <td>本年度人才招聘费用预算（单位：元）</td>
+                <td>{{d.c2_1}}</td>
+            </tr>
+            <tr>
+                <td>下年度人才招聘费用预算（单位：元）</td>
+                <td>{{d.c2_2}}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">
+                    <p class="strong">贵单位人才培养费用预算：</p>
+                </td>
+                <td>本年度人才培养费用预算（单位：元）</td>
+                <td>{{d.c2_3}}</td>
+            </tr>
+            <tr>
+                <td>下年度人才培养费用预算（单位：元）</td>
+                <td>{{d.c2_4}}</td>
+            </tr>
+            <!--C2 END-->
+            <!--C3 START-->
+            <tr>
+                <td class="order">C3</td>
+                <td>
+                    <p class="strong">贵单位引进人才的难易程度：</p>
+                    <p>（单选）</p>
+                </td>
+                <td colspan="2">
+                    <ul class="choise-list" data-choise="{{d.c3}}">
+                        <li>1.很容易（80%-100%能够招到）</li>
+                        <li>2.容易（能招到60%-80%）</li>
+                        <li>3.比较困难（能招到40%-60%）</li>
+                        <li>4.困难（只能招到20%-40%）</li>
+                        <li>5.很困难（招到不足20%）</li>
+                        <li>6.招收不到</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--C3 END-->
+            <!--C4 START-->
+            <tr>
+                <td class="order">C4</td>
+                <td>
+                    <p class="strong">贵单位人才引进的渠道主要有哪些：</p>
+                    <p>（多选，不限制个数）</p>
+                </td>
+                <td colspan="2">
+                    <ul class="choise-list" data-choise="{{d.c4}}">
+                        <li>1.通过企业官方网站发布招聘信息</li>
+                        <li>2.与专业招聘网站合作，发布招聘信息</li>
+                        <li>3.参加招聘会</li>
+                        <li>4.通过人才市场招聘</li>
+                        <li>5.通过专业寻猎机构进行招聘</li>
+                        <li>6.通过广告媒体分布招聘信息</li>
+                        <li>7.通过第三方招聘渠道，如社交软件群</li>
+                        <li>8.内部招聘</li>
+                        <li>9.员工推荐</li>
+                        <li>10.校园招聘</li>
+                        <li>11.人力资源外包</li>
+                        <li>12.通过大数据手段开展招聘</li>
+                        <li>13.其它: <span>{{d.c4_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--C4 END-->
+            <!--C5 START-->
+            <tr>
+                <td class="order">C5</td>
+                <td>
+                    <p class="strong">贵单位对归国留学人员的需求程度：</p>
+                    <p>（单选）</p>
+                </td>
+                <td colspan="2">
+                    <ul class="choise-list" data-choise="{{d.c5}}">
+                        <li>1.没有归国留学人员的招聘需求</li>
+                        <li>2.需要归国留学人员加入，但是未有明确招聘计划</li>
+                        <li>3.需要归国留学人员加入，已有明确招聘计划且正在开展招聘</li>
+                        <li>4.需要大量归国留学人员加入，已招聘到部分归国留学人员</li>
+                        <li>5.单位员工主要依赖归国留学人员引进</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--C5 END-->
+            <!--C6 START-->
+            <tr>
+                <td class="order">C6</td>
+                <td>
+                    <p class="strong">贵单位引进人才难度大的主要原因：</p>
+                    <p>（多选，最多选三项）</p>
+                </td>
+                <td colspan="2">
+                    <ul class="choise-list" data-choise="{{d.c6}}">
+                        <li>1.招聘信息发布渠道少，获得人才的信息有限</li>
+                        <li>2.较为缺乏所需岗位人才</li>
+                        <li>3.竞争对手对人才的抢夺非常激烈</li>
+                        <li>4.单位缺乏人才发展（包括单位经营管理、产品研发和技术创新等）支撑平台</li>
+                        <li>5.政府引才支持力度不强</li>
+                        <li>6.生活成本过高（住房/租房、物价等）</li>
+                        <li>7.公共设施不完善</li>
+                        <li>8.贵单位地处偏远，交通不便</li>
+                        <li>9.应聘者对薪水要求过高，单位难以满足应聘者的薪酬期望</li>
+                        <li>10.其它：<span>{{d.c6_0}}</span> </li>
+                    </ul>
+                </td>
+            </tr>
+            <!--C6 END-->
+            <!--C7 START-->
+            <tr>
+                <td class="order">C7</td>
+                <td>
+                    <p class="strong">贵单位在人才引进方面，需要的政府支持主要有：</p>
+                    <p>（多选，最多选三项）</p>
+                </td>
+                <td colspan="2">
+                    <ul class="choise-list" data-choise="{{d.c7}}">
+                        <li>1.举办大型人才交流会、招聘会、境外引智推介会等活动</li>
+                        <li>2.组织区政府组团外出招聘</li>
+                        <li>3.建立海外引才平台，如引才工作站</li>
+                        <li>4.加强创新创业扶持政策，吸引创新创业人才</li>
+                        <li>5.完善市级、区级人才引进与激励政策，提高人才服务质量</li>
+                        <li>6.提高区级人才租房和生活补贴额度</li>
+                        <li>7.减少人才引进阻碍，提高人才引进效率</li>
+                        <li>8.其它：<span>{{d.c7_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--C7 END-->
+            <!--C8 START-->
+            <tr>
+                <td class="order">C8</td>
+                <td>
+                    <p class="strong">贵单位的人才培养方式主要有：</p>
+                    <p>（多选，最多选三项）</p>
+                </td>
+                <td colspan="2">
+                    <ul class="choise-list" data-choise="{{d.c8}}">
+                        <li>1.定期组织内部人才培训</li>
+                        <li>2.人才轮岗制度</li>
+                        <li>3.人才外派培训</li>
+                        <li>4.导师辅导</li>
+                        <li>5.人才储备建立</li>
+                        <li>6.人才梯队建设</li>
+                        <li>7.开展继续教育</li>
+                        <li>8.其它：<span>{{d.c8_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--C8 END-->
+            <!--C9 START-->
+            <tr>
+                <td class="order">C9</td>
+                <td>
+                    <p class="strong">贵单位在人才培养方面，需要的政府支持主要有：</p>
+                    <p>（多选，最多选三项）</p>
+                </td>
+                <td colspan="2">
+                    <ul class="choise-list" data-choise="{{d.c9}}">
+                        <li>1.开展人才继续教育培训活动</li>
+                        <li>2.促进校企合作，引入高校资源为企业员工提供培训机会</li>
+                        <li>3.推进人才培养国际合作</li>
+                        <li>4.强化博士后“人才战略储备库”功能</li>
+                        <li>5.其它：<span>{{d.c9_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--C9 END-->
+        </table>
+        <table id="tb_d">
+            <tr class="tc strong">
+                <td colspan="10">D.人力资源服务</td>
+            </tr>
+            <!--D1 START-->
+            <tr>
+                <td class="order">D1</td>
+                <td>
+                    <p class="strong">贵单位采购过哪些人力资源服务：</p>
+                    <p>（多选，不限制个数）</p>
+                </td>
+                <td>
+                    <ul class="choise-list" data-choise="{{d.d1}}">
+                        <li>1.没采购过</li>
+                        <li>2.猎头/RPO </li>
+                        <li>3.招聘网站</li>
+                        <li>4.人力资源外包</li>
+                        <li>5.人力资源派遣</li>
+                        <li>6.人才测评</li>
+                        <li>7.人力资源培训</li>
+                        <li>8.薪酬数据调查</li>
+                        <li>9.转职服务</li>
+                        <li>10.人力资源管理咨询</li>
+                        <li>11.人力资源战略咨询</li>
+                        <li>12.其它：<span>{{d.d1_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--D1 END-->
+            <!--D2 START-->
+            <tr>
+                <td class="order">D2</td>
+                <td>
+                    <p class="strong">贵单位近3年，急需哪些人力资源服务：</p>
+                    <p>（多选，不限制个数）</p>
+                </td>
+                <td>
+                    <ul class="choise-list" data-choise="{{d.d2}}">
+                        <li>1.猎头/RPO </li>
+                        <li>2.招聘网站</li>
+                        <li>3.人力资源外包</li>
+                        <li>4.人力资源派遣</li>
+                        <li>5.人才测评</li>
+                        <li>6.人力资源培训</li>
+                        <li>7.薪酬数据调查</li>
+                        <li>8.转职服务</li>
+                        <li>9.人力资源管理咨询</li>
+                        <li>10.人力资源管理咨询</li>
+                        <li>11.其它：<span>{{d.d2_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--D2 END-->
+        </table>
+        <table id="tb_e">
+            <tr class="tc strong">
+                <td colspan="10">E.人才发展环境评价</td>
+            </tr>
+            <!--E1 START-->
+            <tr>
+                <td colspan="7">
+                    <p class="strong">E1.贵单位对南山区政府部门的公共行政服务便利性和效率性的总体评价是： （单选）</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <ul class="choise-list" data-choise="{{d.e1}}">
+                        <li>1.很不好</li>
+                        <li>2.不太好</li>
+                        <li>3.一般</li>
+                        <li>4.比较好</li>
+                        <li>5.很好</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--E1 END-->
+            <!--E2 START-->
+            <tr>
+                <td colspan="7">
+                    <p class="strong">E2.贵单位对南山区“领航计划”和《南山区人才工作分项资金实施细则》的熟悉程度是：</p>
+                    <p>（单选）</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">人才政策</p>
+                </td>
+                <td colspan="6">
+                    <p class="tc strong">熟悉程度</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">“领航计划”</p>
+                </td>
+                <td colspan="6">
+                    <ul class="choise-list" data-choise="{{d.e2_1}}">
+                        <li>1.不知道</li>
+                        <li>2.不太了解</li>
+                        <li>3.一般</li>
+                        <li>4.比较熟悉</li>
+                        <li>5.很熟悉</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">《南山区人才工作分项资金实施细则》</p>
+                </td>
+                <td colspan="6">
+                    <ul class="choise-list" data-choise="{{d.e2_2}}">
+                        <li>1.不知道</li>
+                        <li>2.不太了解</li>
+                        <li>3.一般</li>
+                        <li>4.比较熟悉</li>
+                        <li>5.很熟悉</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--E2 END-->
+            <!--E3 START-->
+            <tr>
+                <td colspan="7">
+                    <p class="strong">E3.贵单位认为南山区“领航计划”和《南山区人才工作分项资金实施细则》具体政策内容的合理性是：</p>
+                    <p>（单选）</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">人才政策</p>
+                </td>
+                <td colspan="6">
+                    <p class="tc strong">政策的合理性</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">“领航计划”</p>
+                </td>
+                <td colspan="6">
+                    <ul class="choise-list" data-choise="{{d.e3_1}}">
+                        <li>1.无法判断</li>
+                        <li>2.很不合理</li>
+                        <li>3.不太合理</li>
+                        <li>4.一般</li>
+                        <li>5.比较合理</li>
+                        <li>6.很合理</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">《南山区人才工作分项资金实施细则》</p>
+                </td>
+                <td colspan="6">
+                    <ul class="choise-list" data-choise="{{d.e3_2}}">
+                        <li>1.无法判断</li>
+                        <li>2.很不合理</li>
+                        <li>3.不太合理</li>
+                        <li>4.一般</li>
+                        <li>5.比较合理</li>
+                        <li>6.很合理</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--E3 END-->
+            <!--E4 START-->
+            <tr>
+                <td colspan="7">
+                    <p class="strong">E4.贵单位对南山区“领航计划”和《南山区人才工作分项资金实施细则》的总体满意度是：</p>
+                    <p>（单选）</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">人才政策</p>
+                </td>
+                <td colspan="6">
+                    <p class="tc strong">政策总体满意度</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">“领航计划”</p>
+                </td>
+                <td colspan="6">
+                    <ul class="choise-list" data-choise="{{d.e4_1}}">
+                        <li>1.非常不满意</li>
+                        <li>2.很不满意</li>
+                        <li>3.一般</li>
+                        <li>4.比较满意</li>
+                        <li>5.非常满意</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tc strong">《南山区人才工作分项资金实施细则》</p>
+                </td>
+                <td colspan="6">
+                    <ul class="choise-list" data-choise="{{d.e4_2}}">
+                        <li>1.非常不满意</li>
+                        <li>2.很不满意</li>
+                        <li>3.一般</li>
+                        <li>4.比较满意</li>
+                        <li>5.非常满意</li>
+                    </ul>
+                </td>
+            </tr>
+            <!--E4 END-->
+            <!--E5 START-->
+            <tr>
+                <td colspan="7">
+                    <p class="strong">E5.贵单位了解南山区人才政策的途径：</p>
+                    <p>（多选，不限制个数）</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <ul class="choise-list" data-choise="{{d.e5}}">
+                        <li>1.政府信息网站发布的人才政策</li>
+                        <li>2.主动联系政府相关部门</li>
+                        <li>3.政府部门开展的人才政策宣导活动</li>
+                        <li>4.政府部门微信公众号推送的人才政策信息</li>
+                        <li>5.电视广播等传统媒体宣传</li>
+                        <li>6.不知道通过何种渠道获取政策信息</li>
+                        <li>7.其它：<span>{{d.e5_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--E5 END-->
+            <!--E6 START-->
+            <tr>
+                <td colspan="7">
+                    <p class="strong">E6.贵单位认为南山区人才政策需要进一步完善的地方是：</p>
+                    <p>（多选，不限制个数）</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <ul class="choise-list" data-choise="{{d.e6}}">
+                        <li>1.政策制定的科学性</li>
+                        <li>2.政策的全面性</li>
+                        <li>3.政策的时效性</li>
+                        <li>4.政策的可操作性</li>
+                        <li>5.政策的执行落实</li>
+                        <li>6.政策的宣传</li>
+                        <li>7.其它：<span>{{d.e6_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--E6 END-->
+            <!--E7 START-->
+            <tr>
+                <td colspan="7">
+                    <p class="strong">E7.贵单位认为南山区政府部门在人才发展方面最应提供哪些支持：</p>
+                    <p>（多选，最多选三项））</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <ul class="choise-list" data-choise="{{d.e7}}">
+                        <li>1.为单位牵线搭桥，帮助单位开拓高层次人才引才渠道</li>
+                        <li>2.对单位引进高层次人才提供奖励补助或配套资助</li>
+                        <li>3.建立完善人才学习交流机制和平台</li>
+                        <li>4.建立人才、项目信息供需平台 </li>
+                        <li>5.让单位在员工职称评审过程中拥有更多自主权 </li>
+                        <li>6.加大科技成果转化的资金投入，打造更好的人才创新创业环境</li>
+                        <li>7.优化人才生活服务保障，妥善解决人才落户、住房、子女教育及医疗保障等生活问题</li>
+                        <li>8.放宽人才优惠政策申请的资格条件，让更多人才受惠</li>
+                        <li>9.加强人才政策的宣传力度 </li>
+                        <li>10.其它：<span>{{d.e7_0}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <!--E7 END-->
+        </table>
+
+    </script>
+    <div class="loading-page" id="loadmask">
+        <div class="mask"></div>
+        <p class="content">请稍后...</p>
+    </div>
+</body>
+<script src="//img3.job1001.com/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="//img3.job1001.com/myNew/2018/js/layui/layui.js" type="text/javascript"></script>
+<script src="//img3.job1001.com/zhuanti/2018/nsrc_dbsys/js/web_base.js" type="text/javascript"></script>
+<script src="//img3.job1001.com/zhuanti/2018/nsrc_dbsys/js/jQuery.print.js" type="text/javascript" charset="utf-8">
+</script>
+<script type="text/javascript">
+    layui.use(['laytpl', 'jquery', 'layer'], function() {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            laytpl = layui.laytpl;
+
+        $(document).on('click', '#print_paper', function() {
+            $('#btn_box').remove();
+            window.print();
+        });
+
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        getData();
+        //获取数据
+        function getData() {
+            var company_id = GetQueryString('company_id');
+            // console.log(company_id);
+            //  var _host = 'http://192.168.60.25:8081';
+            //var _host = '';
+            var _host = 'https://nsbigdata.job1001.com';
+            $.ajax({
+                type: "post",
+                //url: WEBCONFIG.webUrl + "/comInfoAll/Index/getComInfoAll",
+                // url: '{:url("comInfoAll/Index/getComInfoAll")}',
+                // url: 'https://www.easy-mock.com/mock/5b9274a1ca16547085a239e2/a/test',
+                url: _host +
+                    '/nsbigdata_api/webservice/index.jsp?user=bigtablesys&pwd=bigtable1001&gtype=http&version=v2&op=bigtablecontroller&func=getComInfoAll',
+                // url: _host+'/webservice/index.php?user=bigtablesys&pwd=bigtable1001&gtype=http&op=bigtablecontroller&func=getComInfoAll&gtype=http',
+                dataType: 'json',
+                data: {
+                    companyId: company_id
+                },
+                success: function(res) {
+                    //console.dir(res);
+                    if (res.code == 200) {
+                        $('#loadmask').hide()
+                        var _data = createData(res.data);
+                        // for(var key in _data){
+                        // 	_data[key]=key;
+                        // }
+                        renderData(_data);
+                    }
+                },
+                error: function(res, type) {
+                    // console.log(JSON.stringify(res))
+                    layer.msg('网络开小差了，请稍后重试！')
+                },
+                complete: function() {
+                    $('#loadmask').hide()
+                }
+            });
+        }
+        //模版引擎渲染数据
+        function renderData(data) {
+            var getTpl = $('#template').html(),
+                view = $('#content');
+            // console.dir(data)
+            laytpl(getTpl).render(data, function(html) {
+                view.html(html);
+                var choise_list = $('.choise-list');
+                $.each(choise_list, function(index, item) {
+                    var choise = $(item).data('choise');
+                    if (choise) {
+                        var choiseArr = choise.toString().split(',')
+                        for (var i = 0; i < choiseArr.length; i++) {
+                            $(item).find('li').eq(choiseArr[i] - 1).addClass('choised');
+                        }
+                        if (choiseArr[choiseArr.length - 1] == "[object Object]") {
+                            $(item).find('li').last().addClass('choised');
+                        }
+                    }
+                });
+                //自动打印
+                // window.print();
+            });
+
+        }
+
+        //二维对象有子对象判断
+        function havaSonObj(data, num) {
+            if (data && data.length) {
+                return data[data.length - 1] ? data[data.length - 1][num] ? data[data.length - 1][num] : '' : '';
+            } else if (typeof data == 'string') {
+                return data;
+            } else if (typeof data == 'object') {
+                return data[num];
+            } else {
+                return '';
+            }
+        }
+
+        //组装data
+        function createData(data) {
+            var _A = data.comBasicInfo;
+            var _B = data.talentStatus;
+            var _C = data.talentRecommendTrain;
+            var _D = data.resourceServices;
+            var _E = data.devEnvEvaluate;
+            var _data = {
+                a1_1: _A.companyName || '', //单位名称
+                a1_2: _A.legalName || '', //法定代表人
+                a1_3: _A.legalTel || '', //联系电话
+                a1_4: _A.companyHrName || '', //单位HR联系人
+                a1_5: _A.companyHrTel || '', //联系电话
+                a1_6: _A.companyHrEmail || '', //Email
+                a2: _A.area || '', //贵单位总部所在街道及区域
+                a3: _A.companyType || '', //贵单位性质
+                a3_0: havaSonObj(_A.companyType, 13),
+                a4: _A.tradeType || '', //贵单位所属行业类型
+                a5: _A.industry || '', //贵单位是否属于南山区“十三五”期间重点发展的产业
+                a5_0: havaSonObj(_A.industry, 18),
+                a6: _A.foundYear || '', //贵单位成立年限
+                a7: _A.aTaking.lastYearTaking || '', //贵单位上年度营业收入
+                a8: _A.aRatal.lastYearRatal || '', //贵单位上年度纳税额
+                a9: _A.aLaborCost.lastYearLaborCost || '', //贵单位上年度人工成本
+                a10_1: _A.aProfitSitBean.thisYearEarnings || '', //贵单位盈利情况-本年度
+                a10_2: _A.aProfitSitBean.nextYearEarnings || '', //贵单位盈利情况-下年度
+                a11: _A.businessInfluence || '', //对贵单位生产经营影响最大的外部因素是：
+                a11_0: havaSonObj(_A.businessInfluence, 8),
+                b1_1: _B.talent_total || '', //在岗员工总数
+                b1_2: _B.nanshan_talent_total || '', //南山区在岗员工数量
+                b2_1: _B.bPersonAge[0] ? _B.bPersonAge[0].age_number : '', //24岁及以下
+                b2_2: _B.bPersonAge[1] ? _B.bPersonAge[1].age_number : '', //25-34岁
+                b2_3: _B.bPersonAge[2] ? _B.bPersonAge[2].age_number : '', //35-44岁
+                b2_4: _B.bPersonAge[3] ? _B.bPersonAge[3].age_number : '', //45岁及以上
+                b2_5: _B.male_number || '', //男
+                b2_6: _B.female_number || '', //女
+                b3: _B.professional_type || '', //单位核心部门或核心业务的人才专业主要是：
+                b3_0: havaSonObj(_B.professional_type, 5),
+                b4_1: _B.party_branch || '', //是否有党支部/党委
+                b4_2: _B.party_members_number || '', //党员人数（包含预备党员）
+                b5_1: _B.bPersonEdus[0] ? _B.bPersonEdus[0].on_job_number : '', //人才学历-在岗人才数量-高中/中专/中技及以下	
+                b5_2: _B.bPersonEdus[1] ? _B.bPersonEdus[1].on_job_number : '', //人才学历-在岗人才数量-大专
+                b5_3: _B.bPersonEdus[2] ? _B.bPersonEdus[2].on_job_number : '', //人才学历-在岗人才数量-本科
+                b5_4: _B.bPersonEdus[3] ? _B.bPersonEdus[3].on_job_number : '', //人才学历-在岗人才数量-硕士
+                b5_5: _B.bPersonEdus[4] ? _B.bPersonEdus[4].on_job_number : '', //人才学历-在岗人才数量-博士
+                b5_6: _B.bPersonEdus[0] ? _B.bPersonEdus[0].requirements_number : '', //人才学历-近一年人才需求数量-高中/中专/中技及以下	
+                b5_7: _B.bPersonEdus[1] ? _B.bPersonEdus[1].requirements_number : '', //人才学历-近一年人才需求数量-大专
+                b5_8: _B.bPersonEdus[2] ? _B.bPersonEdus[2].requirements_number : '', //人才学历-近一年人才需求数量-本科
+                b5_9: _B.bPersonEdus[3] ? _B.bPersonEdus[3].requirements_number : '', //人才学历-近一年人才需求数量-硕士
+                b5_10: _B.bPersonEdus[4] ? _B.bPersonEdus[4].requirements_number : '', //人才学历-近一年人才需求数量-博士
+                b6_1: _B.bPersonJobTitle[0] ? _B.bPersonJobTitle[0].on_job_number : '', //职称情况-正高级-在岗人才数量
+                b6_2: _B.bPersonJobTitle[1] ? _B.bPersonJobTitle[1].on_job_number : '', //职称情况-副高级-在岗人才数量
+                b6_3: _B.bPersonJobTitle[2] ? _B.bPersonJobTitle[2].on_job_number : '', //职称情况-中级-在岗人才数量
+                b6_4: _B.bPersonJobTitle[3] ? _B.bPersonJobTitle[3].on_job_number : '', //职称情况-初（助理）级-在岗人才数量
+                b6_5: _B.bPersonJobTitle[4] ? _B.bPersonJobTitle[4].on_job_number : '', //职称情况-初（员级）级-在岗人才数量
+                b6_6: _B.bPersonJobTitle[0] ? _B.bPersonJobTitle[0].requirements_number : '', //职称情况-正高级-近一年人才需求数量
+                b6_7: _B.bPersonJobTitle[1] ? _B.bPersonJobTitle[1].requirements_number : '', //职称情况-副高级-近一年人才需求数量
+                b6_8: _B.bPersonJobTitle[2] ? _B.bPersonJobTitle[2].requirements_number : '', //职称情况-中级-近一年人才需求数量
+                b6_9: _B.bPersonJobTitle[3] ? _B.bPersonJobTitle[3].requirements_number : '', //职称情况-初（助理）级-近一年人才需求数量
+                b6_10: _B.bPersonJobTitle[4] ? _B.bPersonJobTitle[4].requirements_number : '', //职称情况-初（员级）级-近一年人才需求数量
+                b7_1: _B.bPersonSkill[0] ? _B.bPersonSkill[0].on_job_number : '', //技能等级-高级技师-在岗人才数量
+                b7_2: _B.bPersonSkill[1] ? _B.bPersonSkill[1].on_job_number : '', //技能等级-技师-在岗人才数量
+                b7_3: _B.bPersonSkill[2] ? _B.bPersonSkill[2].on_job_number : '', //技能等级-中级工-在岗人才数量
+                b7_4: _B.bPersonSkill[3] ? _B.bPersonSkill[3].on_job_number : '', //技能等级-初级工-在岗人才数量
+                b7_5: _B.bPersonSkill[0] ? _B.bPersonSkill[0].requirements_number : '', //技能等级-高级技师-近一年人才需求数量
+                b7_6: _B.bPersonSkill[1] ? _B.bPersonSkill[1].requirements_number : '', //技能等级-技师-近一年人才需求数量
+                b7_7: _B.bPersonSkill[2] ? _B.bPersonSkill[2].requirements_number : '', //技能等级-中级工-近一年人才需求数量
+                b7_8: _B.bPersonSkill[3] ? _B.bPersonSkill[3].requirements_number : '', //技能等级-初级工-近一年人才需求数量
+                b8_1: _B.bPersonSource[0] ? _B.bPersonSource[0].on_job_number : '', //人才来源-外籍人才-在岗人才数量
+                b8_2: _B.bPersonSource[1] ? _B.bPersonSource[1].on_job_number : '', //人才来源-留学归国人才	-在岗人才数量
+                b8_3: _B.bPersonSource[2] ? _B.bPersonSource[2].on_job_number : '', //人才来源-国内应届毕业生-在岗人才数量
+                b8_4: _B.bPersonSource[3] ? _B.bPersonSource[3].on_job_number : '', //人才来源-国内社会招聘人才-在岗人才数量
+                b8_5: _B.bPersonSource[0] ? _B.bPersonSource[0].requirements_number : '', //人才来源-外籍人才-近一年人才需求数量
+                b8_6: _B.bPersonSource[1] ? _B.bPersonSource[1].requirements_number : '', //人才来源-留学归国人才-近一年人才需求数量
+                b8_7: _B.bPersonSource[2] ? _B.bPersonSource[2].requirements_number : '', //人才来源-国内应届毕业生-近一年人才需求数量
+                b8_8: _B.bPersonSource[3] ? _B.bPersonSource[3].requirements_number : '', //人才来源-国内社会招聘人才-近一年人才需求数量
+                b9_1: _B.bPersonJobCategory[0] ? _B.bPersonJobCategory[0].on_job_number : '', //人才岗位类别-管理岗-在岗人才数量
+                b9_2: _B.bPersonJobCategory[1] ? _B.bPersonJobCategory[1].on_job_number : '', //人才岗位类别-职能岗-在岗人才数量
+                b9_3: _B.bPersonJobCategory[2] ? _B.bPersonJobCategory[2].on_job_number : '', //人才岗位类别-营销岗-在岗人才数量
+                b9_4: _B.bPersonJobCategory[3] ? _B.bPersonJobCategory[3].on_job_number : '', //人才岗位类别-专业技术岗-在岗人才数量
+                b9_5: _B.bPersonJobCategory[4] ? _B.bPersonJobCategory[4].on_job_number : '', //人才岗位类别-生产岗-在岗人才数量
+                b9_6: _B.bPersonJobCategory[5] ? _B.bPersonJobCategory[5].on_job_number : '', //人才岗位类别-辅助岗-在岗人才数量
+                b9_7: _B.bPersonJobCategory[6] ? _B.bPersonJobCategory[6].on_job_number : '', //人才岗位类别-其它-在岗人才数量
+                b9_8: _B.bPersonJobCategory[0] ? _B.bPersonJobCategory[0].requirements_number : '', //人才岗位类别-管理岗-近一年人才需求数量
+                b9_9: _B.bPersonJobCategory[1] ? _B.bPersonJobCategory[1].requirements_number : '', //人才岗位类别-职能岗-近一年人才需求数量
+                b9_10: _B.bPersonJobCategory[2] ? _B.bPersonJobCategory[2].requirements_number : '', //人才岗位类别-营销岗-近一年人才需求数量
+                b9_11: _B.bPersonJobCategory[3] ? _B.bPersonJobCategory[3].requirements_number : '', //人才岗位类别-专业技术岗-近一年人才需求数量
+                b9_12: _B.bPersonJobCategory[4] ? _B.bPersonJobCategory[4].requirements_number : '', //人才岗位类别-生产岗-近一年人才需求数量
+                b9_13: _B.bPersonJobCategory[5] ? _B.bPersonJobCategory[5].requirements_number : '', //人才岗位类别-辅助岗-近一年人才需求数量
+                b9_14: _B.bPersonJobCategory[6] ? _B.bPersonJobCategory[6].requirements_number : '', //人才岗位类别-其它-近一年人才需求数量
+                b10_1: _B.in_shenzhen_number || '', //人才户籍分布-深户人才数量
+                b10_2: _B.not_shenzhen_number || '', //人才户籍分布-非深户人才数量
+                b10_3: _B.special_area_number || '', //人才户籍分布-港澳台地区人才数量
+                b10_4: _B.foreign_number || '', //人才户籍分布-外国国籍人才数量
+                b11_1: _B.new_recruit_number || '', //人才流动-本年度新招人才数量
+                b11_2: _B.loss_number || '', //人才流动-本年度流失人才数量
+                b11_3: _B.flow_rate || '', //人才流动-近一年人才流动比例（单选）
+                b11_4: _B.bPersonFlow[0] ? _B.bPersonFlow[0].job_name : '', //人才流动-岗位1-岗位名称
+                b11_5: _B.bPersonFlow[1] ? _B.bPersonFlow[1].job_name : '', //人才流动-岗位2-岗位名称
+                b11_6: _B.bPersonFlow[2] ? _B.bPersonFlow[2].job_name : '', //人才流动-岗位3-岗位名称
+                b11_7: _B.bPersonFlow[0] ? _B.bPersonFlow[0].job_turnover_rate : '', //人才流动-岗位1-流失率
+                b11_8: _B.bPersonFlow[1] ? _B.bPersonFlow[1].job_turnover_rate : '', //人才流动-岗位2-流失率
+                b11_9: _B.bPersonFlow[2] ? _B.bPersonFlow[2].job_turnover_rate : '', //人才流动-岗位3-流失率
+                b11_10: _B.bPersonFlow[0] ? _B.bPersonFlow[0].job_salary : '', //人才流动-岗位1-月工资中位数（元）
+                b11_11: _B.bPersonFlow[1] ? _B.bPersonFlow[1].job_salary : '', //人才流动-岗位2-月工资中位数（元）
+                b11_12: _B.bPersonFlow[2] ? _B.bPersonFlow[2].job_salary : '', //人才流动-岗位3-月工资中位数（元）
+                b12_1: _B.bPersonGap[0] ? _B.bPersonGap[0].job_name : '', //人才缺口-岗位1-岗位名称
+                b12_2: _B.bPersonGap[1] ? _B.bPersonGap[1].job_name : '', //人才缺口-岗位2-岗位名称
+                b12_3: _B.bPersonGap[2] ? _B.bPersonGap[2].job_name : '', //人才缺口-岗位3-岗位名称
+                b12_4: _B.bPersonGap[0] ? _B.bPersonGap[0].job_number : '', //人才缺口-岗位1-紧缺人才数量	
+                b12_5: _B.bPersonGap[1] ? _B.bPersonGap[1].job_number : '', //人才缺口-岗位2-紧缺人才数量	
+                b12_6: _B.bPersonGap[2] ? _B.bPersonGap[2].job_number : '', //人才缺口-岗位3-紧缺人才数量	
+                b12_7: _B.bPersonGap[0] ? _B.bPersonGap[0].job_salary : '', //人才缺口-岗位1-月工资中位数（元）
+                b12_8: _B.bPersonGap[1] ? _B.bPersonGap[1].job_salary : '', //人才缺口-岗位2-月工资中位数（元）
+                b12_9: _B.bPersonGap[2] ? _B.bPersonGap[2].job_salary : '', //人才缺口-岗位3-月工资中位数（元）
+                b13: _B.team_build_difficulties || '', //人才队伍建设
+                b13_0: havaSonObj(_B.team_build_difficulties, 10),
+                c1_1: _C.this_year_recommend || '', //本年度新引进人才数量
+                c1_2: _C.next_year_recommend || '', //下年度预计引进人才数量	
+                c1_3: _C.this_year_graduate || '', //本年度新引进应届高校毕业生数量	
+                c1_4: _C.graduate_avg_salary || '', //目前招聘高校毕业生人均工资水平（元/月）	
+                c1_5: _C.next_year_graduate || '', //下年度预计引进应届毕业生数量
+                c2_1: _C.this_year_recruiting_spend || '', //本年度人才招聘费用预算（单位：元）
+                c2_2: _C.next_year_recruiting_spend || '', //下年度人才招聘费用预算（单位：元）
+                c2_3: _C.this_year_train_spend || '', //本年度人才培养费用预算（单位：元）
+                c2_4: _C.next_year_train_spend || '', //下年度人才培养费用预算（单位：元）
+                c3: _C.recommend_difficulty || '', //贵单位引进人才的难易程度：
+                c4: _C.recommend_way || '', //贵单位人才引进的渠道主要有哪些：
+                c4_0: havaSonObj(_C.recommend_way, 13),
+                c5: _C.returnee_demand || '', //贵单位对归国留学人员的需求程度：
+                c6: _C.recommend_difficulty_reason || '', //贵单位引进人才难度大的主要原因：
+                c6_0: havaSonObj(_C.recommend_difficulty_reason, 10),
+                c7: _C.recommend_gov_support || '', //贵单位在人才引进方面，需要的政府支持主要有：
+                c7_0: havaSonObj(_C.recommend_gov_support, 8),
+                c8: _C.train_way || '', //贵单位的人才培养方式主要有：
+                c8_0: havaSonObj(_C.train_way, 8),
+                c9: _C.gov_support_train || '', //贵单位在人才培养方面，需要的政府支持主要有：
+                c9_0: havaSonObj(_C.gov_support_train, 5),
+                d1: _D.purchased_services || '', //贵单位采购过哪些人力资源服务：
+                d1_0: havaSonObj(_D.purchased_services, 12),
+                d2: _D.urgent_need_services || '', //贵单位近3年，急需哪些人力资源服务：
+                d2_0: havaSonObj(_D.urgent_need_services, 11),
+                e1: _E.public_administration_services || '', //公共行政服务便利性和效率性的总体评价
+                e2_1: _E.pilot_plan_familiarity || '', //“领航计划”-熟悉程度
+                e2_2: _E.working_capital_familiarity || '', //《南山区人才工作分项资金实施细则》-熟悉程度
+                e3_1: _E.pilot_plan_rationality || '', //“领航计划”-政策的合理性
+                e3_2: _E.working_capital_rationality || '', //《南山区人才工作分项资金实施细则》-政策的合理性
+                e4_1: _E.pilot_plan_satisfaction || '', //“领航计划”-政策总体满意度
+                e4_2: _E.working_capital_satisfaction || '', //《南山区人才工作分项资金实施细则》-政策总体满意度
+                e5: _E.acquire_policy_way || '', //贵单位了解南山区人才政策的途径
+                e5_0: havaSonObj(_E.acquire_policy_way, 7),
+                e6: _E.gov_need_promote || '', //贵单位认为南山区人才政策需要进一步完善的地方是
+                e6_0: havaSonObj(_E.gov_need_promote, 7),
+                e7: _E.gov_need_provide_support || '', //贵单位认为南山区政府部门在人才发展方面最应提供哪些支持
+                e7_0: havaSonObj(_E.gov_need_provide_support, 10),
+            }
+
+            return _data;
+        }
+
+    })
+</script>
+
+</html>
