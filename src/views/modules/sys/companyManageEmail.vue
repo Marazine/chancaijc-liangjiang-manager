@@ -187,7 +187,11 @@ export default {
                 }
                 this.dataListLoading = false;
             } catch (error) {
-                this.$message.error(error);
+                if(typeof error == 'object'){
+                    this.$message.error("网络错误！");
+                } else {
+                    this.$message.error(error);
+                }
             }
         },
         // 查看详情

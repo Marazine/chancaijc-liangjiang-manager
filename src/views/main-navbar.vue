@@ -172,7 +172,6 @@
                                 name: "login"
                             });
                             this.$message.success(data.status_desc);
-                            this.$message.info(data.status_desc);
                         });
                     })
                     .catch(err => {

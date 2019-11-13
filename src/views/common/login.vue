@@ -189,6 +189,7 @@ export default {
         data: param
       }).then(({ data }) => {
         if (data && data.code == 200) {
+          sessionStorage.setItem('user', JSON.stringify(data.data || {}))
           this.$cookie.set("token", data.user);
           this.$router.replace({ name: "home" });
         }

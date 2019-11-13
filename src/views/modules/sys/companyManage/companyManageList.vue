@@ -29,6 +29,23 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item v-if="!(role_id.length == 1 && role_id[0] == 2) && isAuth('sys:company:setStatus')">
+          <el-select  v-model="condition.investigator" filterable clearable placeholder="调研人员">
+            <el-option
+              v-for="item in surveyOptions"
+              :key="item.userId"
+              :label="item.userName"
+              :value="item.userId">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-select  v-model="condition.allot" filterable clearable placeholder="分配状态">
+            <el-option label="不限" value=""></el-option>
+            <el-option label="已分配" value="1"></el-option>
+            <el-option label="未分配" value="2"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="serchData()">查询</el-button>
         </el-form-item>
@@ -36,9 +53,11 @@
     <!-- 表单搜索 END -->
     <!-- 新增预设企业, 导入预设企业, 批量发送邮件 START -->
     <div class="company-management-list-operation">
-      <el-button v-if="isAuth('sys:company:getComById')" type="primary" @click="addOrUpdateCompany('add')">新增预设企业</el-button>
-      <el-button v-if="isAuth('sys:company:saveCom')" type="primary" @click="exportCompany">导入预设企业</el-button>
+      <el-button v-if="isAuth('sys:company:saveCom')" type="primary" @click="addOrUpdateCompany('add')">新增预设企业</el-button>
+      <el-button v-if="isAuth('sys:company:importCom')" type="primary" @click="exportCompany">导入预设企业</el-button>
       <el-button v-if="isAuth('sys:company:sendEmail')" type="primary" @click="showEmailInfoDialog('more')">批量发送邮件</el-button>
+      <el-button v-if="isAuth('sys:company:distributeCom')" type="primary" @click="showAllotDialog('more')">批量分配企业</el-button>
+
     </div>
     <!-- 新增预设企业, 导入预设企业, 批量发送邮件 END -->
     <!-- 展示列表 START -->
@@ -48,6 +67,18 @@
       <el-table-column prop="companyName" label="企业名称" align="center" width="200" fixed></el-table-column>
       <el-table-column prop="linkMobile" label="联系电话" align="center" width="120"></el-table-column>    
       <el-table-column prop="linkEmail" label="联系邮箱" align="center" width="200"></el-table-column>    
+      <el-table-column prop="visitName" label="调研人员" align="center" width="100">
+        <template slot-scope="scope">
+         <span v-if="scope.row.visitName">{{scope.row.visitName}}</span>
+         <span v-else>--</span>
+        </template>
+      </el-table-column>    
+      <el-table-column prop="visitStatus" label="调研状态" align="center" width="100">
+        <template slot-scope="scope">
+         <span v-if="scope.row.visitStatus == 1">已走访</span>
+         <span v-else>待走访</span>
+        </template>
+      </el-table-column>    
       <el-table-column prop="companyFrom" label="类型" align="center" width="100">
         <template slot-scope="scope">
           {{getCompanyFrom(scope.row.companyFrom)}}
@@ -65,10 +96,19 @@
       <el-table-column fixed="right" header-align="center" align="center" label="操作" width="200">
         <template slot-scope="scope">
           <el-button v-if="isAuth('sys:company:getComById')" type="text" size="small" @click="checkInfo(scope.row)">查看详情</el-button>
-          <el-button v-if="isAuth('sys:company:getComById')" type="text" size="small" @click="addOrUpdateCompany('update', scope.row)">编辑</el-button>
-          <el-button v-if="isAuth('sys:company:deleteCom')" type="text" size="small" @click="deleteCom(scope.row)">删除</el-button>
-          <el-button v-if="isAuth('sys:company:checkPaper')" type="text" size="small" @click="checkPaper(scope.row)">查看问卷</el-button>
-          <el-button v-if="isAuth('sys:company:sendEmail')" type="text" size="small" @click="showEmailInfoDialog('only', scope.row)">发送邮件</el-button>
+          <el-dropdown trigger="click">
+            <span class="el-dropdown-link">
+              <el-button type="text" size="small">操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:getComById')&&isAuth('sys:company:getComByIdEdit')" type="text" size="small" @click="addOrUpdateCompany('update', scope.row)">编辑</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:deleteCom')" type="text" size="small" @click="deleteCom(scope.row)">删除</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:checkPaper')" type="text" size="small" @click="checkPaper(scope.row)">查看问卷</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:sendEmail')" type="text" size="small" @click="showEmailInfoDialog('only', scope.row)">发送邮件</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:distributeCom')" type="text" size="small" @click="showAllotDialog('only', scope.row)">分配企业</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:setStatus') && scope.row.visitId" type="text" size="small" @click="markVisit('only', scope.row)">标记走访</el-button></el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </template>
       </el-table-column>
     </el-table>
@@ -193,6 +233,27 @@
       </span>
     </el-dialog>
     <!-- 导入预设企业 END -->
+    
+    <!-- 分配企业 START -->
+    <el-dialog title="分配企业" v-if="allotCompany" :visible.sync="allotCompany" width="500px">
+      <el-form :model="formAllot">
+        <el-form-item label="调研人员" label-width="100px">
+          <el-select  v-model="formAllot.investigator" filterable clearable placeholder="调研人员">
+            <el-option
+              v-for="item in surveyOptions"
+              :key="item.userId"
+              :label="item.userName"
+              :value="item.userId">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="allotCompany = false">取 消</el-button>
+        <el-button type="primary" @click="updateAllot">确 定</el-button>
+      </div>
+    </el-dialog>
+    <!-- 分配企业 END -->
   </div>
 </template>
 <script>
@@ -218,7 +279,34 @@ export default {
         callback();
       }
     };
+    const role_id = JSON.parse(sessionStorage.getItem('user')).roleIdList;
+    const admin_id = JSON.parse(sessionStorage.getItem('user')).admin_id;
     return {
+      role_id: role_id, //角色ID
+      admin_id: admin_id, //用户ID
+      getloading:false,
+      // 分配企业
+      formAllot:{
+        companyId:[],
+        investigator:''
+      },
+      // 分配企业弹框
+      allotCompany: false,
+      companySelection:[],
+      surveyOptions:[
+        {
+          id: '11',
+          user_name: '大肖'
+        },
+        {
+          id: '12',
+          user_name: '中肖'
+        },
+        {
+          id: '13',
+          user_name: '小肖'
+        }
+      ],// 调研人员
       uploadUrl:'',
       // 搜索信息
       condition: {
@@ -226,6 +314,8 @@ export default {
         linkMobile: '',
         status: '',
         companyFrom: '',
+        investigator:'',//调研人员
+        allot: '', //分配状态
         pageNo: 1,
         pageSize: 10,
       },
@@ -293,7 +383,7 @@ export default {
           { required: true, validator: checkPhone, trigger: 'blur' }
         ],
       },
-      multipleSelection: [],
+      multipleSelection: [], //多条已选数据
       companyId: '',
       fromMail: '',
       toMail: '', 
@@ -309,6 +399,7 @@ export default {
   created() {
     this.getDataList();
     this.uploadUrl = this.$http.adornUrl("op=company&func=importCom", "XZX");
+    this.getSurvey();
   },
   watch: {
 
@@ -318,6 +409,17 @@ export default {
     // 打开预导企业 弹窗
     exportCompany() {
       this.exportShow = true;
+    },
+    startLoading() {
+      this.getloading = this.$loading({
+        lock: true,
+        text: '操作中，请稍后',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+    },
+    endLoading() {
+      this.getloading.close();
     },
     // 确认上传
     submitUpload() {
@@ -362,6 +464,49 @@ export default {
         return item.id;
       }).join(',');
     },
+    // 标记走访状态
+    markVisit(type, row) {
+      let condition;
+      let status = "待走访";
+      if(row.visitStatus == 1) {
+        condition = {
+          visitId: row.visitId,
+          status: 2
+        };
+      } else {
+        condition = {
+          visitId: row.visitId,
+          status: 1
+        };
+        status = "已走访"
+      }
+      this.$confirm(`确定将【${row.companyName}】的走访状态修改为【${status}】?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.startLoading();
+        this.$http({
+          url: this.$http.adornUrl("op=company&func=setStatus", "XZX"),
+          method: "post",
+          data: {
+            condition: JSON.stringify(condition)
+          }
+        }).then( ({data}) =>{
+          if(data.code == 200) {
+            this.getDataList()
+            this.$message.success(data.status_desc);
+          } else {
+            this.$message.error(data.status_desc);
+          }
+          this.endLoading();
+        }).catch(()=>{
+          this.$message.error('操作失败，请稍后再试！');
+          this.endLoading();
+        });
+      }).catch(() => {        
+      });
+    },
     // 打开 邮件发送的弹窗 
     showEmailInfoDialog(type, data) {
       if(type == 'more') { // 多条获取邮件信息
@@ -389,6 +534,7 @@ export default {
           id: data.id
         };
       }
+      this.startLoading();
       this.$http({
         url: this.$http.adornUrl("op=company&func=getEmailInfo", "XZX"),
         method: "post",
@@ -396,6 +542,7 @@ export default {
           condition: JSON.stringify(condition)
         }
       }).then( ({data}) =>{
+        this.endLoading()
         if(data.code == 200) {
           this.fromMail = data.data.fromMail;
           this.toMail = data.data.toMail;
@@ -403,6 +550,72 @@ export default {
           this.formEmail.companyId = data.data.companyId;
           this.formEmail.fromMail = data.data.fromMail;
           this.formEmail.toMail = data.data.toMail;
+        } else {
+          this.$message.error(data.status_desc);
+        }
+      }).catch(()=>{
+        this.$message.error('操作失败，请稍后再试！');
+        this.endLoading()
+      });
+    },
+    // 打开 分配企业的弹窗 
+    showAllotDialog(type, data){
+      if(type == 'more') { // 多条获取邮件信息
+        if(this.multipleSelection.length > 0) { // 选择了多条
+          if(this.multipleSelection.length>10){
+            this.$message.error('每次最多只能选择十家企业进行分配！');
+          }else{
+            this.companySelection = this.multipleSelection.join(",");
+            this.allotCompany = true;
+          }
+        } 
+        else { // 没有选择多条, 提示弹窗
+          this.$message.error('请选择多条数据在进行操作');
+        }
+      } else if (type == 'only') { // 单条获取邮件信息
+        this.companySelection = data.id;
+        this.allotCompany = true;
+      }
+        
+    },
+    updateAllot(){
+      // 提交分配
+      this.startLoading();
+      this.$http({
+        url: this.$http.adornUrl("op=company&func=distributeCom", "XZX"),
+        method: "post",
+        data: {
+          condition: JSON.stringify({
+            companyId:this.companySelection,
+            userId:this.formAllot.investigator
+          })
+        }
+      }).then( ({data}) =>{
+        this.endLoading()
+        if(data.code == 200) {
+          this.getDataList();
+          this.$message.success(data.status_desc);
+          this.allotCompany = false;
+        } else {
+          this.$message.error(data.status_desc);
+        }
+      }).catch(()=>{
+        this.$message.error('操作失败，请稍后再试！');
+        this.endLoading()
+      });;
+    },
+    // 获取调研人员
+    getSurvey() {
+      this.$http({
+        url: this.$http.adornUrl("op=user&func=getUsersByRoleId", "XZX"),
+        method: "post",
+        data: {
+          roleId:2,//调研人员角色ID
+          test:true
+        }
+      }).then( ({data}) =>{
+        if(data.code == 200) {
+          this.surveyOptions = data.data;
         } else {
           this.$message.error(data.status_desc);
         }
@@ -601,6 +814,9 @@ export default {
     // 获取页面列表
     async getDataList() {
       try {
+        if(this.role_id.length == 1 && this.role_id[0] == 2){
+          this.condition.investigator = this.admin_id;
+        }
         this.dataListLoading = true;
         const res = await this.$http({
           url: this.$http.adornUrl("op=company&func=queryCom", "XZX"),
@@ -621,7 +837,11 @@ export default {
         }
         this.dataListLoading = false;
       } catch (error) {
-        this.$message.error(error);
+        if(typeof error == 'object'){
+          this.$message.error("网络错误！");
+        } else {
+          this.$message.error(error);
+        }
       }
     },
     // 查看详情
