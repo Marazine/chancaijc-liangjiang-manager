@@ -54,7 +54,7 @@
 <el-table-column fixed="right" header-align="center" align="center" label="操作">
     <template slot-scope="scope">
           <el-button type="text" size="small" @click="checkPaper(scope.row)">查看答卷</el-button>
-          <!-- <el-button v-if="scope.row['filepath'] != ''" type="text" size="small" @click="downloadFilepath(scope.row)">扫描件下载</el-button> -->
+          <el-button v-if="scope.row['filepath'] && scope.row['filepath'] != ''" type="text" size="small" @click="downloadFilepath(scope.row)">扫描件下载</el-button>
         </template>
 </el-table-column>
 </el-table>
@@ -75,6 +75,7 @@
         previewAddress
     } from '@/utils';
     let condition;
+    let Base64 = require('js-base64').Base64;
     export default {
         data() {
             return {
@@ -440,8 +441,10 @@
                 );
             },
             downloadFilepath(row) {
+                // debugger;
                 let url = this.$http.adornUrl("op=bigtablecontroller&func=downloadFilepath", "XZX");
-                window.open(url + "&unitId=" + row.companyId);
+                let path = Base64.encode(row.filepath);
+                window.open(url + "&files=" + path);
                 return;
                 this.$http({
                     url: url,
@@ -556,7 +559,7 @@
                         //   console.dir(data)
                         //   if (data.code == 200) {
                         //   } else {
-                        //     this.$message.success(data.desc);
+                        //     this.$message.success(data.status_desc);
                         //   }
                         // });
                     } else {

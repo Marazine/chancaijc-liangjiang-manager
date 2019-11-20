@@ -141,7 +141,7 @@
                         this.percent2 = data.data.percent2;
                         this.renderChart();
                     } else {
-                        // this.$message.success(data.desc);
+                        // this.$message.success(data.status_desc);
                     }
                 });
             },

@@ -41,7 +41,7 @@
         </el-form-item>
         <el-form-item>
           <el-select  v-model="condition.allot" filterable clearable placeholder="分配状态">
-            <el-option label="不限" value=""></el-option>
+            <!-- <el-option label="不限" value=""></el-option> -->
             <el-option label="已分配" value="1"></el-option>
             <el-option label="未分配" value="2"></el-option>
           </el-select>
@@ -398,7 +398,7 @@ export default {
   },
   created() {
     this.getDataList();
-    this.uploadUrl = this.$http.adornUrl("op=company&func=importCom", "XZX");
+    this.uploadUrl = this.$http.adornUrl("op=company&func=uploadExcel", "XZX");
     this.getSurvey();
   },
   watch: {
@@ -446,7 +446,7 @@ export default {
     },
     // 下载模板
     download() {
-      window.open('//img3.job1001.com/chancaijc/企业信息导入模板.xlsx');
+      window.open('//img3.job1001.com/chancaijc/liangjiang/两江新区企业信息录入模板.xlsx');
     },
     handleExceed(file, fileList) {
       this.$message.warning(`当前只能单次上传 1 个文件,本次选择了 ${file.length} 个文件`);
