@@ -262,7 +262,7 @@ import { previewAddress, } from '@/utils';
 export default {
   data() {
     let checkPhone = (rule, value, callback) => { // 手机号验证
-      const phoneReg = /^1[3|4|5|6|7|8][0-9]{9}$/;
+      const phoneReg = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
       if (value != '') {
         setTimeout(() => {
           if (!Number.isInteger(+value)) {
