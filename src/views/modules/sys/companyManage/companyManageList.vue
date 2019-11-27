@@ -47,6 +47,12 @@
           </el-select>
         </el-form-item>
         <el-form-item>
+          <el-select v-model="condition.filepath" filterable clearable placeholder="扫描件上传状态">
+            <el-option label="未上传" value="0"></el-option>
+            <el-option label="已上传" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
           <el-button type="primary" @click="serchData()">查询</el-button>
         </el-form-item>
     </el-form>
@@ -75,20 +81,27 @@
       </el-table-column>    
       <el-table-column prop="visitStatus" label="调研状态" align="center" width="100">
         <template slot-scope="scope">
-         <span v-if="scope.row.visitStatus == 1">已走访</span>
-         <span v-else>待走访</span>
+          <el-tag v-if="scope.row.visitStatus == 1" type="success">已走访</el-tag>
+          <el-tag v-else type="danger">待走访</el-tag>
         </template>
       </el-table-column>    
       <el-table-column prop="companyFrom" label="类型" align="center" width="100">
         <template slot-scope="scope">
           {{getCompanyFrom(scope.row.companyFrom)}}
         </template>
-      </el-table-column>    
+      </el-table-column>   
+      <el-table-column prop="filepath" label="盖章扫描件" align="center" width="100">
+        <template slot-scope="scope">
+          <el-tag :type="scope.row.filepath == '' ? 'danger' : 'success'">{{scope.row.filepath == '' ? '未上传' : '已上传'}}</el-tag>
+        </template>
+      </el-table-column>
       <!-- <el-table-column prop="name" label="短信状态" align="center" width="100"></el-table-column>    
       <el-table-column prop="name" label="邮件状态" align="center" width="100"></el-table-column>     -->
       <el-table-column prop="status" label="问卷状态" align="center" width="100">
         <template slot-scope="scope">
-          {{getStatus(scope.row.status)}}
+          <el-tag v-if="scope.row.status == 0" type="info">{{getStatus(scope.row.status)}}</el-tag>
+          <el-tag v-else-if="scope.row.status == 1" type="success">{{getStatus(scope.row.status)}}</el-tag>
+          <el-tag v-else-if="scope.row.status == 2" type="danger">{{getStatus(scope.row.status)}}</el-tag>
         </template>
       </el-table-column>    
       <el-table-column prop="reachRate" label="问卷完成率" align="center" width="100"></el-table-column>    
@@ -107,6 +120,7 @@
               <el-dropdown-item><el-button v-if="isAuth('sys:company:sendEmail')" type="text" size="small" @click="showEmailInfoDialog('only', scope.row)">发送邮件</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:distributeCom')" type="text" size="small" @click="showAllotDialog('only', scope.row)">分配企业</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:setStatus') && scope.row.visitId" type="text" size="small" @click="markVisit('only', scope.row)">标记走访</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:updateFileStatus') && scope.row.filepath == ''" type="text" size="small" @click="signWords(scope.row)">标记扫描件</el-button></el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </template>
@@ -316,6 +330,7 @@ export default {
         companyFrom: '',
         investigator:'',//调研人员
         allot: '', //分配状态
+        filepath: '',
         pageNo: 1,
         pageSize: 10,
       },
@@ -884,6 +899,33 @@ export default {
     currentChangeHandle(val) {
       this.condition.pageNo = val;
       this.getDataList();
+    },
+    // 标记扫描件
+    signWords(row) {
+      this.$confirm('确认标记已收到该企业的问卷扫描件？').then(() => {
+        let url = this.$http.adornUrl("op=company&func=updateFileStatus", "XZX");
+        this.$http({
+          url: url,
+          method: "post",
+          data: {
+            condition:JSON.stringify({
+              id: row.id
+            })
+          }
+        }).then(({ data }) => {
+          if (data.code == 200) {
+            this.$message({
+              type: "success",
+              message: data.status_desc
+            });
+            this.serchData();
+          } else {
+            this.$message.error(data.status_desc);
+          }
+        }).catch(()=>{
+          this.$message.error('网络异常，请稍后重试');
+        });
+      }).catch(() => {});
     },
   }
 };
