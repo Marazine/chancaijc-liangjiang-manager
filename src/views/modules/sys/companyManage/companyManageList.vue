@@ -121,7 +121,7 @@
               <el-dropdown-item><el-button v-if="isAuth('sys:company:distributeCom')" type="text" size="small" @click="showAllotDialog('only', scope.row)">分配企业</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:setStatus') && scope.row.visitId" type="text" size="small" @click="markVisit('only', scope.row)">标记走访</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:updateFileStatus') && scope.row.filepath == ''" type="text" size="small" @click="signWords(scope.row)">标记扫描件</el-button></el-dropdown-item>
-              <el-dropdown-item><el-button v-if="isAuth('sys:company:downloadFilepath') && scope.row.filepath != '' && scope.row.filepath != '1'" type="text" size="small" @click="downloadFilepath(scope.row)">扫描件下载</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:updateFileStatus') && scope.row.filepath != '' && scope.row.filepath != '1'" type="text" size="small" @click="downloadFilepath(scope.row)">扫描件下载</el-button></el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </template>
