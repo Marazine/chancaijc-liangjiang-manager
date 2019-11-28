@@ -146,7 +146,6 @@ export default {
         data: param
       }).then(({ data }) => {
         if (data && data.code == 200) {
-          console.log(data)
           this.dataList = data.data;
           this.totalPage = parseInt(data.pageparam.sums);
         } else {
