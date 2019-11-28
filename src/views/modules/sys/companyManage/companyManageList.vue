@@ -930,7 +930,10 @@ export default {
     },
     // 扫描件下载
     downloadFilepath(row){
-      window.open(JSON.parse(row.filepath)[0]['path']);
+      // console.log(row);
+      let url = this.$http.adornUrl("op=company&func=downloadFilepath", "XZX");
+      window.open(url+"&id="+row.id);
+      // window.open(JSON.parse(row.filepath)[0]['path'] + '&unitId=' + row.companyId);
     },
   }
 };
