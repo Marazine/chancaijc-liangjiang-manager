@@ -111,7 +111,7 @@
         methods: {
             init() {
                 this.$http({
-                    url: this.$http.adornUrl("op=personfusioncontroller&func=getIndexData", "CQ"),
+                    url: this.$http.adornUrl("op=dash&func=getDashData", "XZX"),
                     method: "post",
                     data: {
                         condition: JSON.stringify({

@@ -73,7 +73,7 @@
       <el-button v-if="isAuth('sys:company:importCom')" type="primary" @click="exportCompany">导入预设企业</el-button>
       <el-button v-if="isAuth('sys:company:sendEmail')" type="primary" @click="showEmailInfoDialog('more')">批量发送邮件</el-button>
       <el-button v-if="isAuth('sys:company:distributeCom')" type="primary" @click="showAllotDialog('more')">批量分配企业</el-button>
-      <!-- <el-button v-if="isAuth('sys:company:batchSql')" type="primary" @click="showBatchSqlDialog">上传sql语句</el-button> -->
+      <el-button v-if="isAuth('sys:company:batchSql')" type="primary" @click="showBatchSqlDialog">上传sql语句</el-button>
     </div>
     <!-- 新增预设企业, 导入预设企业, 批量发送邮件 END -->
     <!-- 展示列表 START -->

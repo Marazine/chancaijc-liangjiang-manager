@@ -16,6 +16,14 @@ import cloneDeep from 'lodash/cloneDeep'
 Vue.use(VueCookie)
 Vue.config.productionTip = false
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import echarts from 'echarts'
+import 'echarts-gl' // 3D地图插件
+import '@/utils/plot' // 全局图表组件
+
+Vue.prototype.$echarts = echarts
+
 let Base64 = require('js-base64').Base64;
 
 // 非生产环境, 适配mockjs模拟数据                 // api: https://github.com/nuysoft/Mock
