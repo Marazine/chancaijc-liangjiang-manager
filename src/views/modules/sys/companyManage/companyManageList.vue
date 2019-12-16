@@ -63,7 +63,7 @@
       <el-button v-if="isAuth('sys:company:importCom')" type="primary" @click="exportCompany">导入预设企业</el-button>
       <el-button v-if="isAuth('sys:company:sendEmail')" type="primary" @click="showEmailInfoDialog('more')">批量发送邮件</el-button>
       <el-button v-if="isAuth('sys:company:distributeCom')" type="primary" @click="showAllotDialog('more')">批量分配企业</el-button>
-
+      <!-- <el-button v-if="isAuth('sys:company:batchSql')" type="primary" @click="showBatchSqlDialog">上传sql语句</el-button> -->
     </div>
     <!-- 新增预设企业, 导入预设企业, 批量发送邮件 END -->
     <!-- 展示列表 START -->
@@ -71,50 +71,49 @@
       <el-table-column type="selection" align="center" width="40" fixed></el-table-column>
       <el-table-column type="index" header-align="center" align="center" width="50" label="序号" fixed></el-table-column>
       <el-table-column prop="companyName" label="企业名称" align="center" width="200" fixed></el-table-column>
-      <el-table-column prop="linkMobile" label="联系电话" align="center" width="120"></el-table-column>    
-      <el-table-column prop="linkEmail" label="联系邮箱" align="center" width="200"></el-table-column>    
-      <el-table-column prop="visitName" label="调研人员" align="center" width="100">
+      <el-table-column prop="linkMobile" label="联系电话" align="center" width="120"></el-table-column>
+      <el-table-column prop="visitStatus" label="调研状态" align="center" width="120">
         <template slot-scope="scope">
-         <span v-if="scope.row.visitName">{{scope.row.visitName}}</span>
-         <span v-else>--</span>
-        </template>
-      </el-table-column>    
-      <el-table-column prop="visitStatus" label="调研状态" align="center" width="100">
-        <template slot-scope="scope">
-          <el-tag v-if="scope.row.visitStatus == 1" type="success">已走访</el-tag>
-          <el-tag v-else type="danger">待走访</el-tag>
-        </template>
-      </el-table-column>    
-      <el-table-column prop="companyFrom" label="类型" align="center" width="100">
-        <template slot-scope="scope">
-          {{getCompanyFrom(scope.row.companyFrom)}}
-        </template>
-      </el-table-column>   
-      <el-table-column prop="filepath" label="盖章扫描件" align="center" width="100">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.filepath == '' ? 'danger' : 'success'">{{scope.row.filepath == '' ? '未上传' : '已上传'}}</el-tag>
+          <el-tag v-if="scope.row.visitStatus !== null" :type="getVisitStatus('color', scope.row.visitStatus)">{{getVisitStatus('visitStatus', scope.row.visitStatus)}}</el-tag>
+          <div v-else></div>
         </template>
       </el-table-column>
-      <!-- <el-table-column prop="name" label="短信状态" align="center" width="100"></el-table-column>    
-      <el-table-column prop="name" label="邮件状态" align="center" width="100"></el-table-column>     -->
       <el-table-column prop="status" label="问卷状态" align="center" width="100">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.status == 0" type="info">{{getStatus(scope.row.status)}}</el-tag>
           <el-tag v-else-if="scope.row.status == 1" type="success">{{getStatus(scope.row.status)}}</el-tag>
           <el-tag v-else-if="scope.row.status == 2" type="danger">{{getStatus(scope.row.status)}}</el-tag>
         </template>
-      </el-table-column>    
-      <el-table-column prop="reachRate" label="问卷完成率" align="center" width="100"></el-table-column>    
-      <el-table-column prop="updateTime" label="更新时间" align="center" width="100"></el-table-column>    
+      </el-table-column>
+      <el-table-column prop="reachRate" label="问卷完成率" align="center" width="100"></el-table-column>
+      <el-table-column prop="filepath" label="盖章扫描件" align="center" width="100">
+        <template slot-scope="scope">
+          <el-tag :type="scope.row.filepath == '' ? 'danger' : 'success'">{{scope.row.filepath == '' ? '未上传' : '已上传'}}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="companyFrom" label="类型" align="center" width="100">
+        <template slot-scope="scope">
+          {{getCompanyFrom(scope.row.companyFrom)}}
+        </template>
+      </el-table-column>
+      <el-table-column prop="linkEmail" label="联系邮箱" align="center" width="200"></el-table-column>
+      <el-table-column prop="visitName" label="调研人员" align="center" width="100">
+        <template slot-scope="scope">
+         <span v-if="scope.row.visitName">{{scope.row.visitName}}</span>
+         <span v-else>--</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="updateTime" label="更新时间" align="center" width="100"></el-table-column> 
       <el-table-column fixed="right" header-align="center" align="center" label="操作" width="200">
         <template slot-scope="scope">
-          <el-button v-if="isAuth('sys:company:getComById')" type="text" size="small" @click="checkInfo(scope.row)">查看详情</el-button>
+          <el-button v-if="isAuth('sys:company:getComById')" type="text" size="small" @click="checkInfo(scope.row, 'check')">查看详情</el-button>
           <el-dropdown trigger="click">
             <span class="el-dropdown-link">
               <el-button type="text" size="small">操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item><el-button v-if="isAuth('sys:company:getComById')&&isAuth('sys:company:getComByIdEdit')" type="text" size="small" @click="addOrUpdateCompany('update', scope.row)">编辑</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:remarkCom')" type="text" size="small" @click="remarkCom(scope.row)">备注</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:deleteCom')" type="text" size="small" @click="deleteCom(scope.row)">删除</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:checkPaper')" type="text" size="small" @click="checkPaper(scope.row)">查看问卷</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:sendEmail')" type="text" size="small" @click="showEmailInfoDialog('only', scope.row)">发送邮件</el-button></el-dropdown-item>
@@ -138,8 +137,9 @@
                    layout="total, sizes, prev, pager, next, jumper">
     </el-pagination>
     <!-- 分页展示 END -->
+
     <!-- 查看详情 START -->
-    <el-dialog title="查看详情" :visible.sync="isShow" width="30%">
+    <el-dialog title="查看详情" :visible.sync="isShow" width="30%" :close-on-click-modal="false" :close-on-press-escape="false">
       <div class="my-dialog-content">
         <el-form>
           <el-form-item label="企业名称:" label-width="100px" class="test" style="margin-bottom:0">
@@ -157,6 +157,9 @@
           <el-form-item label="联系邮箱:" label-width="100px" style="margin-bottom:0">
             <span>{{info.linkEmail}}</span>
           </el-form-item>
+          <el-form-item label="备注:" label-width="100px" style="margin-bottom:0">
+            <span>{{info.remarks}}</span>
+          </el-form-item>
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -164,8 +167,9 @@
       </span>
     </el-dialog>
     <!-- 查看详情 END -->
+
     <!-- 新增/编辑预设企业 START -->
-    <el-dialog v-if="addOrUpdateShow" :title="addOrUpdateTitle" :visible.sync="addOrUpdateShow" width="30%">
+    <el-dialog v-if="addOrUpdateShow" :title="addOrUpdateTitle" :visible.sync="addOrUpdateShow" width="30%" :close-on-click-modal="false" :close-on-press-escape="false">
       <el-form :model="form" :rules="rules" ref="ruleForm">
         <el-form-item label="企业名称" label-width="100px" prop="companyName">
           <el-input v-model="form.companyName"></el-input>
@@ -195,8 +199,9 @@
       </div>
     </el-dialog>
     <!-- 新增/编辑预设企业 END -->
+
     <!-- 发送邮件 START -->
-    <el-dialog title="发送邮件" :visible.sync="sendEmailDialogShow" width="50%">
+    <el-dialog title="发送邮件" :visible.sync="sendEmailDialogShow" width="50%" :close-on-click-modal="false" :close-on-press-escape="false">
       <el-form :model="formEmail">
         <el-form-item label="发件人邮箱" label-width="100px">
           <el-input v-model="formEmail.fromMail" :disabled="true"></el-input>
@@ -217,8 +222,9 @@
       </div>
     </el-dialog>
     <!-- 发送邮件 END -->
+
     <!-- 导入预设企业 START -->
-    <el-dialog title="导入预设企业" v-if="exportShow" :visible.sync="exportShow" width="40%">
+    <el-dialog title="导入预设企业" v-if="exportShow" :visible.sync="exportShow" width="40%" :close-on-click-modal="false" :close-on-press-escape="false">
       <!-- <div class="my-dialog-export" style="position: relative;"> -->
       <div class="my-dialog-export">
         <div class="my-dialog-export-tip">
@@ -248,12 +254,39 @@
       </span>
     </el-dialog>
     <!-- 导入预设企业 END -->
-    
+
+    <!-- 上传 sql START -->
+    <el-dialog title="上传 sql 语句" v-if="sqlDialogShow" :visible.sync="sqlDialogShow" width="40%" :close-on-click-modal="false" :close-on-press-escape="false">
+      <div class="my-dialog-export">
+        <div>
+          <el-upload ref="sqlUpload"
+                     class="upload-demo"
+                     list-type="text"
+                     accept=".sql"
+                     :limit="1"
+                     :action="batchSqlUrl"
+                     :auto-upload="false"
+                     :on-success="sqlUploadSuccess"
+                     :on-error="sqlUploadError"
+                     :on-exceed="sqlHandleExceed"
+                     :before-remove="sqlBeforeRemove">
+            <el-button size="small" type="success">上传文件</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传.sql文件</div>
+          </el-upload>
+        </div>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="sqlCancelUpload">取 消</el-button>
+        <el-button type="primary" @click="sqlSubmitUpload">确 认</el-button>
+      </span>
+    </el-dialog>
+    <!-- 上传 sql END -->
+
     <!-- 分配企业 START -->
-    <el-dialog title="分配企业" v-if="allotCompany" :visible.sync="allotCompany" width="500px">
+    <el-dialog title="分配企业" v-if="allotCompany" :visible.sync="allotCompany" width="30%" :close-on-click-modal="false" :close-on-press-escape="false">
       <el-form :model="formAllot">
         <el-form-item label="调研人员" label-width="100px">
-          <el-select  v-model="formAllot.investigator" filterable clearable placeholder="调研人员">
+          <el-select v-model="formAllot.investigator" filterable clearable placeholder="调研人员" class="my-mark-visit">
             <el-option
               v-for="item in surveyOptions"
               :key="item.userId"
@@ -269,6 +302,33 @@
       </div>
     </el-dialog>
     <!-- 分配企业 END -->
+
+    <!-- 修改走访状态 START -->
+    <el-dialog v-if="markVisitDialogShow" title="修改调研状态" :visible.sync="markVisitDialogShow" width="25%" :close-on-click-modal="false" :close-on-press-escape="false">
+      <el-select v-model="markVisitCondition.status" clearable placeholder="调研状态" class="my-mark-visit">
+        <el-option
+          v-for="item in markVisitOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelMarkVisitDialogShow">取 消</el-button>
+        <el-button type="primary" @click="uploadMarkVisitData">确 定</el-button>
+      </div>
+    </el-dialog>
+    <!-- 修改走访状态 END -->
+
+    <!-- 添加备注 START -->
+    <el-dialog v-if="remarksDialogShow" title="备注" :visible.sync="remarksDialogShow" width="30%" :close-on-click-modal="false" :close-on-press-escape="false">
+      <el-input type="textarea" :autosize="{maxRows: 10}" placeholder="请输入备注内容..." v-model="remarksCondition.remarks"></el-input>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelRemarksDialogShow">取 消</el-button>
+        <el-button type="primary" @click="uploadRemarksData">确 定</el-button>
+      </div>
+    </el-dialog>
+    <!-- 添加备注 END -->
   </div>
 </template>
 <script>
@@ -323,6 +383,7 @@ export default {
         }
       ],// 调研人员
       uploadUrl:'',
+      batchSqlUrl:'',
       // 搜索信息
       condition: {
         companyName: '',
@@ -378,6 +439,7 @@ export default {
         linkAddress: '',
         linkMobile: '',
         linkEmail: '',
+        remarks: '',
       },
       form: {
         id: '',
@@ -410,32 +472,91 @@ export default {
         emailTitle: '邀请你参加XX企业人才调研',
         emailContent: 'XX公司',
       },
+      sqlDialogShow: false,
+      markVisitDialogShow: false,
+      markVisitCondition: {
+        visitId: '',
+        status: 2
+      },
+      markVisitOptions: [
+        {
+          value: 1,
+          label: '已走访'
+        },
+        {
+          value: 2,
+          label: '待走访'
+        },
+        {
+          value: 3,
+          label: '联系不上'
+        },
+        {
+          value: 4,
+          label: '已通知未填'
+        },
+        {
+          value: 5,
+          label: '拒绝填写'
+        },
+        {
+          value: 6,
+          label: '无效企业'
+        },
+      ],
+      remarksDialogShow: false,
+      remarksCondition: {
+        companyId: '',
+        remarks: ''
+      }
     };
   },
   created() {
     this.getDataList();
     this.uploadUrl = this.$http.adornUrl("op=company&func=uploadExcel", "XZX");
+    this.batchSqlUrl = this.$http.adornUrl("op=company&func=batchSql", "XZX");
     this.getSurvey();
   },
   watch: {
 
   },
   methods: {
+    // 打开 sql 弹窗
+    showBatchSqlDialog() {
+      this.sqlDialogShow = true;
+    },
+    // sql 上传成功的回调
+    sqlUploadSuccess(response, file, fileList) {
+      if(response.code == 200) {
+        this.getDataList();
+        this.sqlDialogShow = false;
+        this.$message.success(response.status_desc);
+      } else {
+        this.$message.error(response.status_desc);
+      }
+    },
+    // sql 上传失败时的回调
+    sqlUploadError(err, file, fileList) {
+      console.log(err, file, fileList);
+    },
+    sqlHandleExceed(file, fileList) {
+      this.$message.warning(`当前只能单次上传 1 个 sql,本次选择了 ${file.length} 个文件`);
+    },
+    sqlBeforeRemove(file, fileList) {
+      return this.$confirm(`确认移除 ${file.name}`);
+    },
+    sqlCancelUpload() {
+      this.$refs.sqlUpload.clearFiles();
+      this.sqlDialogShow = false;
+    },
+    // 确认上传 sql
+    sqlSubmitUpload() {
+      this.$refs.sqlUpload.submit();
+    },
     // --------------------------------------------------
     // 打开预导企业 弹窗
     exportCompany() {
       this.exportShow = true;
-    },
-    startLoading() {
-      this.getloading = this.$loading({
-        lock: true,
-        text: '操作中，请稍后',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });
-    },
-    endLoading() {
-      this.getloading.close();
     },
     // 确认上传
     submitUpload() {
@@ -471,6 +592,17 @@ export default {
       return this.$confirm(`确认移除 ${file.name}`);
     },
     // --------------------------------------------------
+    startLoading() {
+      this.getloading = this.$loading({
+        lock: true,
+        text: '操作中，请稍后',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+    },
+    endLoading() {
+      this.getloading.close();
+    },
     // table 列表选中数据内容 array
     handleSelectionChange(val) {
       this.multipleSelection = val.map(item => {
@@ -481,7 +613,7 @@ export default {
       }).join(',');
     },
     // 标记走访状态
-    markVisit(type, row) {
+    markVisit2(type, row) {
       let condition;
       let status = "待走访";
       if(row.visitStatus == 1) {
@@ -522,6 +654,48 @@ export default {
         });
       }).catch(() => {        
       });
+    },
+    // 打开 走访状态 弹窗
+    markVisit(type, row) {
+      this.markVisitDialogShow = true;
+      this.markVisitCondition.status = row.visitStatus;
+      this.markVisitCondition.visitId = row.visitId;
+    },
+    // 关闭标记走访弹窗
+    cancelMarkVisitDialogShow() {
+      this.markVisitDialogShow = false;
+      this.markVisitCondition = {
+        visitId: null,
+        status: 2
+      };
+    },
+    // 修改 走访状态
+    uploadMarkVisitData() {
+      if(this.markVisitCondition.status) {
+        let condition = this.markVisitCondition;
+        this.startLoading();
+        this.$http({
+          url: this.$http.adornUrl("op=company&func=setStatus", "XZX"),
+          method: "post",
+          data: {
+            condition: JSON.stringify(condition)
+          }
+        }).then( ({data}) =>{
+          if(data.code == 200) {
+            this.getDataList()
+            this.$message.success(data.status_desc);
+          } else {
+            this.$message.error(data.status_desc);
+          }
+          this.endLoading();
+          this.markVisitDialogShow = false;
+        }).catch(()=>{
+          this.$message.error('操作失败，请稍后再试！');
+          this.endLoading();
+        });
+      } else {
+        this.$message.error('请选择走访状态');
+      }
     },
     // 打开 邮件发送的弹窗 
     showEmailInfoDialog(type, data) {
@@ -861,29 +1035,34 @@ export default {
       }
     },
     // 查看详情
-    async checkInfo(data) {
-      let condition = {
-        id: data.id
-      };
-      const res = await this.$http({
-        url: this.$http.adornUrl("op=company&func=getComById", "XZX"),
-        method: "post",
-        data: {
-          condition: JSON.stringify(condition)
-        }
-      });
-      let d = res.data;
-      if (d.code == 200) {
-        this.info.companyName = d.data.companyName;
-        this.info.linkMan = d.data.linkMan;
-        this.info.linkAddress = d.data.linkAddress;
-        this.info.linkMobile = d.data.linkMobile;
-        this.info.linkEmail = d.data.linkEmail;
+    async checkInfo(data, type) {
+        let condition = {
+            id: data.id
+        };
+        const res = await this.$http({
+          url: this.$http.adornUrl("op=company&func=getComById", "XZX"),
+          method: "post",
+          data: {
+            condition: JSON.stringify(condition)
+          }
+        });
+        let d = res.data;
+        if (d.code == 200) {
+          if(type == 'check') {
+            this.info.companyName = d.data.companyName;
+            this.info.linkMan = d.data.linkMan;
+            this.info.linkAddress = d.data.linkAddress;
+            this.info.linkMobile = d.data.linkMobile;
+            this.info.linkEmail = d.data.linkEmail;
+            this.info.remarks = d.data.remarks;
 
-        this.isShow = true;
-      } else {
-        this.$message.error(d.status_desc);
-      }
+            this.isShow = true;
+          } else {
+            this.remarksCondition.remarks = d.data.remarks;
+          }
+        } else {
+          this.$message.error(d.status_desc);
+        }
     },
     //查询
     serchData() {
@@ -935,6 +1114,49 @@ export default {
       window.open(url+"&id="+row.id);
       // window.open(JSON.parse(row.filepath)[0]['path'] + '&unitId=' + row.companyId);
     },
+    // 获取页面走访内容
+    getVisitStatus(type, status) {
+      let visitStatus = ['已走访', '待走访', '联系不上', '已通知未填', '拒绝填写', '无效企业'];
+      let color = ['success', 'info', 'warning', 'warning', 'danger', 'danger'];
+      let number = status - 1;
+      if(type === 'visitStatus') {
+        return visitStatus[number];
+      } else if(type === 'color') {
+        return color[number];
+      }
+    },
+    // 打开 备注的弹窗
+    remarkCom(row) {
+      this.remarksDialogShow = true;
+      this.remarksCondition.companyId = row.id;
+      this.checkInfo(row);
+    },
+    // 关闭 备注的弹窗
+    cancelRemarksDialogShow() {
+      this.remarksDialogShow = false;
+      this.remarksCondition = {
+        companyId: '',
+        remarks: ''
+      }
+    },
+    async uploadRemarksData() {
+      let condition = this.remarksCondition;
+      const res = await this.$http({
+        url: this.$http.adornUrl("op=company&func=remarkCom", "XZX"),
+        method: "post",
+        data: {
+          condition: JSON.stringify(condition)
+        }
+      });
+      let d = res.data;
+      if (d.code == 200) {
+        this.$message.success(d.status_desc);
+        this.getDataList();
+      } else {
+        this.$message.error(d.status_desc);
+      }
+      this.remarksDialogShow = false;
+    }
   }
 };
 </script>
@@ -953,7 +1175,7 @@ export default {
   }
   .my-dialog-content {
     margin-top: -20px;
-    padding-left: 30px;
+    padding-left: 0px;
   }
   .my-dialog-export {
     margin-top: -20px;
@@ -964,6 +1186,9 @@ export default {
       right: 50%;
       transform: translate(-50%);
     }
+  }
+  .my-mark-visit {
+    width: 100%;
   }
 }
 </style>
