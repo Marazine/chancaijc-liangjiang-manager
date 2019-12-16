@@ -50,6 +50,10 @@
               :menu="menu" 
               :dynamicMenuRoutes="dynamicMenuRoutes">
         </sub-menu>
+        <el-menu-item index="board" @click="pushNewPage">
+            <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
+            <span slot="title">一键看板</span>
+        </el-menu-item>
         <!-- <el-submenu index="系统管理">
           <template slot="title">
             <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
@@ -186,6 +190,10 @@
                     this.menuActiveName = tab.menuId + ''
                     this.mainTabsActiveName = tab.name
                 }
+            },
+            pushNewPage() {
+              const {href} = this.$router.resolve({ name: 'board' })
+              window.open(href, '_blank')
             }
         }
     }
