@@ -10,6 +10,16 @@
           <el-input v-model="condition.linkMobile" placeholder="手机号查询" :maxlength="11" clearable></el-input>
         </el-form-item>
         <el-form-item>
+          <el-select v-model="condition.visitStatus" clearable placeholder="调研状态">
+            <el-option
+              v-for="item in options3"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
           <el-select v-model="condition.status" clearable placeholder="问卷状态查询">
             <el-option
               v-for="item in options"
@@ -75,7 +85,7 @@
       <el-table-column prop="visitStatus" label="调研状态" align="center" width="120">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.visitStatus !== null" :type="getVisitStatus('color', scope.row.visitStatus)">{{getVisitStatus('visitStatus', scope.row.visitStatus)}}</el-tag>
-          <div v-else></div>
+          <el-tag v-else type="info">待走访</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="问卷状态" align="center" width="100">
@@ -118,7 +128,7 @@
               <el-dropdown-item><el-button v-if="isAuth('sys:company:checkPaper')" type="text" size="small" @click="checkPaper(scope.row)">查看问卷</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:sendEmail')" type="text" size="small" @click="showEmailInfoDialog('only', scope.row)">发送邮件</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:distributeCom')" type="text" size="small" @click="showAllotDialog('only', scope.row)">分配企业</el-button></el-dropdown-item>
-              <el-dropdown-item><el-button v-if="isAuth('sys:company:setStatus') && scope.row.visitId" type="text" size="small" @click="markVisit('only', scope.row)">标记走访</el-button></el-dropdown-item>
+              <el-dropdown-item><el-button v-if="isAuth('sys:company:setStatus') && scope.row.visitId" type="text" size="small" @click="markVisit('only', scope.row)">调研状态</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:updateFileStatus') && scope.row.filepath == ''" type="text" size="small" @click="signWords(scope.row)">标记扫描件</el-button></el-dropdown-item>
               <el-dropdown-item><el-button v-if="isAuth('sys:company:updateFileStatus') && scope.row.filepath != '' && scope.row.filepath != '1'" type="text" size="small" @click="downloadFilepath(scope.row)">扫描件下载</el-button></el-dropdown-item>
             </el-dropdown-menu>
@@ -393,6 +403,7 @@ export default {
         investigator:'',//调研人员
         allot: '', //分配状态
         filepath: '',
+        visitStatus: '',
         pageNo: 1,
         pageSize: 10,
       },
@@ -429,6 +440,32 @@ export default {
           value: '0',
           label: '预导企业'
         }
+      ],
+      options3: [
+        {
+          value: 1,
+          label: '已走访'
+        },
+        {
+          value: 2,
+          label: '待走访'
+        },
+        {
+          value: 3,
+          label: '联系不上'
+        },
+        {
+          value: 4,
+          label: '已通知未填'
+        },
+        {
+          value: 5,
+          label: '拒绝填写'
+        },
+        {
+          value: 6,
+          label: '无效企业'
+        },
       ],
       dataList: [],
       totalPage: 0,
