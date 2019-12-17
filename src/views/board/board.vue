@@ -28,17 +28,17 @@
             </ul>
             <ul class="fr deta">
                 <li>
-                    <p><img src="../../assets/img/company2.png" /><i></i></p>
-                    <div>
-                        <p>企业人才总数</p>
-                        <p class="num">{{num2}}家</p>
-                    </div>
-                </li>
-                <li>
                     <p><img src="../../assets/img/company3.png" /><i></i></p>
                     <div>
                         <p>重点产业数量</p>
                         <p class="num">{{num4}}家</p>
+                    </div>
+                </li>
+                <li>
+                    <p><img src="../../assets/img/company2.png" /><i></i></p>
+                    <div>
+                        <p>企业人才总数</p>
+                        <p class="num">{{num2}}人</p>
                     </div>
                 </li>
             </ul>
