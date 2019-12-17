@@ -43,8 +43,7 @@
                     'sbnsr' || this.config.type == 'clnxfb';
             },
             externalF() {
-                return this.config.type == 'qyrwzhycjhhlx' || this.config.type == 'dwcrzypy' || this.config.type ==
-                    'qyrczyqd' || this.config.type == 'rcdwjs' || this.config.type == 'lsl';
+                return this.config.type == 'qyrwzhycjhhlx' || this.config.type == 'dwcrzypy' || this.config.type == 'rcdwjs';
             },
             sex() {
                 return this.config.type == 'xbfb';
@@ -56,7 +55,7 @@
                 return this.config.type == 'rchjfb' || this.config.type == 'rcxlfb' || this.config.type == 'qyljrctj' || this
                     .config.type == 'bndcrpyfy' || this.config.type == 'qycrny' || this.config.type == 'wloneyxycr' || this.config
                     .type == 'zcqk' || this.config.type == 'rcly' || this.config.type == 'rcqk2' || this.config.type ==
-                    'ddwsczdwbys';
+                    'ddwsczdwbys' || this.config.type == 'qyrczyqd' || this.config.type == 'qyrczyqd2' || this.config.type == 'lsl';
             },
             barVer() {
                 return this.config.type == 'rczy' || this.config.type == 'qyrcfzpj' || this.config.type == 'wlynxyrcsl' || this

@@ -80,13 +80,14 @@ export default {
             estateData: {},
             estate_config: {
                 type: 'lsl',
-                title: '各产业2020年度国留学归国人才需求',
-                radius: ['40%', '80%'],
+                title: '近一年人才流动比例',
+                radius: ['50%', '70%'],
+                radius2: [0, '48%'],
+                left: '20%',
+                right: '20%',
+                top: '0%',
+                bottom: '0',
                 paddingTop: '6%',
-                top: '15%',
-                right: '8%',
-                left: '12%',
-                bottom: '20%',
             },
         }
     },
@@ -113,9 +114,6 @@ export default {
                 this.pie_a_nextData = data.data.industuryFlow;
                 this.estate_salary_Data = data.data.natureFlow;
                 this.estateData = data.data.B_B11_3;
-                // this.ggxq_Data = data.data.D_D1_1;
-                // this.zfzc_Data = data.data.C_C2_2;
-                // this.zfzc_Data2 = data.data.C_C2_4;
                 this.isShow = true;
               }
           });

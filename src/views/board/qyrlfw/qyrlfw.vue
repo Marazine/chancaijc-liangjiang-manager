@@ -46,8 +46,9 @@ export default {
             pie_a_year_config: {
               type: 'qycrny',
               title: "企业本年度招聘成本分析",
-              radius: ['35%', '50%'],
-              radius2: [0, '32%'],
+              paddingTop: '8%',
+              radius: ['45%', '65%'],
+              radius2: [0, '43%'],
               left: '20%',
               right: '20%',
               top: '0',
@@ -57,8 +58,9 @@ export default {
             pie_a_next_year_config: {
                 type: 'wloneyxycr',
                 title: "企业本年度培训成本分析",
-                radius: ['35%', '50%'],
-                radius2: [0, '32%'],
+                paddingTop: '8%',
+                radius: ['45%', '65%'],
+                radius2: [0, '43%'],
                 left: '20%',
                 right: '20%',
                 top: '0',
