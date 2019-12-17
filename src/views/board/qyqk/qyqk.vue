@@ -3,7 +3,7 @@
     <div class="title-c"></div>
     <div class="content" v-if="isShow">
       <div class="title-text">
-        <img src="../../../assets/img/qyqk.png" alt="">
+        <!-- <img src="../../../assets/img/qyqk.png" alt=""> -->
       </div>
       <img class="fuseChildrenBack" @click="$router.push({name:'board'})" src="../../../assets/img/0001.png" alt="">
       <div class="row bh-100">
