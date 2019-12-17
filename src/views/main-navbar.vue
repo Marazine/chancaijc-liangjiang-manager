@@ -13,7 +13,7 @@
         
         
         
-        <el-menu-item class="site-navbar__avatar close" index="2" style="background-color: transparent;">
+        <el-menu-item class="site-navbar__avatar" index="2" style="background-color: transparent;">
           <el-input v-model="inputSearch" @keydown.enter.native="searchCompany" :debounce=0 placeholder="请输入企业名称">
           </el-input>
           <span class="el-icon-circle-close-outline" :style="{display:visible}" @click="clearContent"></span>

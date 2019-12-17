@@ -1,7 +1,7 @@
 <template>
   <div class="mod-user">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
-      <el-form-item>
+      <el-form-item class="my-form-input">
         <el-input v-model="dataForm.name" placeholder="模糊搜索" clearable></el-input>
       </el-form-item>
       <el-form-item>
@@ -206,3 +206,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  /deep/ .el-form-item.my-form-input.el-form-item--medium /deep/ div.el-form-item__content {
+    line-height: 32px !important;
+  }
+</style>

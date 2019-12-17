@@ -2,13 +2,13 @@
   <div class="mod-user">
     <!-- 表单搜索 START -->
     <el-form :inline="true" class="">
-        <el-form-item>
+        <el-form-item class="my-form-input">
             <el-input v-model="condition.user" placeholder="操作人" clearable></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item class="my-form-input">
             <el-input v-model="condition.ip" placeholder="ip" clearable></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item class="my-form-input">
             <el-select  v-model="condition.userType" filterable clearable placeholder="操作平台">
               <el-option label="分析系统" value="1"></el-option>
               <el-option label="问卷系统" value="2"></el-option>
@@ -204,4 +204,7 @@ export default {
       }
   }
 }
+  /deep/ .el-form-item.my-form-input.el-form-item--medium /deep/ div.el-form-item__content {
+    line-height: 32px !important;
+  }
 </style>
