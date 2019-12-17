@@ -63,10 +63,13 @@
                     "rgb(165, 190, 198)",
                 ]
                 data.name.forEach((item, index) => {
+                    console.log(data.value[index] > 30 ? 50 : data.value[index] + 20);
+                    
                     dataList.push({
                         "name": item + ":" + data.value[index],
                         "value": data.value[index],
-                        "symbolSize": data.value[index] > 30 ? 150 : data.value[index] + 100,
+                        // "symbolSize": 30,
+                        "symbolSize": Number(data.value[index]) > 30 ? 130 : Number(data.value[index]) + 100,
                         "draggable": true,
                         "itemStyle": {
                             "normal": {
