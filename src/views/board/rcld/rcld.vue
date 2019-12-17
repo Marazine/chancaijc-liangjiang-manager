@@ -46,6 +46,7 @@ export default {
               type: 'bussinessFlow',
               title: "十三五重点行业2020年度国内社会人才需求",
               type: 'bussinessFlow',
+              isScroll: true,
               paddingTop: '8%',
               c_left: "5%",
               margin: '5%',

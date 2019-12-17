@@ -59,7 +59,14 @@
                 //     ],
                 //     color: ['#5e94dd', '#49b5bd'],
                 // }
-
+                let xData = data_chart.name;
+                let y1Data = data_chart.value;
+                let y1Data1 = data_chart.value1;
+                if (this.config.isScroll) {
+                    var tempMaxData = y1Data.pop();
+                    var tempMaxData1 = y1Data1.pop();
+                    var tempXData = xData.pop();
+                }
                 let option = {
                     backgroundColor: 'transparent',
                     tooltip: {
@@ -143,28 +150,58 @@
                                 },
                             },
                             // data : ['分拣','清洗','抛光','研磨','脱膜','切割','压膜','压膜分配','光固化后处理','光固化']
-                            data : data_chart.name
+                            data : xData
                         }
                     ],
+                    "dataZoom": [{
+                        "show": false,
+                        "height": 12,
+                        filterMode: 'empty',
+                        "yAxisIndex": [
+                            0
+                        ],
+                        bottom: '8%',
+                        "start": 0,
+                        "end": 45,
+                        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+                        handleSize: '110%',
+                        handleStyle: {
+                            color: "#d3dee5",
+
+                        },
+                        textStyle: {
+                            color: "#fff"
+                        },
+                        borderColor: "#90979c"
+                    }, {
+                        "type": "inside",
+                        "show": true,
+                        "yAxisIndex": [
+                            0
+                        ],
+                        "height": 15,
+                        "start": 1,
+                        "end": 35
+                    }],
                     series : [
                         {
                             name: this.config.legend[0],
                             type:'bar',
                             stack: '总量',
-                            // barWidth: 12,
+                            barWidth: 16,
                             label: {
-                                // normal: {
-                                //     // show: true,
-                                //     // position: 'left',
-                                //     // color: '#ddd',
-                                //     // fontSize: '10',
-                                //     // formatter: function(params) {
-                                //     //     return params.data * -1;
-                                //     // }
-                                // }
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight',
+                                    color: '#ddd',
+                                    fontSize: '10',
+                                    formatter: function(params) {
+                                        return params.data * -1;
+                                    }
+                                }
                             },
                             // data:[400, 241,360, 320, 302, 341, 374, 390, 450, 420]
-                            data: data_chart.value
+                            data: y1Data
                         },
                         {
                             name: this.config.legend[1],
@@ -172,19 +209,18 @@
                             stack: '总量',
                             // barWidth: 12,
                             label: {
-                                // normal: {
-                                //     // formatter: function(params){return -params.value}
-                                //     // normal: {
-                                //         // show: true,
-                                //         // // position: 'right',
-
-                                //         // color: '#ddd',
-                                //         // fontSize: '10',
-                                //     // }
-                                // }
+                                normal: {
+                                    show: true,
+                                    position: 'insideLeft',
+                                    color: '#ddd',
+                                    fontSize: '10',
+                                    formatter: function(params) {
+                                        return params.data * -1;
+                                    }
+                                }
                             },
                             // data:[-120, -180,-120, -120, -132, -101, -134, -190, -230, -210]
-                            data: data_chart.value1
+                            data: y1Data1
                         }
                     ],
                 };
@@ -320,6 +356,21 @@
                 //     }, ]
                 // }
                 this.myChart.setOption(option);
+                if (this.config.isScroll) {
+                    setInterval(() => {
+
+                        xData.unshift(tempXData);
+                        tempXData = xData.pop();
+
+                        data_chart.value.unshift(tempMaxData);
+                        tempMaxData = data_chart.value.pop();
+
+                        data_chart.value1.unshift(tempMaxData1);
+                        tempMaxData1 = data_chart.value1.pop();
+
+                        this.myChart.setOption(option);
+                    }, 2000);
+                }
                 window.addEventListener("resize", ()=> {
                     if(this.myChart) {
                         this.myChart.resize();
