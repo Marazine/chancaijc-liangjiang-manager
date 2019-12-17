@@ -50,10 +50,10 @@
                         left: 'center',
                         padding: 1,
                         text: this.config.echartTitle,
-                        textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
+                        textStyle: { //主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
                             color: '#00f2f1',
-                            fontSize: 14,
-                        },
+                            fontSize: 14,
+                        },
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -68,48 +68,29 @@
                         type: 'category',
                         boundaryGap: true,
                         show: true,
-                        axisTick: {
-                            show: this.config.rcqk ? true : false,
-                            lineStyle: this.config.rcqk ? {
-                                color: "#a0c0ff",
-                                with: 3
-                            } : ''
-                        },
-                        axisLine: {
-                            show: this.config.rcqk || this.config.showLine ? true : false
-                        },
                         axisLabel: {
+                            formatter: '{value}',
+                            color: "#fff",
+                            fontSize: 12
+                        },
+                        axisTick: {
                             show: true,
-                            fontSize: 11,
-                            color: '#eee',
-                            textStyle: {
-                                // align: 'left',
-                                // baseline:'middle'
-                            },
-                            // interval: 0,
-                            formatter: (value) => {
-                                if (this.config.isCut) {
-                                    return value
-                                }
-                                if (value.length > 10) {
-                                    return value.substring(0, 10) + "..";
-                                } else {
-                                    return value;
-                                }
+                            lineStyle: {
+                                color: "#a0c0ff",
                             }
                         },
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "rgba(0, 222, 215, 0.2)",
+                                width: 1,
+                                type: "solid"
+                            },
+                        },
+                        splitLine: {
+                            show: false
+                        },
                         data: xData
-                            // .map((item) => {
-                            //     // item['textStyle'] = {
-                            //     //     align:"left"
-                            //     // }
-                            //     return {
-                            //         value: item,
-                            //         textStyle: {
-                            //             align: 'left',
-                            //         }
-                            //     }
-                            // })
                     }],
                     xAxis: [{
                             show: false,
@@ -168,7 +149,7 @@
                 };
                 this.myChart.setOption(option);
                 window.addEventListener("resize", () => {
-                    if(this.myChart) {
+                    if (this.myChart) {
                         this.myChart.resize();
                     }
                 });
@@ -178,12 +159,12 @@
 </script>
 
 <style lang="scss" scoped>
-.my-title-click {
-    cursor: pointer;
-}
-
-.my-title,
-.my-title-click {
-    left: 7% !important;
-}
+    .my-title-click {
+        cursor: pointer;
+    }
+    
+    .my-title,
+    .my-title-click {
+        left: 7% !important;
+    }
 </style>
