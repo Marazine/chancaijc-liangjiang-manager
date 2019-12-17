@@ -10,16 +10,15 @@
       <div class="row bh-100">
           <div class="row col-md-12 columnBox ">
             <div class="columnBottom row">
-              <div class=" col-md-4 column column100">
-                <!-- <double_pillar :initData="one" :config="oneConfig"></double_pillar> -->
+              <div class=" col-md-6 column column100">
                 <Chart :initData="one" :config='oneConfig'></Chart>
               </div>
-              <div class=" col-md-4 column column100">
+              <div class=" col-md-6 column column100">
                 <Chart :initData="pie_a_nextData" :config='pie_a_next_year_config'></Chart>
               </div>
-              <div class=" col-md-4 column column100">
+              <!-- <div class=" col-md-4 column column100">
                 <Chart :initData="estate_salary_Data" :config='estate_salary_config'></Chart>
-              </div>
+              </div> -->
             </div>
             <div class="columnBottom row">
               <div class=" col-md-6 column column100">
@@ -132,6 +131,7 @@ export default {
             oneConfig: {
               title: "在外游子薪酬对比",
               type: 'bussinessFlow',
+              paddingTop: '8%',
               c_left: "5%",
               margin: '5%',
               legend: ['省内', '省外']

@@ -38,27 +38,8 @@
                 }
             },
             pillarChart(data_chart, config_chart) {
-                // data_chart.value.forEach((item, index) => {
-                //     data_chart.value[index] = "-" + item;
-                // })
 
                 this.myChart = this.$echarts.init(this.$refs.pillar);
-                /**
-                 * 外接数据
-                 *
-                 */
-                // let data = { //标准参数
-                //     id: 'multipleThree',
-                //     title: '双柱子',
-                //     legend: ['正面', '负面'],
-                //     barWidth: 30,
-                //     yAxis: ['最值得冒险', '知道不知道', '儿子娃娃', '正确人类', '纠结', '只要平凡'],
-                //     xAxis: [
-                //         [-180, -150, -60, -95, -160, -80],
-                //         [150, 220, 165, 300, 180, 200, ]
-                //     ],
-                //     color: ['#5e94dd', '#49b5bd'],
-                // }
 
                 let option = option = {
                     backgroundColor: 'transparent',
@@ -96,13 +77,13 @@
                             color: "#fd5c8c"
                         }], false)
                     ],
-                    // legend: {
-                    //     top: 12,
-                    //     itemGap: 10,
-                    //     itemWidth: 10,
-                    //     itemHeight: 10,
-                    //     data: this.config.legend
-                    // },
+                    legend: {
+                        top: 12,
+                        itemGap: 10,
+                        itemWidth: 10,
+                        itemHeight: 10,
+                        data: this.config.legend
+                    },
                     grid: {
                         left: '4%',
                         right: '10%',
