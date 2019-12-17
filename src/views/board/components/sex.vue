@@ -2,20 +2,16 @@
     <div class="bh-100 chart_content">
         <div class="role elastic">
             <div class="man elastic">
+                <img src="../../..//assets/img/man.png" alt="">
                 <div class="man_wrap">
-                    <p class="man_number">男: {{initData.man.number}} 人</p>
+                    <p class="man_number">男: {{Math.ceil(initData.man.number)}} 人</p>
                     <p class="man_value">占比: {{initData.man.percentage}}</p>
-                </div>
-                <div>
-                    <img src="../../..//assets/img/man.png" alt="">
                 </div>
             </div>
             <div class="women elastic">
-                <div>
-                    <img src="../../..//assets/img/women.png" alt="">
-                </div>
+                <img src="../../..//assets/img/women.png" alt="">
                 <div class="women_wrap">
-                    <p class="women_number">女: {{initData.woman.number}} 人</p>
+                    <p class="women_number">女: {{Math.ceil(initData.woman.number)}} 人</p>
                     <p class="women_value">占比: {{initData.woman.percentage}}</p>
                 </div>
             </div>
@@ -48,7 +44,7 @@
 
 <style lang="scss" scoped>
 .chart_content{
-    padding: 20% 8% 0 8%;
+    padding: 12% 12% 0 12%;
 }
     .elastic {
         display: flex;
@@ -59,15 +55,20 @@
     .role {
         color: #fff;
         .man {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
             .man_value {
-                font-size: 12px;
+                font-size: 14px;
                 margin-top: 10px;
                 background-image: linear-gradient(to right, #1759ff, #52bded);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
             .man_number {
-                font-size: 14px;
+                font-size: 16px;
             }
             .man_wrap {
                 height: 100%;
@@ -75,15 +76,20 @@
             }
         }
         .women {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
             .women_value {
-                font-size: 12px;
+                font-size: 14px;
                 margin-top: 10px;
                 background-image: linear-gradient(to right, #f7418c, #fbbb66);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
             .women_number {
-                font-size: 14px;
+                font-size: 16px;
             }
             .women_wrap {
                 height: 100%;
