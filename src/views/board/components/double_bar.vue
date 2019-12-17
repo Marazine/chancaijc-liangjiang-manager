@@ -1,14 +1,14 @@
 <template>
-    <div class="bh-100">
-        <div class="chart-wrap" ref="pillar"></div>
-    </div>
+  <div class="bh-100">
+    <div class="chart-wrap" ref="pillar"></div>
+  </div>
 </template>
 
 <script>
     export default {
         data() {
             return {
-	    	myChart:null,
+                myChart: null,
                 chartData: {
                     "name": ['海洋产业', '航天航空产业', '生物产业', '新材料产业', '节能环保产业', '生命健康产业', '新能源产业', '文化创意产业', '高端装备制造',
                         '现代服务产业', '互联网产业', '新一代信息技术产业'
@@ -389,20 +389,10 @@
                     //             //         // show: true,
                     //             //         // // position: 'right',
 
-                    //             //         // color: '#ddd',
-                    //             //         // fontSize: '10',
-                    //             //     // }
-                    //             // }
-                    //         },
-                    //         // data:[-120, -180,-120, -120, -132, -101, -134, -190, -230, -210]
-                    //         data: data_chart.value1
-                    //     }
-                    // ],
-                // };
 
                 this.myChart.setOption(option);
-                window.addEventListener("resize", ()=> {
-                    if(this.myChart) {
+                window.addEventListener("resize", () => {
+                    if (this.myChart) {
                         this.myChart.resize();
                     }
                 })
