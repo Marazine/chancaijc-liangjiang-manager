@@ -19,7 +19,6 @@
       <BarScroll v-if="config.type=='qyqk'" :initData="qyqkData" :config="config"></BarScroll>
       <PieA v-if="config.type=='rcyinjin'" :initData="dataPieA" :config="config"></PieA>
       <ProductPerson v-if="config.type=='qyysynse'" :initData="qyysynseData" :config='config'></ProductPerson>
-      <DoublePillar v-if="config.type=='qyysynse'" :initData="doublePillar" :config="config"></DoublePillar>
     </div>
   </div>
 </template>
@@ -40,7 +39,6 @@
             this.dataPieA = this.initData.C1_1;
             this.qyqkData = this.initData.A4;
             this.qyysynseData = this.initData.A8;
-            this.doublePillar = this.initData.double_pillar;
         },
         computed: {
             productPerson() {

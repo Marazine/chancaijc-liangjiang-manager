@@ -47,7 +47,7 @@
                     },
                     legend: {
                         color: ["#F58080", "#47D8BE", "#F9A589"],
-                        data: ['新报', '流失'],
+                        data: ['流入', '流出'],
                         left: 'center',
                         bottom: 'bottom'
                     },
@@ -64,7 +64,7 @@
                         data: data_chart.name,
                         axisLine: {
                             lineStyle: {
-                                color: "#999"
+                                color: "#fff"
                             }
                         }
                     },
@@ -80,7 +80,7 @@
                         axisLine: {
                             show: false,
                             lineStyle: {
-                                color: "#333"
+                                color: "#fff"
                             },
                         },
                         nameTextStyle: {
@@ -91,7 +91,7 @@
                         }
                     },
                     series: [{
-                            name: '新报',
+                            name: '流入',
                             type: 'line',
                             data: data_chart.value,
                             color: "#F58080",
@@ -130,7 +130,7 @@
                             smooth: true
                         },
                         {
-                            name: '流失',
+                            name: '流出',
                             type: 'line',
                             data: data_chart.value1,
                             lineStyle: {

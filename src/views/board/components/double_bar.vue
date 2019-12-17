@@ -42,53 +42,106 @@
                 this.myChart = this.$echarts.init(this.$refs.pillar);
 
                 let option = {
+                    // backgroundColor: '#00265f',
+                    // title:{
+                    //      "text": "最近6日场站用气量统计",
+                    //     textStyle:{
+                    //         color: '#fff',
+                    //     }
+                    // },
                     tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'shadow'
-        }
-    },
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    // legend: {
+                    //     data: ['FT101', 'FT102', '总和'],
+                    //     left:'center',
+                    //     align: 'left',
+                    //     top:'2%',
+                    //     textStyle: {
+                    //         color: "#fff"
+                    //     },
+                    //     itemWidth: 10,
+                    //     itemHeight: 10,
+                    //     itemGap: 35
+                    // },
+                    grid: {
+                        top: '5%',
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    // grid: [{
+                    //     width: '80%',
+                    //     left: '10%'
+                    // },{
+                    //     left: '13.3%',
+                    //     width: '80%'
+                    // }],
                     xAxis: [{
+                        // show: false,
+                        type: 'category',
                         data: data_chart.name,
-                        axisLabel: {
-                            interval: 0,
-                            show: false
-                        },
-                    },{
-                        data: data_chart.name,
-                        axisLabel: {
-                            interval: 0,
-                            show: true
-                        },
                         axisLine: {
-                        show: false  
+                            show: false,
+                            lineStyle: {
+                                color: "#fff",
+                                width: 1,
+                                type: "solid"
+                            },
                         },
                         axisTick: {
-                            show: false
+                            show: true,
                         },
-                        gridIndex: 1
+                        splitLine:{
+                            show:false
+                        }
+                        // axisLabel: {
+                        //     show: true,
+                        //     textStyle: {
+                        //         color: "#fff",
+                        //     }
+                        // },
                     }],
                     yAxis: [{
+                        // show: false,
                         type: 'value',
-                        show: true
-                    },{
-                        gridIndex: 1,
-                        show: false,
+                        // name:'万m³',
+                        axisLabel: {
+                            formatter: '{value}'
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                        axisLine: {
+                            show: false,
+                            lineStyle: {
+                                color: "#fff",
+                                width: 1,
+                                type: "solid"
+                            },
+                        },
+                        splitLine:{
+                            show:false
+                        }
+                        // splitLine: {
+                        //     lineStyle: {
+                        //         color: "#fff",
+                        //     }
+                        // }
                     }],
-                    grid: [{
-                        width: '80%',
-                        left: '10%'
-                    },{
-                        left: '13.3%',
-                        width: '80%'
-                    }],
-                    series: [
-                        {
-                            type: 'bar',
-                            barWidth: 10,
-                            data: data_chart.value,
-                            itemStyle: {
-                                barBorderRadius: 10,
+                    series: [{
+                        // name: 'FT101',
+                        type: 'bar',
+                        data: data_chart.value,
+                        // barWidth: 16, //柱子宽度
+                        barWidth: 8,
+                        // barGap: 1, //柱子之间间距
+                        itemStyle: {
+                            normal: {
                                 color: {
                                     type: 'linear',
                                     x: 0,
@@ -100,16 +153,20 @@
                                     }, {
                                         offset: 1, color: 'rgba(0, 222, 215, 0.2)' // 100% 处的颜色
                                     }],
-                                }
+                                },
+                                opacity: 1,
+                                barBorderRadius: 12,
                             }
-                            
-                        },
-                        {
-                            type: 'bar',
-                            barWidth: 10,
-                            data: data_chart.value1,
-                            itemStyle: {
-                                barBorderRadius: 10,
+                        }
+                    }, {
+                        // name: 'FT102',
+                        type: 'bar',
+                        data: data_chart.value1,
+                        // barWidth: 16,
+                        barWidth: 8,
+                        // barGap: 1,
+                        itemStyle: {
+                            normal: {
                                 color: {
                                     type: 'linear',
                                     x: 0,
@@ -121,11 +178,98 @@
                                     }, {
                                         offset: 1, color: 'rgba(255, 86, 36, 0.2)' // 100% 处的颜色
                                     }],
-                                }
+                                },
+                                opacity: 1,
+                                barBorderRadius: 12,
                             }
-                        },
-                    ]
+                        }
+                    }]
                 };
+                // {
+                //     tooltip: {
+                //         trigger: 'axis',
+                //         axisPointer: {
+                //             type: 'shadow'
+                //         }
+                //     },
+                //     xAxis: [{
+                //         data: data_chart.name,
+                //         axisLabel: {
+                //             interval: 0,
+                //             show: false
+                //         },
+                //     },{
+                //         data: data_chart.name,
+                //         axisLabel: {
+                //             interval: 0,
+                //             show: true
+                //         },
+                //         axisLine: {
+                //         show: false  
+                //         },
+                //         axisTick: {
+                //             show: false
+                //         },
+                //         gridIndex: 1
+                //     }],
+                //     yAxis: [{
+                //         type: 'value',
+                //         show: true
+                //     },{
+                //         gridIndex: 1,
+                //         show: false,
+                //     }],
+                //     grid: [{
+                //         width: '80%',
+                //         left: '10%'
+                //     },{
+                //         left: '13.3%',
+                //         width: '80%'
+                //     }],
+                //     series: [
+                //         {
+                //             type: 'bar',
+                //             barWidth: 10,
+                //             data: data_chart.value,
+                //             itemStyle: {
+                //                 barBorderRadius: 10,
+                //                 color: {
+                //                     type: 'linear',
+                //                     x: 0,
+                //                     y: 0,
+                //                     x2: 0,
+                //                     y2: 1,
+                //                     colorStops: [{
+                //                         offset: 0, color: '#37FFF9' // 0% 处的颜色
+                //                     }, {
+                //                         offset: 1, color: 'rgba(0, 222, 215, 0.2)' // 100% 处的颜色
+                //                     }],
+                //                 }
+                //             }
+                            
+                //         },
+                //         {
+                //             type: 'bar',
+                //             barWidth: 10,
+                //             data: data_chart.value1,
+                //             itemStyle: {
+                //                 barBorderRadius: 10,
+                //                 color: {
+                //                     type: 'linear',
+                //                     x: 0,
+                //                     y: 0,
+                //                     x2: 0,
+                //                     y2: 1,
+                //                     colorStops: [{
+                //                         offset: 0, color: '#FF5624' // 0% 处的颜色
+                //                     }, {
+                //                         offset: 1, color: 'rgba(255, 86, 36, 0.2)' // 100% 处的颜色
+                //                     }],
+                //                 }
+                //             }
+                //         },
+                //     ]
+                // };
                 
                 // {
                 //     backgroundColor: 'transparent',

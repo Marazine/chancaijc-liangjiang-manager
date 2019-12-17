@@ -44,18 +44,18 @@ export default {
             pie_aData: {},
             pie_a_year_config: {
               type: 'bussinessFlow',
-              title: "十三五重点行业2020年度国内社会人才需求",
+              title: "不同行业人才净流入流出分布",
               type: 'bussinessFlow',
               isScroll: true,
               paddingTop: '8%',
               c_left: "5%",
               margin: '5%',
-              legend: ['省内', '省外']
+              legend: ['流入', '流出']
             },
             pie_a_nextData: {},
             pie_a_next_year_config: {
                 type: 'industuryFlow',
-                title: "各产业2020年度国内应届生需求",
+                title: "重点产业人才流动分布",
                 paddingTop: '8%',
                 radius: ['35%', '50%'],
                 radius2: [0, '32%'],
@@ -67,7 +67,7 @@ export default {
             estate_salary_Data: {},
             estate_salary_config: {
                 type: 'natureFlow',
-                title: '各产业2020年度外籍人才需求',
+                title: '不同企业性质人才流动分布',
                 paddingTop: '8%',
                 echartTitleShow: false,
                 left: '4%',
@@ -80,7 +80,7 @@ export default {
             estateData: {},
             estate_config: {
                 type: 'lsl',
-                title: '各产业2020年度国留学归国人才需求',
+                title: '近一年人才流动比例',
                 radius: ['40%', '80%'],
                 paddingTop: '6%',
                 top: '15%',
