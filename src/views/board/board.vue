@@ -6,18 +6,18 @@
     <div class="fuse content" v-if="isShow">
       <div class="row bh-100">
         <div class="col-md-3 f-column">
-          <!-- <product_person :initData="PayData" :config='configure_ind'></product_person> -->
-          <chartSwitch :initData="PayData" :config='configure_ind'></chartSwitch>
-          <!-- <pie_a :initData="product_personData" :config="product_person_config"></pie_a> -->
-          <Chart :initData="product_personData" :config='product_person_config'></Chart>
+            <Chart :initData="PayData" :config='configure_ind'></Chart>
+            <!-- <chartSwitch :initData="PayData" :config='configure_ind'></chartSwitch> -->
+            <Chart :initData="product_personData" :config='product_person_config'></Chart>
         </div>
         <div class="col-md-6" style="padding:0 10px">
-          <ns_map :initData='zhDataMap' :initmapData='initmapData' :title="'珠海地图'" :config="zhuhaimapConfig"></ns_map>
-          <Guide></Guide>
+            <ns_map :initData='zhDataMap' :initmapData='initmapData' :title="'珠海地图'" :config="zhuhaimapConfig"></ns_map>
+            <Guide></Guide>
         </div>
         <div class="col-md-3 f-column">
-          <chartSwitch :initData="pie_aData" :config='pie_aconfig'></chartSwitch>
-          <Chart :initData="professionalData" :config='professional_config'></Chart>
+            <Chart :initData="pie_aData" :config='pie_aconfig'></Chart>
+            <!-- <chartSwitch :initData="pie_aData" :config='pie_aconfig'></chartSwitch> -->
+            <Chart :initData="professionalData" :config='professional_config'></Chart>
         </div>
       </div>
     </div>
@@ -116,25 +116,26 @@
                     data: {
                         condition: JSON.stringify({
                             index: 1,
-                            queryKeys: ['A4', 'B1_1', 'C1_1', 'C1_2', 'C8']
+                            // queryKeys: ['A4', 'B1_1', 'C1_1', 'C1_2', 'C8']
+                            queryKeys: ['A_A2_1', 'A_A4_1', 'A_A10_1']
                         })
                     }
                 }).then(({
                     data
                 }) => {
                     if (data && data.code == 200) {
-                        this.allData = data.data;
-                        this.PayData = {
-                            A4: data.data.A4,
-                            personBussiness: data.data.personBussiness
-                        };
-                        this.product_personData = data.data.B1_1;
-                        this.pie_aData = {
-                            C1_1: data.data.C1_1,
-                            C1_2: data.data.C1_2
-                        };
-                        this.professionalData = data.data.C8;
-                        this.zhDataMap.ns_mapData = data.data.regionDetail;
+                        // this.allData = data.data;
+                        // this.PayData = {
+                        //     A4: data.data.A4,
+                        //     personBussiness: data.data.personBussiness
+                        // };
+                        // this.product_personData = data.data.B1_1;
+                        // this.pie_aData = {
+                        //     C1_1: data.data.C1_1,
+                        //     C1_2: data.data.C1_2
+                        // };
+                        // this.professionalData = data.data.C8;
+                        // this.zhDataMap.ns_mapData = data.data.regionDetail;
 
                         this.isShow = true;
                     }

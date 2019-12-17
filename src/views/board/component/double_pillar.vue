@@ -1,7 +1,7 @@
 <template>
   <div class="back-img bh-50">
     <div class="title">
-      <img src="../../../assets/img/arrow.png" alt="">
+      <!-- <img src="../../../assets/img/arrow.png" alt=""> -->
       {{config.title}}
     </div>
     <div class="s-content" ref="pillar" id="pillar" :style="{paddingTop:config.paddingTop?config.paddingTop:''}"></div>
@@ -17,8 +17,8 @@
                     "name": ['海洋产业', '航天航空产业', '生物产业', '新材料产业', '节能环保产业', '生命健康产业', '新能源产业', '文化创意产业', '高端装备制造',
                         '现代服务产业', '互联网产业', '新一代信息技术产业'
                     ],
-                    'value1': [1350, 1948, 2970, 5468, 10034, 10162, 10428, 11017, 14383, 17681, 48060, 94567],
-                    'value2': [1261, 1815, 2117, 4544, 9900, 7861, 9043, 9271, 13235, 15450, 36115, 75320]
+                    'value': [1350, 1948, 2970, 5468, 10034, 10162, 10428, 11017, 14383, 17681, 48060, 94567],
+                    'value1': [1261, 1815, 2117, 4544, 9900, 7861, 9043, 9271, 13235, 15450, 36115, 75320]
                 }
             }
         },
@@ -37,14 +37,15 @@
             init() {
                 if (this.initData) {
                     this.pillarChart(this.initData, this.config);
+                    
                 } else {
                     this.pillarChart(this.chartData, this.config);
                 }
             },
             pillarChart(data_chart, config_chart) {
-                data_chart.value.forEach((item, index) => {
-                    data_chart.value[index] = "-" + item;
-                })
+                // data_chart.value.forEach((item, index) => {
+                //     data_chart.value[index] = "-" + item;
+                // })
 
                 this.myChart = this.$echarts.init(this.$refs.pillar);
                 /**
@@ -158,7 +159,8 @@
                             },
                         },
 
-                        data: this.$filterReserve(data_chart.name)
+                        // data: this.$filterReserve(data_chart.name)
+                        data: data_chart.name
                     }],
                     series: [{
                         name: config_chart.legend[0],
@@ -177,7 +179,8 @@
                             },
 
                         },
-                        data: this.$filterReserve(data_chart.value)
+                        // data: this.$filterReserve(data_chart.value)
+                        data: data_chart.value
                     }, {
                         name: config_chart.legend[1],
                         type: 'bar',
@@ -191,7 +194,8 @@
                                 fontSize: '10',
                             }
                         },
-                        data: this.$filterReserve(data_chart.value2)
+                        // data: this.$filterReserve(data_chart.value1)
+                        data: data_chart.value1
                     }, ]
                 }
                 this.myChart.setOption(option);

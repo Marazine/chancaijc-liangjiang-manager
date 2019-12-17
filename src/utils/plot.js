@@ -29,3 +29,5 @@ import Gragh from '@/views/board/components/gragh' //
 Vue.component("Gragh", Gragh)
 import Radio from '@/views/board/components/radio' //
 Vue.component("Radio", Radio)
+import DoublePillar from '@/views/board/components/double_pillar' //
+Vue.component("DoublePillar", DoublePillar)

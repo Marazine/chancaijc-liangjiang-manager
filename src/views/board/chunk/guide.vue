@@ -15,24 +15,24 @@
         <span>企业分布</span>
       </p>
     </div>
-    <div class="roll4 roll" @click="$router.push({name:'rcpy'})">
+    <div class="roll4 roll" @click="$router.push({name:'rcld'})">
       <p>
-        <span>人才培养</span>
+        <span>人才流动及<br />来源分析</span>
       </p>
     </div>
-    <div class="roll5 roll" @click="$router.push({name:'rcqk'})">
+    <div class="roll5 roll" @click="$router.push({name:'xq'})">
       <p>
-        <span>人才情况</span>
+        <span>人才需求<br />分析</span>
       </p>
     </div>
-    <div class="roll6 roll" @click="$router.push({name:'rcyj'})">
+    <div class="roll6 roll" @click="$router.push({name:'qyrlfw'})">
       <p>
-        <span>人才引进</span>
+        <span>企业人力<br />资源服务<br />投入及需<br />求分析</span>
       </p>
     </div>
-    <div class="roll7 roll" @click="$router.push({name:'rlzyfw'})">
+    <div class="roll7 roll" @click="$router.push({name:'rcfzhj'})">
       <p>
-        <span>人才服务与<br />政策</span>
+        <span>人才发展<br />环境分析</span>
       </p>
     </div>
   </div>

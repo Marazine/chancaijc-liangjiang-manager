@@ -68,3 +68,8 @@ export function previewAddress(company_id) {
     var tempAddress = "/print.html?id=" + company_id;
     return tempAddress;
 }
+
+// 数组数据翻转
+export function filterReserve(value) {
+    return value.reverse();
+}

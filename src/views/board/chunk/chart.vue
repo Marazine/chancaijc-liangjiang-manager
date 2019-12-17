@@ -17,6 +17,7 @@
       <ExternalF v-if="externalF" :initData="initData" :config="config"></ExternalF>
       <Gragh v-if="gragh" :initData="initData" :config="config"></Gragh>
       <Radio v-if="radio" :initData="initData" :config="config"></Radio>
+      <DoublePillar v-if="doublePillar" :initData="initData" :config="config"></DoublePillar>
     </div>
   </div>
 </template>
@@ -64,6 +65,9 @@
             },
             radio() {
                 return this.config.type == 'rcpy';
+            },
+            doublePillar() {
+                return this.config.type == 'bussinessFlow';
             }
         },
         beforeDestroy() {

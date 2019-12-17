@@ -28,6 +28,10 @@ const globalRoutes = [
     { path: '/rcpy', component: _import('board/rcpy/rcpy'), name: 'rcpy', meta: { title: '人才培养' } },
     { path: '/rlzyfw', component: _import('board/rlzyfw/rlzyfw'), name: 'rlzyfw', meta: { title: '人才资源服务与政策'} },
     { path: '/company2', component: _import('board/common/company'), name: 'company2', meta: { title: '企业类型分布' } },
+    { path: '/rcfzhj', component: _import('board/rcfzhj/rcfzhj'), name: 'rcfzhj', meta: { title: '人才发展环境分析' } },
+    { path: '/xq', component: _import('board/xq/xq'), name: 'xq', meta: { title: '人才需求分析' } },
+    { path: '/qyrlfw', component: _import('board/qyrlfw/qyrlfw'), name: 'qyrlfw', meta: { title: '企业人力资源服务投入及需求分析' } },
+    { path: '/rcld', component: _import('board/rcld/rcld'), name: 'rcld', meta: { title: '人才流动及来源分析' } },
 ]
 
 // 主入口路由(需嵌套上左右整体布局)
