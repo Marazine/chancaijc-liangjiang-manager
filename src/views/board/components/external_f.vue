@@ -8,7 +8,7 @@
     export default {
         data() {
             return {
-                myChart:null,
+                myChart: null,
                 b_age_aboard: [{
                     value: 10,
                     name: 'IDS'
@@ -63,7 +63,9 @@
 
                 let option = {
                     backgroundColor: "transparent",
-                    color: ['#0E7CE2', '#FF8352', '#E271DE', '#F8456B', '#00FFFF', '#4AEAB0', "#EAEA26", "#906BF9", "#FE5656", "#01E17E", "#3DD1F9", "#FFAD05"],
+                    color: ['#0E7CE2', '#FF8352', '#E271DE', '#F8456B', '#00FFFF', '#4AEAB0', "#EAEA26", "#906BF9", "#FE5656",
+                        "#01E17E", "#3DD1F9", "#FFAD05"
+                    ],
                     // title: {
                     // text: '网络/安全设备',
                     // left: '60',
@@ -93,146 +95,148 @@
                     //     type: 'category',
                     //     data: [],
                     //     z: 10,
-                        // axisLine: {
-                        //     show: false,
-                        //     lineStyle: {
-                        //         color: "#0B4A6B",
-                        //         width: 1,
-                        //         type: "solid"
-                        //     },
-                        // },
-                        // axisLabel: {
-                        //     interval: 0,
-                        //     show: true,
-                        //     color: "#0B4A6B",
-                        //     margin: 8,
-                        //     fontSize: 16
-                        // },
+                    // axisLine: {
+                    //     show: false,
+                    //     lineStyle: {
+                    //         color: "#0B4A6B",
+                    //         width: 1,
+                    //         type: "solid"
+                    //     },
+                    // },
+                    // axisLabel: {
+                    //     interval: 0,
+                    //     show: true,
+                    //     color: "#0B4A6B",
+                    //     margin: 8,
+                    //     fontSize: 16
+                    // },
                     // },
                     // radiusAxis: {
                     //     min: 40,
                     //     max: 120,
                     //     interval: 20,
-                        // axisLine: {
-                        //     show: false,
-                        //     lineStyle: {
-                        //         color: "#0B3E5E",
-                        //         width: 1,
-                        //         type: "solid"
-                        //     },
-                        // },
-                        // axisLabel: {
-                        //     formatter: '{a} %',
-                        //     show: false,
-                        //     padding: [0, 0, 20, 0],
-                        //     color: "#0B3E5E",
-                        //     fontSize: 16
-                        // },
-                        // splitLine: {
-                        //     lineStyle: {
-                        //         color: "#0B3E5E",
-                        //         width: 2,
-                        //         type: "solid"
-                        //     }
-                        // }
+                    // axisLine: {
+                    //     show: false,
+                    //     lineStyle: {
+                    //         color: "#0B3E5E",
+                    //         width: 1,
+                    //         type: "solid"
+                    //     },
+                    // },
+                    // axisLabel: {
+                    //     formatter: '{a} %',
+                    //     show: false,
+                    //     padding: [0, 0, 20, 0],
+                    //     color: "#0B3E5E",
+                    //     fontSize: 16
+                    // },
+                    // splitLine: {
+                    //     lineStyle: {
+                    //         color: "#0B3E5E",
+                    //         width: 2,
+                    //         type: "solid"
+                    //     }
+                    // }
                     // },
                     // calculable: true,
                     series: [
-                    //     {
-                    //     type: 'pie',
-                    //     radius: ["5%", "10%"],
-                    //     hoverAnimation: false,
-                    //     labelLine: {
-                    //         normal: {
-                    //             show: false,
-                    //             length: 30,
-                    //             length2: 55
-                    //         },
-                    //         emphasis: {
-                    //             show: false
-                    //         }
-                    //     },
-                    //     data: [{
-                    //         name: '',
-                    //         value: 0,
-                    //         itemStyle: {
-                    //             normal: {
-                    //                 color: "#0B4A6B"
-                    //             }
-                    //         }
-                    //     }]
-                    // }, 
-                    // {
-                    //     type: 'pie',
-                    //     radius: ["90%", "95%"],
-                    //     hoverAnimation: false,
-                    //     labelLine: {
-                    //         normal: {
-                    //             show: false,
-                    //             length: 30,
-                    //             length2: 55
-                    //         },
-                    //         emphasis: {
-                    //             show: false
-                    //         }
-                    //     },
-                    //     name: "",
-                    //     data: [{
-                    //         name: '',
-                    //         value: 0,
-                    //         itemStyle: {
-                    //             normal: {
-                    //                 color: "#0B4A6B"
-                    //             }
-                    //         }
-                    //     }]
-                    // }, 
-                    {
-                        // stack: 'a',
-                        // roseType: 'area',
-                        // zlevel: 10,
-                        type: 'pie',
-                        // radius: ['40%', '80%'],
-                        radius: this.config.radius,
-                        roseType: 'radius',
-                        label: {
-                            normal: {
-                                show: true,
-                                // formatter: "{b}",
-                                formatter: (param)=>{
-                                    if(param.name.length > 8) {
-                                        return param.name? param.name.slice(0, 8) + "\n" + param.name.slice(8) + "\n数量: " + param.value : ''
-                                    } else {
-                                        return param.name? param.name + "\n数量: " + param.value : ''
-                                    }
+                        //     {
+                        //     type: 'pie',
+                        //     radius: ["5%", "10%"],
+                        //     hoverAnimation: false,
+                        //     labelLine: {
+                        //         normal: {
+                        //             show: false,
+                        //             length: 30,
+                        //             length2: 55
+                        //         },
+                        //         emphasis: {
+                        //             show: false
+                        //         }
+                        //     },
+                        //     data: [{
+                        //         name: '',
+                        //         value: 0,
+                        //         itemStyle: {
+                        //             normal: {
+                        //                 color: "#0B4A6B"
+                        //             }
+                        //         }
+                        //     }]
+                        // }, 
+                        // {
+                        //     type: 'pie',
+                        //     radius: ["90%", "95%"],
+                        //     hoverAnimation: false,
+                        //     labelLine: {
+                        //         normal: {
+                        //             show: false,
+                        //             length: 30,
+                        //             length2: 55
+                        //         },
+                        //         emphasis: {
+                        //             show: false
+                        //         }
+                        //     },
+                        //     name: "",
+                        //     data: [{
+                        //         name: '',
+                        //         value: 0,
+                        //         itemStyle: {
+                        //             normal: {
+                        //                 color: "#0B4A6B"
+                        //             }
+                        //         }
+                        //     }]
+                        // }, 
+                        {
+                            // stack: 'a',
+                            // roseType: 'area',
+                            // zlevel: 10,
+                            type: 'pie',
+                            // radius: ['40%', '80%'],
+                            radius: this.config.radius,
+                            // roseType: 'radius',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    // formatter: "{b}",
+                                    formatter: (param) => {
+                                        if (param.name.length > 10) {
+                                            return param.name ? param.name.slice(0, 10) + "\n" + param.name.slice(10) + "\n数量: " + param
+                                                .value : ''
+                                        } else {
+                                            return param.name ? param.name + "\n数量: " + param.value : ''
+                                        }
+                                    },
+                                    textStyle: {
+                                        fontSize: 12,
+                                    },
+                                    position: 'outside'
                                 },
-                                textStyle: {
-                                    fontSize: 12,
+                                emphasis: {
+                                    show: true
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: true,
+                                    // length: 20,
+                                    // length2: 55
+                                    length: 10,
+                                    length2: 15
                                 },
-                                position: 'outside'
+                                emphasis: {
+                                    show: true
+                                }
                             },
-                            emphasis: {
-                                show: true
-                            }
+                            data: data
                         },
-                        labelLine: {
-                            normal: {
-                                show: true,
-                                // length: 20,
-                                // length2: 55
-                                length: 1,
-                                length2: 5
-                            },
-                            emphasis: {
-                                show: false
-                            }
-                        },
-                        data: data
-                    }, ]
+                    ]
                 }
                 this.myChart.setOption(option);
-                window.addEventListener("resize", ()=> {
-                    if(this.myChart) {
+                window.addEventListener("resize", () => {
+                    if (this.myChart) {
                         this.myChart.resize();
                     }
                 });

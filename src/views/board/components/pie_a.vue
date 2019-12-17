@@ -95,7 +95,12 @@
                                 // formatter: "{b}\n数量: {c}",
                                 formatter: (param) => {
 
-                                    return param.name ? param.name + "\n数量: " + param.value : ''
+                                    if (param.name.length > 10) {
+                                        return param.name ? param.name.slice(0, 10) + "\n" + param.name.slice(10) + "\n数量: " + param
+                                            .value : ''
+                                    } else {
+                                        return param.name ? param.name + "\n数量: " + param.value : ''
+                                    }
 
                                 },
                                 textStyle: {

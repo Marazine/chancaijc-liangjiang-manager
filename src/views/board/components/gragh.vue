@@ -63,7 +63,7 @@
                     "rgb(165, 190, 198)",
                 ]
                 data.name.forEach((item, index) => {
-                    
+
                     dataList.push({
                         "name": item + ":" + data.value[index],
                         "value": data.value[index],
