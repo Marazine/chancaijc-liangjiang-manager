@@ -129,7 +129,7 @@
                         color: "#F58080",
                         lineStyle: {
                             normal: {
-                                width: 5,
+                                width: 2,
                                 color: {
                                     type: 'linear',
 
@@ -166,7 +166,7 @@
                         data: data_chart.value1,
                         lineStyle: {
                             normal: {
-                                width: 5,
+                                width: 2,
                                 color: {
                                     type: 'linear',
 

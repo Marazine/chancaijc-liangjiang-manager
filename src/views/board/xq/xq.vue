@@ -43,8 +43,9 @@ export default {
             pie_a_year_config: {
               type: 'qycrny',
               title: "十三五重点行业2020年度国内社会人才需求",
-              radius: ['35%', '50%'],
-              radius2: [0, '32%'],
+              paddingTop: '8%',
+              radius: ['45%', '65%'],
+              radius2: [0, '43%'],
               left: '20%',
               right: '20%',
               top: '0',
@@ -54,8 +55,9 @@ export default {
             pie_a_next_year_config: {
                 type: 'wloneyxycr',
                 title: "各产业2020年度国内应届生需求",
-                radius: ['35%', '50%'],
-                radius2: [0, '32%'],
+                paddingTop: '8%',
+                radius: ['45%', '65%'],
+                radius2: [0, '43%'],
                 left: '20%',
                 right: '20%',
                 top: '0',
