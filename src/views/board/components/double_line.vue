@@ -46,27 +46,36 @@
                         trigger: 'axis'
                     },
                     legend: {
-                        color: ["#F58080", "#47D8BE", "#F9A589"],
+                        color: ["#F58080", "#47D8BE"],
                         data: ['流入', '流出'],
                         left: 'center',
-                        bottom: 'bottom'
+                        // bottom: 'bottom',
+                        textStyle: { //图例文字的样式
+                            color: '#fff',
+                            // fontSize: 16
+                        },
                     },
                     grid: {
-                        top: 'middle',
                         left: '3%',
                         right: '4%',
-                        bottom: '3%',
-                        height: '80%',
+                        bottom: '0%',
+                        height: '90%',
                         containLabel: true
                     },
                     xAxis: {
                         type: 'category',
                         data: data_chart.name,
-                        axisLine: {
-                            lineStyle: {
-                                color: "#fff"
+                        axisLabel: {
+                            margin: 10,
+                            color: '#e2e9ff',
+                            textStyle: {
+                                fontSize: 12,
+                            },
+                            rotate:35,
+                            formatter: (value) => {
+                                return value
                             }
-                        }
+                        },
                     },
                     yAxis: {
                         type: 'value',
@@ -88,7 +97,7 @@
                         },
                         splitArea: {
                             show: false
-                        }
+                        },
                     },
                     series: [{
                             name: '流入',

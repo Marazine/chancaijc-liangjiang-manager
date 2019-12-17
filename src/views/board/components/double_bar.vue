@@ -69,18 +69,11 @@
                     // },
                     grid: {
                         top: '5%',
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
+                        left: '5%',
+                        right: '3%',
+                        bottom: '-3%',
                         containLabel: true
                     },
-                    // grid: [{
-                    //     width: '80%',
-                    //     left: '10%'
-                    // },{
-                    //     left: '13.3%',
-                    //     width: '80%'
-                    // }],
                     xAxis: [{
                         // show: false,
                         type: 'category',
@@ -98,13 +91,18 @@
                         },
                         splitLine:{
                             show:false
-                        }
-                        // axisLabel: {
-                        //     show: true,
-                        //     textStyle: {
-                        //         color: "#fff",
-                        //     }
-                        // },
+                        },
+                        axisLabel: {
+                            margin: 10,
+                            color: '#e2e9ff',
+                            textStyle: {
+                                fontSize: 12,
+                            },
+                            rotate: 30,
+                            formatter: (value) => {
+                                return value
+                            }
+                        },
                     }],
                     yAxis: [{
                         // show: false,
