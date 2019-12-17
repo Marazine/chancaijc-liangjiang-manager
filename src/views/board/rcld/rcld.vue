@@ -32,12 +32,8 @@
 </template>
 
 <script>
-import double_pillar from "../component/double_pillar" 
 
 export default {
-    components: {
-      double_pillar
-    },
     data() {
         return {
             isShow: false,

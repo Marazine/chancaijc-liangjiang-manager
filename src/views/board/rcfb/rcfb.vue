@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="fuse content" v-if="isShow"> -->
   <div class="my-board main">
     <div class="title-c"></div>
     <div class="content" v-if="isShow">

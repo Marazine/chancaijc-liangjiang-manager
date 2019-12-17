@@ -6,13 +6,10 @@
     <div class="fuse content" v-if="isShow">
       <div class="row bh-100">
         <div class="col-md-3 f-column">
-          <!-- <product_person :initData="PayData" :config='configure_ind'></product_person> -->
           <chartSwitch :initData="PayData" :config='configure_ind'></chartSwitch>
-          <!-- <pie_a :initData="product_personData" :config="product_person_config"></pie_a> -->
           <Chart :initData="professionalData" :config='professional_config'></Chart>
         </div>
         <div class="col-md-6" style="padding:0 10px">
-            
             <ul class="fl deta">
                 <li>
                     <p><img src="../../assets/img/company1.png"/><i></i></p>
@@ -49,7 +46,6 @@
           <Guide></Guide>
         </div>
         <div class="col-md-3 f-column">
-          <!-- <Chart :initData="product_num" :config='product_num_config'></Chart> -->
           <Chart :initData="product_personData" :config='product_person_config'></Chart>
           <chartSwitch :initData="product_num" :config='product_num_config'></chartSwitch>
         </div>
@@ -59,12 +55,10 @@
 </template>
 
 <script>
-    import pie_a from "./qyqk/modules/pie_a"
-
     import Guide from './chunk/guide'
-
     import nsMap from './ns'
     import nsData from './nsData'
+    
     export default {
         data() {
             let queryType = this.$route.query.type;
@@ -159,13 +153,10 @@
         },
         created() {
             this.init();
-            // this.isShow = true;
         },
         components: {
-            pie_a,
             Guide
         },
-
         methods: {
             init() {
                 this.$http({

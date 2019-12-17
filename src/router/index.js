@@ -21,7 +21,6 @@ const globalRoutes = [
     { path: '/login', component: _import('common/login'), name: 'login', meta: { title: '登录' } },
     { path: '/analyseF_detail/:companyId/:companyName', component: _import('analyseF/analyseF_detail'), name: 'analyseF_detail', meta: { title: '统计分析明细F' } },
     { path: '/board', component: _import('board/board'), name: 'board', meta: { title: '看板' } },
-    { path: '/qyqk', component: _import('board/qyqk/qyqk'), name: 'qyqk', meta: { title: '企业情况' } },
     { path: '/rcfb', component: _import('board/rcfb/rcfb'), name: 'rcfb', meta: { title: '人才分布' } },
     { path: '/company2', component: _import('board/common/company'), name: 'company2', meta: { title: '企业类型分布' } },
     { path: '/rcfzhj', component: _import('board/rcfzhj/rcfzhj'), name: 'rcfzhj', meta: { title: '人才发展环境分析' } },

@@ -3,7 +3,7 @@
         <div class="role elastic">
             <div class="man elastic">
                 <div class="man_wrap">
-                    <p>男: {{initData.man.number}} 人</p>
+                    <p class="man_number">男: {{initData.man.number}} 人</p>
                     <p class="man_value">占比: {{initData.man.percentage}}</p>
                 </div>
                 <div>
@@ -15,7 +15,7 @@
                     <img src="../../..//assets/img/women.png" alt="">
                 </div>
                 <div class="women_wrap">
-                    <p>女: {{initData.woman.number}} 人</p>
+                    <p class="women_number">女: {{initData.woman.number}} 人</p>
                     <p class="women_value">占比: {{initData.woman.percentage}}</p>
                 </div>
             </div>
@@ -48,7 +48,7 @@
 
 <style lang="scss" scoped>
 .chart_content{
-    padding: 20% 13% 0 13%;
+    padding: 20% 8% 0 8%;
 }
     .elastic {
         display: flex;
@@ -60,11 +60,14 @@
         color: #fff;
         .man {
             .man_value {
-                font-size: 18px;
+                font-size: 12px;
                 margin-top: 10px;
                 background-image: linear-gradient(to right, #1759ff, #52bded);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
+            }
+            .man_number {
+                font-size: 14px;
             }
             .man_wrap {
                 height: 100%;
@@ -73,11 +76,14 @@
         }
         .women {
             .women_value {
-                font-size: 18px;
+                font-size: 12px;
                 margin-top: 10px;
                 background-image: linear-gradient(to right, #f7418c, #fbbb66);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
+            }
+            .women_number {
+                font-size: 14px;
             }
             .women_wrap {
                 height: 100%;
