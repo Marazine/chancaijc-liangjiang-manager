@@ -35,10 +35,15 @@
             },
             estateChart(id, data) {
                 this.myChart = this.$echarts.init(this.$refs.estate);
+
+                data.value.sort((a, b) => {
+                    return b - a
+                })
+                let maxValue = data.value[0];
                 let xData = data.name.map(item => {
                     return {
                         name: item,
-                        max: 5000
+                        max: maxValue
                     }
                 })
                 let y1Data = data.value;
@@ -57,10 +62,10 @@
                         left: 'center',
                         padding: 1,
                         text: this.config.echartTitle,
-                        textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
+                        textStyle: { //主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
                             color: '#00f2f1',
-                            fontSize: 14,
-                        },
+                            fontSize: 14,
+                        },
                     },
                     // legend: {
                     //     show: true,
@@ -80,17 +85,17 @@
                     tooltip: {},
                     radar: {
                         // shape: 'circle',
-                        radius:'65%',
+                        radius: '65%',
                         triggerEvent: true,
                         name: {
                             textStyle: {
                                 color: '#fff',
-                                fontSize:'10',
+                                fontSize: '10',
                                 borderRadius: 3,
                                 padding: [3, 5]
                             }
                         },
-                        nameGap:'2',
+                        nameGap: '2',
                         indicator: xData,
                         // [
                         //     {//[4300, 10000, 28000, 35000, 50000, 19000, 21000]
@@ -105,10 +110,10 @@
                         splitArea: {
                             areaStyle: {
                                 color: [
-                                        'rgba(222,134,85, 0.1)', 'rgba(222,134,85, 0.2)',
-                                        'rgba(222,134,85, 0.4)', 'rgba(222,134,85, 0.6)',
-                                        'rgba(222,134,85, 0.8)', 'rgba(222,134,85, 1)'
-                                    ].reverse()
+                                    'rgba(222,134,85, 0.1)', 'rgba(222,134,85, 0.2)',
+                                    'rgba(222,134,85, 0.4)', 'rgba(222,134,85, 0.6)',
+                                    'rgba(222,134,85, 0.8)', 'rgba(222,134,85, 1)'
+                                ].reverse()
                             }
                         },
                         // axisLabel:{//展示刻度
@@ -121,7 +126,7 @@
                         },
                         splitLine: {
                             lineStyle: {
-                                width:2,
+                                width: 2,
                                 color: [
                                     'rgba(224,134,82, 0.1)', 'rgba(224,134,82, 0.2)',
                                     'rgba(224,134,82, 0.4)', 'rgba(224,134,82, 0.6)',
@@ -148,12 +153,10 @@
                                 width: 1
                             }
                         },
-                        data: [
-                            {
-                                value: y1Data,
-                                name: '人才主要培养方式',
-                            }
-                        ]
+                        data: [{
+                            value: y1Data,
+                            name: '人才主要培养方式',
+                        }]
                     }]
 
 
@@ -162,7 +165,7 @@
 
                 this.myChart.setOption(option);
                 window.addEventListener("resize", () => {
-                    if(this.myChart) {
+                    if (this.myChart) {
                         this.myChart.resize();
                     }
                 });
@@ -172,12 +175,12 @@
 </script>
 
 <style lang="scss" scoped>
-.my-title-click {
-    cursor: pointer;
-}
-
-.my-title,
-.my-title-click {
-    left: 7% !important;
-}
+    .my-title-click {
+        cursor: pointer;
+    }
+    
+    .my-title,
+    .my-title-click {
+        left: 7% !important;
+    }
 </style>
