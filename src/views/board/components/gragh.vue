@@ -64,9 +64,9 @@
                 ]
                 data.name.forEach((item, index) => {
                     dataList.push({
-                        "name": item,
+                        "name": item + ":" + data.value[index],
                         "value": data.value[index],
-                        "symbolSize": data.value[index] > 30 ? 80 : data.value[index] + 50,
+                        "symbolSize": data.value[index] > 30 ? 150 : data.value[index] + 100,
                         "draggable": true,
                         "itemStyle": {
                             "normal": {
@@ -95,7 +95,7 @@
                         type: 'graph',
                         layout: 'force',
                         force: {
-                            repulsion: 100,
+                            repulsion: 300,
                             edgeLength: 10
                         },
                         roam: true,

@@ -8,7 +8,7 @@
       <img src="../../../assets/img/arrow.png" alt="">
       {{config&&config.title?config.title:'标题'}}
     </div>
-    <div class="switch elastic">
+    <div class="switch elastic" v-if="this.initData.personBussiness">
       <div style="cursor: pointer;" :class="{active:isEtre}" @click="btnSwitch(1)" v-if="config.titleLeft">
         {{config.titleLeft}}</div>
       <div style="cursor: pointer;margin-left:10px;" :class="{active:isperson}" @click="btnSwitch(2)"

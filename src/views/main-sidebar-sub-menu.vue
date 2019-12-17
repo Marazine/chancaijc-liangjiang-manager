@@ -13,6 +13,11 @@
       :menu="item"
       :dynamicMenuRoutes="dynamicMenuRoutes">
     </sub-menu>
+    
+    <el-menu-item index="board" @click="pushNewPage">
+        <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
+        <span slot="title">一键看板</span>
+    </el-menu-item>
   </el-submenu>
   <el-menu-item v-else :index="menu.menuId + ''" @click="gotoRouteHandle(menu)">
     <icon-svg :name="menu.icon || ''" class="site-sidebar__menu-icon"></icon-svg>

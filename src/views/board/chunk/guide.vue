@@ -1,40 +1,31 @@
 <template>
   <div class="">
-    <div class="roll1 roll" @click="$router.push({name:'rcfb'})">
+    <div class="roll2 roll" @click="$router.push({name:'rcfb'})">
       <p>
-        <span>人才分布</span>
+        <span>人才现状分析</span>
       </p>
     </div>
-    <div class="roll2 roll" @click="$router.push({name:'qyqk'})">
+    <div class="roll3 roll" @click="$router.push({name:'rcld'})">
       <p>
-        <span>企业情况</span>
+        <span>人才流动及来源分析</span>
       </p>
     </div>
-    <div class="roll3 roll" @click="$router.push({name:'company2'})">
+    <div class="roll4 roll" @click="$router.push({name:'xq'})">
       <p>
-        <span>企业分布</span>
+        <span>人才需求分析</span>
       </p>
     </div>
-    <div class="roll4 roll" @click="$router.push({name:'rcld'})">
+    <div class="roll5 roll" @click="$router.push({name:'qyrlfw'})">
       <p>
-        <span>人才流动及<br />来源分析</span>
+        <span>人力资源服务分析</span>
       </p>
     </div>
-    <div class="roll5 roll" @click="$router.push({name:'xq'})">
+    <div class="roll6 roll" @click="$router.push({name:'rcfzhj'})">
       <p>
-        <span>人才需求<br />分析</span>
+        <span>人才发展环境分析</span>
       </p>
     </div>
-    <div class="roll6 roll" @click="$router.push({name:'qyrlfw'})">
-      <p>
-        <span>企业人力<br />资源服务<br />投入及需<br />求分析</span>
-      </p>
-    </div>
-    <div class="roll7 roll" @click="$router.push({name:'rcfzhj'})">
-      <p>
-        <span>人才发展<br />环境分析</span>
-      </p>
-    </div>
+
   </div>
 </template>
 

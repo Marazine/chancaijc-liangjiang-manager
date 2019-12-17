@@ -71,7 +71,6 @@
                     var tempMaxData = y1Data.pop();
                     var tempXData = xData.pop();
                 }
-
                 // let y2Data = [28,4.4,5.9,0.9,0.7,1.1,2.1,0.4,1.9,3.8,1.6,0.7,5.7,6.1];
                 let option = {
                     grid: {
@@ -138,7 +137,7 @@
                         ],
                         bottom: '8%',
                         "start": 0,
-                        "end": 45,
+                        "end": this.config.isScroll?45:this.initData.name.length*24,
                         handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
                         handleSize: '110%',
                         handleStyle: {

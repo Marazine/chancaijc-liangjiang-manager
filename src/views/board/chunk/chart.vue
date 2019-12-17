@@ -1,13 +1,13 @@
 <template>
-  <div class="back-img bh-50">
-    <div class="title my-title-click" v-if="config.isClick">
+  <div class="back-img bh-50" :class="config&&config.title?' bh-50':' bh-90'">
+    <div class="title my-title-click" v-if="config&&config.title">
       <img src="~@/assets/img/arrow.png" alt="">
       {{config&&config.title?config.title:'标题'}}
     </div>
-    <div class="title" v-else>
+    <!-- <div class="title" v-else>
       <img src="~@/assets/img/arrow.png" alt="">
       {{config&&config.title?config.title:'标题'}}
-    </div>
+    </div> -->
     <div class="s-content" :style="{paddingTop:config.paddingTop?config.paddingTop:''}">
       <BarScroll v-if="barScroll" :initData="initData" :config="config"></BarScroll>
       <ProductPerson v-if="productPerson" :initData="initData" :config="config"></ProductPerson>
@@ -89,4 +89,12 @@
     .my-title-click {
         left: 7% !important;
     }
+    .bh-90{
+        height: 90%;
+        &.back-img{
+            background: none;
+            border: 0
+        }
+    }
+    
 </style>

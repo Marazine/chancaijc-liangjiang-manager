@@ -1,23 +1,57 @@
 <template>
   <div class="my-board main">
     <div class="title-c">
-      珠海产才检测看板
+      两江产才监测看板
     </div>
     <div class="fuse content" v-if="isShow">
       <div class="row bh-100">
         <div class="col-md-3 f-column">
-            <Chart :initData="PayData" :config='configure_ind'></Chart>
-            <!-- <chartSwitch :initData="PayData" :config='configure_ind'></chartSwitch> -->
-            <Chart :initData="product_personData" :config='product_person_config'></Chart>
+          <!-- <product_person :initData="PayData" :config='configure_ind'></product_person> -->
+          <chartSwitch :initData="PayData" :config='configure_ind'></chartSwitch>
+          <!-- <pie_a :initData="product_personData" :config="product_person_config"></pie_a> -->
+          <Chart :initData="professionalData" :config='professional_config'></Chart>
         </div>
         <div class="col-md-6" style="padding:0 10px">
-            <ns_map :initData='zhDataMap' :initmapData='initmapData' :title="'珠海地图'" :config="zhuhaimapConfig"></ns_map>
-            <Guide></Guide>
+            
+            <ul class="fl deta">
+                <li>
+                    <p><img src="../../assets/img/company1.png"/><i></i></p>
+                    <div>
+                        <p>调研企业</p>
+                        <p class="num">{{num1}}家</p>
+                    </div>
+                </li>
+                <li>
+                    <p><img src="../../assets/img/company5.png" /><i></i></p>
+                    <div>
+                        <p>党员总数</p>
+                        <p class="num">{{num3}}人</p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="fr deta">
+                <li>
+                    <p><img src="../../assets/img/company2.png" /><i></i></p>
+                    <div>
+                        <p>企业人才总数</p>
+                        <p class="num">{{num2}}家</p>
+                    </div>
+                </li>
+                <li>
+                    <p><img src="../../assets/img/company3.png" /><i></i></p>
+                    <div>
+                        <p>重点产业数量</p>
+                        <p class="num">{{num4}}家</p>
+                    </div>
+                </li>
+            </ul>
+          <Chart :initData="middleData" :config='product_person_config2'></Chart>
+          <Guide></Guide>
         </div>
         <div class="col-md-3 f-column">
-            <Chart :initData="pie_aData" :config='pie_aconfig'></Chart>
-            <!-- <chartSwitch :initData="pie_aData" :config='pie_aconfig'></chartSwitch> -->
-            <Chart :initData="professionalData" :config='professional_config'></Chart>
+          <!-- <Chart :initData="product_num" :config='product_num_config'></Chart> -->
+          <Chart :initData="product_personData" :config='product_person_config'></Chart>
+          <chartSwitch :initData="product_num" :config='product_num_config'></chartSwitch>
         </div>
       </div>
     </div>
@@ -35,9 +69,13 @@
         data() {
             let queryType = this.$route.query.type;
             return {
+                num1:0,
+                num2:0,
+                num3:0,
+                num4:0,
                 isShow: false,
                 allData: null,
-                initmapData: nsMap.data,
+                middleData: null,
                 zhDataMap: {
                     ns_mapData: null,
                 },
@@ -50,16 +88,25 @@
                     type: 'qyqk',
                     echartTitleShow: true,
                     echartTitle: "行业类型分布",
-                    title: "企业情况",
+                    title: "行业分布情况",
                     isScroll: true,
+                    titleLeft: "行业类型分布",
+                    titleRight: "行业人才分布",
+                },
+                product_num_config:{
+                    type: 'qyqk',
+                    echartTitleShow: true,
+                    echartTitle: "企业规模",
+                    title: "企业规模",
+                    isScroll: false,
                     titleLeft: "行业类型分布",
                     titleRight: "行业人才分布",
                 },
                 product_person_config: {
                     type: 'rcqk2',
-                    title: '人才情况',
+                    title: '企业盈利情况',
                     echartTitleShow: true,
-                    echartTitle: "企业规模占比",
+                    echartTitle: "",
                     left: '2%',
                     right: '2%',
                     top: '10%',
@@ -71,9 +118,9 @@
                 },
                 professional_config: {
                     type: 'rcpy',
-                    title: "人才培养",
+                    title: "企业性质",
                     echartTitleShow: true,
-                    echartTitle: "人才主要培养方式",
+                    echartTitle: "",
                     left: '2%',
                     right: '2%',
                     top: '0',
@@ -91,12 +138,23 @@
                     titleLeft: "本年度引进",
                     titleRight: "下年度引进",
                 },
+                product_num:null,
                 zhuhaimapConfig: {
                     // paddingTop: '1%',
                     // paddingTop: '1%',
                     marginTop: '4%',
                     isTitle: false,
                 },
+                product_person_config2: {
+                    type: 'jndj',
+                    paddingTop: '10%',
+                    echartTitleShow: false,
+                    isClick: false,
+                    left: '4%',
+                    right: '10%',
+                    top: '0',
+                    bottom: '-8%',
+                }
             }
         },
         created() {
@@ -116,26 +174,36 @@
                     data: {
                         condition: JSON.stringify({
                             index: 1,
-                            // queryKeys: ['A4', 'B1_1', 'C1_1', 'C1_2', 'C8']
-                            queryKeys: ['A_A2_1', 'A_A4_1', 'A_A10_1']
+                            queryKeys: ['A_A4_1', 'A_A2_1', 'A_A10_1', 'B_B1_1', 'A_A3_1']
                         })
                     }
                 }).then(({
                     data
                 }) => {
                     if (data && data.code == 200) {
-                        // this.allData = data.data;
-                        // this.PayData = {
-                        //     A4: data.data.A4,
-                        //     personBussiness: data.data.personBussiness
-                        // };
-                        // this.product_personData = data.data.B1_1;
-                        // this.pie_aData = {
-                        //     C1_1: data.data.C1_1,
-                        //     C1_2: data.data.C1_2
-                        // };
-                        // this.professionalData = data.data.C8;
-                        // this.zhDataMap.ns_mapData = data.data.regionDetail;
+                        this.allData = data.data;
+                        this.PayData = {
+                            A4: data.data.A_A4_1
+                        };
+                        this.middleData = data.data.A_A2_1
+                        this.product_personData = data.data.A_A10_1;
+                        
+                        this.product_num = {
+                            A4: data.data.B_B1_1
+                        };
+                        this.professionalData = data.data.A_A3_1;
+                        this.num1 = data.data.num1;
+                        this.num2 = data.data.num2;
+                        this.num3 = data.data.num3;
+                        this.num4 = data.data.num4;
+
+
+
+                        this.pie_aData = {
+                            C1_1: data.data.C1_1,
+                            C1_2: data.data.C1_2
+                        };
+                        this.zhDataMap.ns_mapData = data.data.regionDetail;
 
                         this.isShow = true;
                     }
