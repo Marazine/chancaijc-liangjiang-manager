@@ -65,7 +65,6 @@
                 data_chart.value1.forEach((item, index) => {
                     y1Data1.push(item * -1);
                 })
-                console.log(y1Data1);
                 if (this.config.isScroll) {
                     var tempMaxData = y1Data.pop();
                     var tempMaxData1 = y1Data1.pop();
@@ -230,11 +229,11 @@
                         xData.unshift(tempXData);
                         tempXData = xData.pop();
 
-                        data_chart.value.unshift(tempMaxData);
-                        tempMaxData = data_chart.value.pop();
+                        y1Data.unshift(tempMaxData);
+                        tempMaxData = y1Data.pop();
 
-                        data_chart.value1.unshift(tempMaxData1);
-                        tempMaxData1 = data_chart.value1.pop();
+                        y1Data1.unshift(tempMaxData1);
+                        tempMaxData1 = y1Data1.pop();
 
                         this.myChart.setOption(option);
                     }, 2000);
