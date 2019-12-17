@@ -138,6 +138,45 @@
                         data: data
                     }]
                 };
+
+                if (chartData.length > 2) {
+                    let idx = 0;
+                    setInterval(() => {
+                        clearSelectedStatus();
+                        option.series[0].data[idx]['selected'] = true;
+                        this.myChart.setOption(option);
+
+                        this.myChart.dispatchAction({
+                            type: 'showTip',
+                            seriesIndex: 0,
+                            dataIndex: idx
+                        });
+                        idx++;
+
+                        if (idx >= chartData.length) {
+                            idx = 0;
+                        }
+                    }, 3000)
+                    let myChart = this.myChart;
+
+                    function clearSelectedStatus() {
+                        option.series[0].data = appendBaseColor(chartData);
+                        myChart.setOption(option);
+                    }
+                }
+
+                function appendBaseColor(data) {
+                    let c = [];
+                    for (let i = 0; i < chartData.length; i++) {
+                        c.push({
+                            value: chartData[i],
+                            name: chartName[i],
+                            'selected': false
+                        })
+                    }
+                    return c
+                }
+
                 this.myChart.setOption(option);
                 window.addEventListener("resize", () => {
                     if (this.myChart) {

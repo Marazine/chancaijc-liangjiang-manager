@@ -60,7 +60,7 @@
             },
             getChart(id, data) {
                 this.myChart = this.$echarts.init(this.$refs.external);
-
+                // console.log(data);
                 let option = {
                     backgroundColor: "transparent",
                     color: ['#0E7CE2', '#FF8352', '#E271DE', '#F8456B', '#00FFFF', '#4AEAB0', "#EAEA26", "#906BF9", "#FE5656",
@@ -233,6 +233,43 @@
                             data: data
                         },
                     ]
+                }
+                if (data.length > 2) {
+                    let idx = 0;
+                    setInterval(() => {
+                        clearSelectedStatus();
+                        option.series[0].data[idx]['selected'] = true;
+                        this.myChart.setOption(option);
+
+                        this.myChart.dispatchAction({
+                            type: 'showTip',
+                            // seriesIndex: 0,
+                            dataIndex: idx
+                        });
+                        idx++;
+
+                        if (idx >= data.length) {
+                            idx = 0;
+                        }
+                    }, 3000)
+                    let myChart = this.myChart;
+
+                    function clearSelectedStatus() {
+                        option.series[0].data = appendBaseColor(data);
+                        myChart.setOption(option);
+                    }
+                }
+
+                function appendBaseColor(data) {
+                    let c = [];
+                    for (let i = 0; i < data.length; i++) {
+                        c.push({
+                            value: data[i].value,
+                            name: data[i].name,
+                            'selected': false
+                        })
+                    }
+                    return c
                 }
                 this.myChart.setOption(option);
                 window.addEventListener("resize", () => {
