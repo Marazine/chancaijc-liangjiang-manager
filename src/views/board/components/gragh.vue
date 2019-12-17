@@ -63,8 +63,7 @@
                     "rgb(165, 190, 198)",
                 ]
                 data.name.forEach((item, index) => {
-                    console.log(data.value[index] > 30 ? 50 : data.value[index] + 20);
-                    
+
                     dataList.push({
                         "name": item + ":" + data.value[index],
                         "value": data.value[index],
