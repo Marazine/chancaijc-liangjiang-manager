@@ -111,7 +111,8 @@
                 zfzc_Data2: {},
                 zfzc_config: {
                     type: 'qyrczyqd',
-                    radius: ['30%', '45%'],
+                    radius: ['40%', '60%'],
+                    radius2: [0, '38%'],
                     title: '企业认为两江新区人才政策需要进一步完善的地方',
                     paddingTop: '5%',
                     // left: '4%',
@@ -119,8 +120,9 @@
                     // bh: 'bh-50'
                 },
                 zfzc_config2: {
-                    type: 'qyrczyqd',
+                    type: 'qyrczyqd2',
                     radius: ['30%', '45%'],
+                    radius2: [0, '28%'],
                     title: '企业最希望获得的政府在人才发展方面的支持',
                     paddingTop: '5%',
                     // left: '4%',
