@@ -18,6 +18,8 @@
       <Gragh v-if="gragh" :initData="initData" :config="config"></Gragh>
       <Radio v-if="radio" :initData="initData" :config="config"></Radio>
       <DoublePillar v-if="doublePillar" :initData="initData" :config="config"></DoublePillar>
+      <DoubleBar v-if="doubleBar" :initData="initData" :config="config"></DoubleBar>
+      <DoubleLine v-if="doubleLine" :initData="initData" :config="config"></DoubleLine>
     </div>
   </div>
 </template>
@@ -42,7 +44,7 @@
             },
             externalF() {
                 return this.config.type == 'qyrwzhycjhhlx' || this.config.type == 'dwcrzypy' || this.config.type ==
-                    'qyrczyqd' || this.config.type == 'rcdwjs';
+                    'qyrczyqd' || this.config.type == 'rcdwjs' || this.config.type == 'lsl';
             },
             sex() {
                 return this.config.type == 'xbfb';
@@ -68,6 +70,12 @@
             },
             doublePillar() {
                 return this.config.type == 'bussinessFlow';
+            },
+            doubleBar() {
+                return this.config.type == 'industuryFlow';
+            },
+            doubleLine() {
+                return this.config.type == 'natureFlow';
             }
         },
         beforeDestroy() {

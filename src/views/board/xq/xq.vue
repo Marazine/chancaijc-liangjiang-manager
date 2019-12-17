@@ -147,7 +147,7 @@ export default {
                 this.pie_a_nextData = data.data.B_B8_7;
                 this.estate_salary_Data = data.data.B_B8_6;
                 this.estateData = data.data.B_B8_5;
-                // this.ggxq_Data = data.data.D_D1_1;
+                this.ggxq_Data = data.data.position;
                 // this.zfzc_Data = data.data.C_C2_2;
                 // this.zfzc_Data2 = data.data.C_C2_4;
                 this.isShow = true;

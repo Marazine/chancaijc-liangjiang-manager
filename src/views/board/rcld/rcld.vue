@@ -11,21 +11,18 @@
           <div class="row col-md-12 columnBox ">
             <div class="columnBottom row">
               <div class=" col-md-6 column column100">
-                <Chart :initData="one" :config='oneConfig'></Chart>
+                <Chart :initData="pie_aData" :config='pie_a_year_config'></Chart>
               </div>
               <div class=" col-md-6 column column100">
                 <Chart :initData="pie_a_nextData" :config='pie_a_next_year_config'></Chart>
               </div>
-              <!-- <div class=" col-md-4 column column100">
-                <Chart :initData="estate_salary_Data" :config='estate_salary_config'></Chart>
-              </div> -->
             </div>
             <div class="columnBottom row">
               <div class=" col-md-6 column column100">
-                <Chart :initData="estateData" :config='estate_config'></Chart>
+                <Chart :initData="estate_salary_Data" :config='estate_salary_config'></Chart>
               </div>
               <div class=" col-md-6 column column100">
-                <Chart :initData="ggxq_Data" :config='ggxq_config'></Chart>
+                <Chart :initData="estateData" :config='estate_config'></Chart>
               </div>
             </div>
           </div>
@@ -46,19 +43,19 @@ export default {
             isShow: false,
             pie_aData: {},
             pie_a_year_config: {
-              type: 'qycrny',
+              type: 'bussinessFlow',
               title: "十三五重点行业2020年度国内社会人才需求",
-              radius: ['35%', '50%'],
-              radius2: [0, '32%'],
-              left: '20%',
-              right: '20%',
-              top: '0',
-              bottom: '0',
+              type: 'bussinessFlow',
+              paddingTop: '8%',
+              c_left: "5%",
+              margin: '5%',
+              legend: ['省内', '省外']
             },
             pie_a_nextData: {},
             pie_a_next_year_config: {
-                type: 'wloneyxycr',
+                type: 'industuryFlow',
                 title: "各产业2020年度国内应届生需求",
+                paddingTop: '8%',
                 radius: ['35%', '50%'],
                 radius2: [0, '32%'],
                 left: '20%',
@@ -68,9 +65,9 @@ export default {
             },
             estate_salary_Data: {},
             estate_salary_config: {
-                type: 'bndxzrc',
+                type: 'natureFlow',
                 title: '各产业2020年度外籍人才需求',
-                paddingTop: '6%',
+                paddingTop: '8%',
                 echartTitleShow: false,
                 left: '4%',
                 right: '10%',
@@ -81,62 +78,15 @@ export default {
             },
             estateData: {},
             estate_config: {
-                type: 'wlynxyrcsl',
+                type: 'lsl',
                 title: '各产业2020年度国留学归国人才需求',
-                bar_color_l: "#00fff3",
-                bar_color_r: "transparent",
-                ispercent: false,
+                radius: ['40%', '80%'],
                 paddingTop: '6%',
                 top: '15%',
                 right: '8%',
                 left: '12%',
                 bottom: '20%',
-                barWidth: '10px',
-                isClick: false,
             },
-            ggxq_Data: {},
-            ggxq_config: {
-                type: 'qyzairencai',
-                title: '各产业2020年度总体需求分析',
-                paddingTop: '8%',
-                echartTitleShow: false,
-                left: '4%',
-                right: '10%',
-                top: '0',
-                bottom: '-8%',
-                bh: 'bh-50',
-                isClick: false,
-            },
-            zfzc_Data: {},
-            zfzc_Data2: {},
-            zfzc_config: {
-                type: 'qyrczyqd',
-                radius: ['40%', '80%'],
-                title: '重点行业下年度招聘成本',
-                paddingTop: '5%',
-                // left: '4%',
-                // unomit: true,
-                // bh: 'bh-50'
-            },
-            zfzc_config2: {
-                type: 'qyrczyqd',
-                radius: ['40%', '80%'],
-                title: '重点行业下年度培训成本',
-                paddingTop: '5%',
-                // left: '4%',
-                // unomit: true,
-                // bh: 'bh-50'
-            },
-            one: {},
-            oneConfig: {
-              title: "在外游子薪酬对比",
-              type: 'bussinessFlow',
-              paddingTop: '8%',
-              c_left: "5%",
-              margin: '5%',
-              legend: ['省内', '省外']
-            },
-
         }
     },
     created() {
@@ -151,18 +101,17 @@ export default {
               data:{
                   condition:JSON.stringify({
                       index: 3,
-                      queryKeys: []
+                      queryKeys: ['B_B11_3']
                   })
               }
           }).then(({
               data
           }) => {
               if (data && data.code == 200) {
-                this.one = data.data.bussinessFlow;
-                // this.pie_aData = data.data.B_B8_8;
-                // this.pie_a_nextData = data.data.B_B8_7;
-                // this.estate_salary_Data = data.data.B_B8_6;
-                // this.estateData = data.data.B_B8_5;
+                this.pie_aData = data.data.bussinessFlow;
+                this.pie_a_nextData = data.data.industuryFlow;
+                this.estate_salary_Data = data.data.natureFlow;
+                this.estateData = data.data.B_B11_3;
                 // this.ggxq_Data = data.data.D_D1_1;
                 // this.zfzc_Data = data.data.C_C2_2;
                 // this.zfzc_Data2 = data.data.C_C2_4;

@@ -31,3 +31,7 @@ import Radio from '@/views/board/components/radio' //
 Vue.component("Radio", Radio)
 import DoublePillar from '@/views/board/components/double_pillar' //
 Vue.component("DoublePillar", DoublePillar)
+import DoubleBar from '@/views/board/components/double_bar' //
+Vue.component("DoubleBar", DoubleBar)
+import DoubleLine from '@/views/board/components/double_line' //
+Vue.component("DoubleLine", DoubleLine)

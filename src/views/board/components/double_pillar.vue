@@ -60,7 +60,7 @@
                 //     color: ['#5e94dd', '#49b5bd'],
                 // }
 
-                let option = option = {
+                let option = {
                     backgroundColor: 'transparent',
                     tooltip: {
                         trigger: 'axis',
