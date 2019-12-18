@@ -106,6 +106,9 @@
                                 show: true
                             }
                         },
+                        tooltip:{
+                            formatter: '{b0}'
+                        },
                         data: dataList,
                         // [{
                         //         "name": "考研",

@@ -19,10 +19,10 @@
                     </div>
                 </li>
                 <li>
-                    <p><img src="../../assets/img/company5.png" /><i></i></p>
+                    <p><img src="../../assets/img/company2.png" /><i></i></p>
                     <div>
-                        <p>党员总数</p>
-                        <p class="num">{{num3}}人</p>
+                        <p>企业人才总数</p>
+                        <p class="num">{{num2}}人</p>
                     </div>
                 </li>
             </ul>
@@ -35,10 +35,10 @@
                     </div>
                 </li>
                 <li>
-                    <p><img src="../../assets/img/company2.png" /><i></i></p>
+                    <p><img src="../../assets/img/company5.png" /><i></i></p>
                     <div>
-                        <p>企业人才总数</p>
-                        <p class="num">{{num2}}人</p>
+                        <p>党员总数</p>
+                        <p class="num">{{num3}}人</p>
                     </div>
                 </li>
             </ul>

@@ -199,7 +199,7 @@
         <el-form-item label="问卷状态" label-width="100px" v-if="isShowaddOrUpdateStatus">
           <el-select v-model="form.status" placeholder="请选择活动区域">
             <el-option label="已提交" :value="1"></el-option>
-            <el-option label="未完成" :value="2"></el-option>
+            <el-option label="系统提交" :value="2"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -428,7 +428,7 @@ export default {
         }, 
         {
           value: '2',
-          label: '未完成'
+          label: '系统提交'
         }
       ],
       options2: [
@@ -1035,7 +1035,7 @@ export default {
       } else if(status == 1) {
         return '已提交';
       } else if(status == 2) {
-        return '未完成';
+        return '系统提交';
       }
     },
     // 获取页面列表
