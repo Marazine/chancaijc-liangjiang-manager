@@ -96,10 +96,10 @@
                                 formatter: (param) => {
 
                                     if (param.name.length > 10) {
-                                        return param.name ? param.name.slice(0, 10) + "\n" + param.name.slice(10) + "\n数量: " + param
-                                            .percent+"%" : ''
+                                        return param.name ? param.name.slice(0, 10) + "\n" + param.name.slice(10) + "\n占比: " + param
+                                            .percent + "%" : ''
                                     } else {
-                                        return param.name ? param.name + "\n数量: " + param.percent +"%": ''
+                                        return param.name ? param.name + "\n占比: " + param.percent + "%" : ''
                                     }
 
                                 },

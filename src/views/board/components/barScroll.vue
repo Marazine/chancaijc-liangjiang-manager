@@ -37,11 +37,11 @@
             },
             estateChart(id, data) {
                 let total = 0;
-                if(this.config.showPercent){
-                    for(let i in data.value){
-                        total += parseInt(data.value[i]);
-                    }
+                // if(this.config.showPercent){
+                for (let i in data.value) {
+                    total += parseInt(data.value[i]);
                 }
+                // }
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
                 // let xData = this.$filterReserve(data.name);
@@ -144,7 +144,7 @@
                         ],
                         bottom: '8%',
                         "start": 0,
-                        "end": this.config.isScroll?45:this.initData.name.length*24,
+                        "end": this.config.isScroll ? 45 : this.initData.name.length * 24,
                         handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
                         handleSize: '110%',
                         handleStyle: {
@@ -213,10 +213,11 @@
                                 textStyle: {
                                     color: '#ffffff'
                                 },
-                                formatter:(item)=>{
-                                    if(_this.config.showPercent){
-                                    // debugger
-                                        return ((item.value/total)*100).toFixed(2) + "%"
+                                formatter: (item) => {
+                                    return ((item.value / total) * 100).toFixed(2) + "%"
+                                    if (_this.config.showPercent) {
+                                        // debugger
+                                        return ((item.value / total) * 100).toFixed(2) + "%"
                                     } else {
                                         return parseInt(item.value)
                                     }

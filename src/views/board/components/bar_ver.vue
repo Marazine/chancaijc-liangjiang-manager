@@ -54,6 +54,10 @@
                 })
             },
             estateChart(id, data) {
+                let total = 0;
+                for (let i in data.value) {
+                    total += data.value[i]
+                }
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
 
@@ -160,7 +164,7 @@
                                 position: 'top',
                                 distance: 1,
 
-                                formatter: this.config.ispercent ? '{c}%' : "{c}",
+                                formatter: this.config.ispercent ? '{c}%' : "{c}%",
                                 color: "#fff"
                             }
                         }

@@ -34,6 +34,10 @@
                 }
             },
             estateChart(id, data) {
+                let total = 0;
+                for (let i in data.value) {
+                    total += data.value[i]
+                }
                 this.myChart = this.$echarts.init(this.$refs.estate);
                 let xData = this.$filterReserve(data.name);
                 let y1Data = this.$filterReserve(data.value);
@@ -139,6 +143,9 @@
                                 position: 'right',
                                 textStyle: {
                                     color: '#ffffff'
+                                },
+                                formatter: (item) => {
+                                    return ((item.value / total) / 100).toFixed(2) + "%"
                                 }
                             }
                         },
