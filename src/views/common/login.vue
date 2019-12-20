@@ -104,8 +104,8 @@ export default {
   },
   created() {
     this.getCaptcha()
-    document.body.style.backgroundImage =
-        "url(//img3.job1001.com/zhuanti/2018/nsrc_dbsys/images/bg-login.jpg)";
+    document.body.style.backgroundImage = "url("+require('../../assets/img/login_bg.jpg')+")";
+        // "url(//img3.job1001.com/zhuanti/2018/nsrc_dbsys/images/bg-login.jpg)";
     document.body.style.backgroundRepeat = 'no-repeat';
   },
   methods: {

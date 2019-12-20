@@ -95,7 +95,6 @@
                                 // formatter: "{b}\n数量: {c}",
                                 formatter: (param) => {
 
-                                        console.log(param)
                                     if (param.name.length > 10) {
                                         return param.name ? param.name.slice(0, 10) + "\n" + param.name.slice(10) + "\n数量: " + param
                                             .percent+"%" : ''

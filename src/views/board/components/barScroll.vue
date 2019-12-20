@@ -36,6 +36,12 @@
 
             },
             estateChart(id, data) {
+                let total = 0;
+                if(this.config.showPercent){
+                    for(let i in data.value){
+                        total += parseInt(data.value[i]);
+                    }
+                }
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
                 // let xData = this.$filterReserve(data.name);
@@ -72,6 +78,7 @@
                     var tempXData = xData.pop();
                 }
                 // let y2Data = [28,4.4,5.9,0.9,0.7,1.1,2.1,0.4,1.9,3.8,1.6,0.7,5.7,6.1];
+                let _this = this;
                 let option = {
                     grid: {
                         left: '2%',
@@ -205,6 +212,14 @@
                                 position: 'right',
                                 textStyle: {
                                     color: '#ffffff'
+                                },
+                                formatter:(item)=>{
+                                    if(_this.config.showPercent){
+                                    // debugger
+                                        return ((item.value/total)*100).toFixed(2) + "%"
+                                    } else {
+                                        return parseInt(item.value)
+                                    }
                                 }
                             }
                         },

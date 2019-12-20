@@ -79,7 +79,7 @@ export default {
             estateData: {},
             estate_config: {
                 type: 'wlynxyrcsl',
-                title: '各产业2020年度国留学归国人才需求',
+                title: '各产业2020年度留学归国人才需求',
                 bar_color_l: "#00fff3",
                 bar_color_r: "transparent",
                 ispercent: false,

@@ -60,7 +60,7 @@
                     bar_color_r: "transparent",
                     ispercent: false,
                     paddingTop: '5%',
-                    top: '5%',
+                    top: '10%',
                     right: '5%',
                     left: '5%',
                     bottom: '25%',
@@ -95,20 +95,6 @@
                     radius: ['45%', '60%'],
                     radius2: [0, '43%'],
                 },
-                pie_aconfig3: {
-                    type: 'rchjfb',
-                    title: "分布",
-                    paddingTop: '10%',
-                    echartTitleShow: false,
-                    left: '2%',
-                    right: '2%',
-                    top: '0',
-                    bottom: '0',
-                    push: 'rcyj',
-                    isClick: false,
-                    radius: ['45%', '60%'],
-                    radius2: [0, '43%']
-                },
                 product_person_config: {
                     type: 'qyqk',
                     echartTitleShow: true,
@@ -116,7 +102,8 @@
                     title: "年龄分布",
                     isScroll: false,
                     titleLeft: "行业类型分布",
-                    titleRight: "行业人才分布"
+                    titleRight: "行业人才分布",
+                    showPercent: true,
                 },
                 pie_aconfig3: {
                     type: 'qyqk',
@@ -126,6 +113,7 @@
                     isScroll: true,
                     titleLeft: "行业类型分布",
                     titleRight: "行业人才分布",
+                    showPercent: true,
                 },
                 configure_ind: {
                     type: 'xbfb',
