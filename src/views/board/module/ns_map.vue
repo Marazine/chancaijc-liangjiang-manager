@@ -27,11 +27,6 @@
             }
         },
         computed: {
-            valueStr: {
-                get() {
-                    return this.$store.state.board.valueStr;
-                }
-            },
             echartTitle: {
                 get() {
                     return this.$store.state.board.echartTitle;
@@ -56,9 +51,17 @@
                 }
             },
         },
-        props: ['initmapData', 'initData', 'title', 'config'],
+        props: ['initmapData', 'initData', 'config'],
         mounted() {
-            this.spreadMapChart(this.initmapData, this.initData.ns_mapData);
+            let arr = [];
+            this.initData.name.map((item, index) => {
+                    arr.push({
+                        name: this.initData.name[index],
+                        value: this.initData.value[index]
+                    });
+                })
+                // console.log(arr);
+            this.spreadMapChart(this.initmapData, arr);
         },
         beforeDestroy() {
             this.myChart.dispose();
@@ -95,12 +98,18 @@
                 let geoCoordMap = {};
                 this.myChart.showLoading();
                 this.myChart.hideLoading();
+
+                // 排序找出最大值
+                this.initData.value.sort((a, b) => {
+                    return b - a
+                })
+                var maxValue = this.initData.value[0];
                 //          初始化option
                 var option = {
                     backgroundColor: 'transparent',
                     title: {
-                        show: this.config.isTitle,
-                        text: this.echartTitle + (this.titleStr ? ("—" + this.titleStr) : ''),
+                        // show: this.config.isTitle,
+                        // text: this.echartTitle + (this.titleStr ? ("—" + this.titleStr) : ''),
                         x: 'left',
                         textStyle: {
                             color: '#fff',
@@ -111,35 +120,39 @@
                         trigger: 'item',
                         formatter: function(params) {
                             return params.name + '<br/>' +
-                                "在岗人才数量：" + params.data.value;
+                                "在岗人才数量：" + (params.data ? params.data.value : '');
                         },
                     },
                     //左侧小导航图标
                     visualMap: {
                         show: false,
                         min: 0,
-                        max: 150,
+                        max: maxValue,
                         inRange: {
-                            color: ['#0e6a9b', '#3b9ccf', '#129e6d', '#26a06f', '#05897c',
-                                '#139e97', '#c45c53', '#908e39', '#997f32', '#28a745'
+                            color: ["#906BF9", '#FF8352', '#E271DE', '#F8456B', '#00FFFF', "#EAEA26", "#FE5656", "#01E17E",
+                                "#3DD1F9",
+                                "#FFAD05", 'rgb(254,67,101)', 'rgb(252,157,154)', 'rgb(249,205,173)', 'rgb(200,200,169)',
+                                'rgb(131,175,155)'
                             ]
                         }
                     },
 
                     //配置属性
                     series: [{
-                        show: false,
+                        show: true,
                         type: 'map3D',
-                        name: '珠海',
+                        name: '两江',
                         map: 'ns',
                         // roam: false,
                         selectedMode: "single", //地图高亮单选
                         boxDepth: 150, //地图倾斜度
                         // regionHeight: 6, //地图高度
                         viewControl: {
-                            distance: 210, //地图视角 控制初始大小
-                            center: [-5, -35, 0],
-                            // alpha: 63, // 让canvas在x轴有一定的倾斜角度
+                            // projection: 'orthographic',
+                            distance: 180, //地图视角 控制初始大小
+                            center: [0, -15, 0],
+                            // alpha: 43, // 让canvas在x轴有一定的倾斜角度
+                            // beta: -20,
                             // // rotateSensitivity:0,//禁止旋转
                             // // zoomSensitivity:0,//禁止缩放
                             // autoRotate: true,
@@ -159,6 +172,7 @@
                                 color: '#26a06f',
                                 borderWidth: 1,
                                 borderColor: '#01eefa',
+                                areaColor: 'rgb(131,175,155)',
                             },
                             // emphasis: { label: { show: true } ,areaColor: '#2B91B7',color:'#ffffff'}
                         },
@@ -171,20 +185,24 @@
                             },
                             itemStyle: {
                                 color: '#2b91b7', //地图高亮颜色
+                                areaColor: '#033553',
                             }
                         },
                         label: {
                             normal: {
                                 textStyle: {
                                     fontSize: 14,
-                                    color: '#ffffff',
+                                    color: '#fff',
                                     fontFamily: 'Microsoft YaHei',
+                                    fontWeight: 500,
+                                    position: "bottom",
                                     backgroundColor: "rgba(0,0,0,0)", //透明度0清空文字背景
                                 },
                                 fontSize: 12,
                                 formatter: function(params) {
-                                    return params.name + '\n' + params.value
-                                }
+                                    return params.name + '\n' + (params.value ? params.value : '')
+                                },
+                                distance: 0,
                             },
                             // emphasis: { 
                             //     textStyle: {color: '#00f2f1'}

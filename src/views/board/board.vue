@@ -10,39 +10,40 @@
           <Chart :initData="professionalData" :config='professional_config'></Chart>
         </div>
         <div class="col-md-6" style="padding:0 10px">
-            <ul class="fl deta">
-                <li>
-                    <p><img src="../../assets/img/company1.png"/><i></i></p>
-                    <div>
-                        <p>调研企业</p>
-                        <p class="num">{{num1}}家</p>
-                    </div>
-                </li>
-                <li>
-                    <p><img src="../../assets/img/company2.png" /><i></i></p>
-                    <div>
-                        <p>企业人才总数</p>
-                        <p class="num">{{num2}}人</p>
-                    </div>
-                </li>
-            </ul>
-            <ul class="fr deta">
-                <li>
-                    <p><img src="../../assets/img/company3.png" /><i></i></p>
-                    <div>
-                        <p>重点产业数量</p>
-                        <p class="num">{{num4}}家</p>
-                    </div>
-                </li>
-                <li>
-                    <p><img src="../../assets/img/company5.png" /><i></i></p>
-                    <div>
-                        <p>党员总数</p>
-                        <p class="num">{{num3}}人</p>
-                    </div>
-                </li>
-            </ul>
-          <Chart :initData="middleData" :config='product_person_config2'></Chart>
+          <ul class="fl deta">
+            <li>
+              <p><img src="../../assets/img/company1.png" /><i></i></p>
+              <div>
+                <p>调研企业</p>
+                <p class="num">{{num1}}家</p>
+              </div>
+            </li>
+            <li>
+              <p><img src="../../assets/img/company2.png" /><i></i></p>
+              <div>
+                <p>企业人才总数</p>
+                <p class="num">{{num2}}人</p>
+              </div>
+            </li>
+          </ul>
+          <ul class="fr deta">
+            <li>
+              <p><img src="../../assets/img/company3.png" /><i></i></p>
+              <div>
+                <p>重点产业数量</p>
+                <p class="num">{{num4}}家</p>
+              </div>
+            </li>
+            <li>
+              <p><img src="../../assets/img/company5.png" /><i></i></p>
+              <div>
+                <p>党员总数</p>
+                <p class="num">{{num3}}人</p>
+              </div>
+            </li>
+          </ul>
+          <!-- <Chart :initData="middleData" :config='product_person_config2'></Chart> -->
+          <ns_map :initData='middleData' :initmapData='initmapData' :config="zhuhaimapConfig"></ns_map>
           <Guide></Guide>
         </div>
         <div class="col-md-3 f-column">
@@ -58,15 +59,18 @@
     import Guide from './chunk/guide'
     import nsMap from './ns'
     import nsData from './nsData'
-    
+    import ns_map from '@/views/board/module/ns_map' //地图
+
+
     export default {
         data() {
             let queryType = this.$route.query.type;
             return {
-                num1:0,
-                num2:0,
-                num3:0,
-                num4:0,
+                initmapData: nsMap.data,
+                num1: 0,
+                num2: 0,
+                num3: 0,
+                num4: 0,
                 isShow: false,
                 allData: null,
                 middleData: null,
@@ -87,7 +91,7 @@
                     titleLeft: "行业类型分布",
                     titleRight: "行业人才分布",
                 },
-                product_num_config:{
+                product_num_config: {
                     type: 'qyqk',
                     echartTitleShow: true,
                     echartTitle: "企业规模",
@@ -138,7 +142,7 @@
                     titleLeft: "本年度引进",
                     titleRight: "下年度引进",
                 },
-                product_num:null,
+                product_num: null,
                 zhuhaimapConfig: {
                     // paddingTop: '1%',
                     // paddingTop: '1%',
@@ -155,13 +159,15 @@
                     top: '0',
                     bottom: '-8%',
                 }
+
             }
         },
         created() {
             this.init();
         },
         components: {
-            Guide
+            Guide,
+            ns_map
         },
         methods: {
             init() {
@@ -184,7 +190,7 @@
                         };
                         this.middleData = data.data.A_A2_1
                         this.product_personData = data.data.A_A10_1;
-                        
+
                         this.product_num = {
                             A4: data.data.B_B1_1
                         };
