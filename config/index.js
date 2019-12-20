@@ -26,7 +26,7 @@ module.exports = {
                 // target: 'http://192.168.60.129:8080/',
                 // target: 'http://192.168.60.115:8200/',
                 // target: 'http://192.168.60.159:8200/',
-                target: 'https://lj-chancaijc.yl1001.com/',
+                target: 'https://lj-chancaijctest.yl1001.com/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/proxyCQ': '/'
@@ -37,7 +37,7 @@ module.exports = {
                 // target: 'http://192.168.60.129:8080/',
                 // target: 'http://192.168.60.115:8200/',
                 // target: 'http://192.168.60.159:8200/',
-                target: 'https://lj-chancaijc.yl1001.com/',
+                target: 'https://lj-chancaijctest.yl1001.com/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/proxyXZX': '/'
