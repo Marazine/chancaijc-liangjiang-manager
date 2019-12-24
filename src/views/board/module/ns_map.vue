@@ -99,6 +99,15 @@
                 this.myChart.showLoading();
                 this.myChart.hideLoading();
 
+                // 求和
+                let total = 0;
+                for (let i in this.initData.value) {
+                    total += parseInt(this.initData.value[i])
+                }
+                if (total == 0) {
+                    total = 1
+                }
+
                 // 排序找出最大值
                 this.initData.value.sort((a, b) => {
                     return b - a
@@ -143,7 +152,7 @@
                         type: 'map3D',
                         name: '两江',
                         map: 'ns',
-                        // roam: false,
+                        roam: true,
                         selectedMode: "single", //地图高亮单选
                         boxDepth: 150, //地图倾斜度
                         // regionHeight: 6, //地图高度
@@ -172,7 +181,7 @@
                                 color: '#26a06f',
                                 borderWidth: 1,
                                 borderColor: '#01eefa',
-                                areaColor: 'rgb(131,175,155)',
+                                areaColor: '#033553',
                             },
                             // emphasis: { label: { show: true } ,areaColor: '#2B91B7',color:'#ffffff'}
                         },
@@ -200,7 +209,9 @@
                                 },
                                 fontSize: 12,
                                 formatter: function(params) {
-                                    return params.name + '\n' + (params.value ? params.value : '')
+                                    return params.name + '\n' + (params.value ? (((parseInt(params.value) / total) * 100).toFixed(
+                                            2) +
+                                        "%") : '')
                                 },
                                 distance: 0,
                             },

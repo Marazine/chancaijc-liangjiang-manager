@@ -33,7 +33,7 @@
                     // debugger
                     if (this.config.ispercent) {
                         this.sum(this.initData.value);
-                        this.percent(this.initData.value);
+                        // this.percent(this.initData.value);
                     }
 
                     this.estateChart("estate", this.initData);
@@ -46,6 +46,9 @@
                 arr.forEach((val, idx, arr) => {
                     this.totalValue += parseInt(val);
                 }, 0);
+                if (this.totalValue == 0) {
+                    this.totalValue = 1
+                }
                 return this.totalValue;
             },
             percent() {
@@ -58,16 +61,21 @@
                 for (let i in data.value) {
                     total += data.value[i]
                 }
+                if (total == 0) {
+                    total = 1
+                }
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
-
+                let _this = this;
                 let option = {
                     backgroundColor: 'transparent',
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {
-                            type: 'shadow'
-                        }
+                            type: 'shadow',
+
+                        },
+
                     },
                     grid: {
                         left: this.config.left,
@@ -106,8 +114,10 @@
                             textStyle: {
                                 color: "#eee",
                                 fontSize: 12
-                            }
+                            },
+
                         },
+
 
                     }],
                     yAxis: [{
@@ -115,7 +125,10 @@
                         axisLabel: {
                             formatter: '{value}',
                             color: "#fff",
-                            fontSize: 12
+                            fontSize: 12,
+                            // formatter: function(params) {
+                            //     console.log(params);
+                            // }
                         },
                         axisTick: {
                             show: true,
@@ -164,7 +177,15 @@
                                 position: 'top',
                                 distance: 1,
 
-                                formatter: this.config.ispercent ? '{c}%' : "{c}%",
+                                // formatter: this.config.ispercent ? '{c}%' : "{c}",
+                                formatter: function(params) {
+                                    if (_this.config.ispercent) {
+                                        // debugger
+                                        return ((params.value / _this.totalValue) * 100).toFixed(2) + "%"
+                                    } else {
+                                        return parseInt(params.value)
+                                    }
+                                },
                                 color: "#fff"
                             }
                         }

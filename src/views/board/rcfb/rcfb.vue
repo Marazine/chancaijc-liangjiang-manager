@@ -58,7 +58,7 @@
                     title: "单位核心部门或核心业务的人才专业",
                     bar_color_l: "#00fff3",
                     bar_color_r: "transparent",
-                    ispercent: false,
+                    ispercent: true,
                     paddingTop: '5%',
                     top: '10%',
                     right: '5%',
@@ -132,6 +132,7 @@
         mounted() {},
         methods: {
             init() {
+                // let data = require('./data.json');
                 this.$http({
                     url: this.$http.adornUrl("op=dash&func=getDashData", "XZX"),
                     method: "post",

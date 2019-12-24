@@ -36,7 +36,10 @@
             estateChart(id, data) {
                 let total = 0;
                 for (let i in data.value) {
-                    total += data.value[i]
+                    total += parseInt(data.value[i])
+                }
+                if (total == 0) {
+                    total = 1
                 }
                 this.myChart = this.$echarts.init(this.$refs.estate);
                 let xData = this.$filterReserve(data.name);
@@ -145,7 +148,7 @@
                                     color: '#ffffff'
                                 },
                                 formatter: (item) => {
-                                    return ((item.value / total) / 100).toFixed(2) + "%"
+                                    return ((item.value / total) * 100).toFixed(2) + "%"
                                 }
                             }
                         },

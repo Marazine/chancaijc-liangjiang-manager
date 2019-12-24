@@ -1,7 +1,7 @@
 <template>
   <div class="my-board main">
     <div class="title-c">
-      两江产才监测看板
+      两江新区人才发展大数据平台
     </div>
     <div class="fuse content" v-if="isShow">
       <div class="row bh-100">
@@ -116,10 +116,9 @@
                 },
                 professional_config: {
                     type: 'rczy',
-                    type: 'rczy',
                     bar_color_l: "#00fff3",
                     bar_color_r: "transparent",
-                    ispercent: false,
+                    ispercent: true,
                     paddingTop: '5%',
                     top: '15%',
                     right: '5%',
@@ -171,6 +170,7 @@
         },
         methods: {
             init() {
+                // let data = require('./data.json');
                 this.$http({
                     url: this.$http.adornUrl("op=dash&func=getDashData", "XZX"),
                     method: "post",

@@ -41,6 +41,9 @@
                 for (let i in data.value) {
                     total += parseInt(data.value[i]);
                 }
+                if (total == 0) {
+                    total = 1
+                }
                 // }
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
