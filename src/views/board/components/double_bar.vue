@@ -391,6 +391,44 @@
                         this.myChart.resize();
                     }
                 })
+                // if (data_chart.name.length > 2) {
+                //     let idx = 0;
+                //     setInterval(() => {
+                //         clearSelectedStatus();
+                //         option.series[0].data[idx]['selected'] = true;
+                //         this.myChart.setOption(option);
+
+                //         this.myChart.dispatchAction({
+                //             type: 'showTip',
+                //             seriesIndex: [0,1],
+                //             dataIndex: idx
+                //         });
+                //         idx++;
+
+                //         if (idx >= data_chart.name.length) {
+                //             idx = 0;
+                //         }
+                //     }, 3000)
+                //     let myChart = this.myChart;
+
+                //     function clearSelectedStatus() {
+                //         option.series[0].data = appendBaseColor(data_chart.value);
+                //         option.series[1].data = appendBaseColor(data_chart.value1);
+                //         myChart.setOption(option);
+                //     }
+                // }
+                // function appendBaseColor(data_chart_value) {
+                //     let c = [];
+                //     for (let i = 0; i < data_chart.value.length; i++) {
+                //         c.push({
+                //             value: data_chart_value[i],
+                //             // name: data_chart.name[i],
+                //             'selected': false
+                //         })
+                //     }
+                //     console.log(c)
+                //     return c
+                // }
             }
         }
     }

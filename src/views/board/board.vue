@@ -18,6 +18,22 @@
                 <p class="num">{{num2}}人</p>
               </div>
             </li>
+            <!-- <li>
+              <p><img src="../../assets/img/company1.png" /><i></i></p>
+              <div>
+                <p>调研企业</p>
+                <p class="num">{{num1}}家</p>
+              </div>
+            </li>
+            <li>
+              <p><img src="../../assets/img/company3.png" /><i></i></p>
+              <div>
+                <p>重点产业企业</p>
+                <p class="num">{{num4}}家</p>
+              </div>
+            </li> -->
+          </ul>
+          <ul class="fr deta">
             <li>
               <p><img src="../../assets/img/company1.png" /><i></i></p>
               <div>
@@ -25,25 +41,16 @@
                 <p class="num">{{num1}}家</p>
               </div>
             </li>
-          </ul>
-          <ul class="fr deta">
-            <li>
-              <p><img src="../../assets/img/company3.png" /><i></i></p>
-              <div>
-                <p>重点产业企业数量</p>
-                <p class="num">{{num4}}家</p>
-              </div>
-            </li>
-            <li>
+            <!-- <li>
               <p><img src="../../assets/img/company5.png" /><i></i></p>
               <div>
                 <p>党员总数</p>
                 <p class="num">{{num3}}人</p>
               </div>
-            </li>
+            </li> -->
           </ul>
-          <!-- <Chart :initData="middleData" :config='product_person_config2'></Chart> -->
-          <ns_map :initData='middleData' :initmapData='initmapData' :config="zhuhaimapConfig"></ns_map>
+          <Chart :initData="middleData" :config='product_person_config2'></Chart>
+          <!-- <ns_map :initData='middleData' :initmapData='initmapData' :config="zhuhaimapConfig"></ns_map> -->
           <Guide></Guide>
         </div>
         <div class="col-md-3 f-column">
@@ -221,6 +228,7 @@
         position: absolute;
         top: 6%;
         z-index: 1;
+        // width: 100%;
         &.fl {
             left: 10%;
         }
@@ -228,8 +236,9 @@
             right: 10%;
         }
         li {
+            float: left;
             padding: 2vh 0;
-            width: 8vw;
+            width: 100%;
             position: relative;
             color: #fff;
             display: flex;
@@ -263,6 +272,9 @@
                     font-size: 20px;
                     // line-height: 1.05;
                 }
+            }
+            div {
+                margin-left: 10px;
             }
             // border-bottom: 1px solid #fff;
         }

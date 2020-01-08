@@ -2,27 +2,27 @@
   <div class="">
     <div class="roll2 roll" @click="$router.push({name:'rcfb'})">
       <p>
-        <span>人才现状分析</span>
+        <span>人才现状</span>
       </p>
     </div>
     <div class="roll3 roll" @click="$router.push({name:'rcld'})">
       <p>
-        <span>人才流动及来源分析</span>
+        <span>人才流动及来源</span>
       </p>
     </div>
     <div class="roll4 roll" @click="$router.push({name:'xq'})">
       <p>
-        <span>人才需求分析</span>
+        <span>人才需求</span>
       </p>
     </div>
     <div class="roll5 roll" @click="$router.push({name:'qyrlfw'})">
       <p>
-        <span>人力资源服务分析</span>
+        <span>人力资源服务</span>
       </p>
     </div>
     <div class="roll6 roll" @click="$router.push({name:'rcfzhj'})">
       <p>
-        <span>人才发展环境分析</span>
+        <span>人才发展环境</span>
       </p>
     </div>
 

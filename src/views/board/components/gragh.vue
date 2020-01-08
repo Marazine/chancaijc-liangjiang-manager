@@ -36,6 +36,13 @@
 
             },
             estateChart(id, data) {
+                let total = 0;
+                for (let i in data.value) {
+                    total += parseInt(data.value[i])
+                }
+                if (total == 0) {
+                    total = 1
+                }
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
                 // var sportsIcon = {
@@ -81,7 +88,7 @@
                         }
                     })
                 })
-
+                let _this = this;
                 // coverData(product_personData2);
                 let option = {
                     backgroundColor: 'transparent',
@@ -103,7 +110,10 @@
                         roam: true,
                         label: {
                             normal: {
-                                show: true
+                                show: true,
+                                formatter: function(params) {
+                                    return params.name.split(":")[0]+" : "+((params.value / total) * 100).toFixed(2) + "%"
+                                },
                             }
                         },
                         tooltip:{

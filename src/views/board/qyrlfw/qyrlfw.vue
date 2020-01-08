@@ -44,7 +44,7 @@
                 pie_aData: {},
                 pie_a_year_config: {
                     type: 'qycrny',
-                    title: "企业本年度招聘成本分析",
+                    title: "企业本年度招聘成本",
                     paddingTop: '8%',
                     radius: ['45%', '65%'],
                     radius2: [0, '43%'],
@@ -56,7 +56,7 @@
                 pie_a_nextData: {},
                 pie_a_next_year_config: {
                     type: 'wloneyxycr',
-                    title: "企业本年度培训成本分析",
+                    title: "企业本年度培训成本",
                     paddingTop: '8%',
                     radius: ['45%', '65%'],
                     radius2: [0, '43%'],
@@ -68,7 +68,7 @@
                 estate_salary_Data: {},
                 estate_salary_config: {
                     type: 'bndxzrc',
-                    title: '企业下年度招聘成本分析',
+                    title: '企业下年度招聘成本',
                     paddingTop: '6%',
                     echartTitleShow: false,
                     left: '4%',
@@ -81,7 +81,7 @@
                 estateData: {},
                 estate_config: {
                     type: 'wlynxyrcsl',
-                    title: '企业下年度培训成本分析',
+                    title: '企业下年度培训成本',
                     bar_color_l: "#00fff3",
                     bar_color_r: "transparent",
                     ispercent: true,
@@ -96,7 +96,7 @@
                 ggxq_Data: {},
                 ggxq_config: {
                     type: 'qyzairencai',
-                    title: '企业采购过的人力资源',
+                    title: '企业采购过的人力资源服务',
                     paddingTop: '8%',
                     ispercent: true,
                     echartTitleShow: false,

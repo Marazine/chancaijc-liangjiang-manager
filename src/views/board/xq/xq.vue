@@ -41,7 +41,7 @@
                 pie_aData: {},
                 pie_a_year_config: {
                     type: 'qycrny',
-                    title: "十三五重点行业2020年度国内社会人才需求",
+                    title: "2020年度国内社会人才需求",
                     paddingTop: '8%',
                     radius: ['45%', '65%'],
                     radius2: [0, '43%'],
@@ -53,7 +53,7 @@
                 pie_a_nextData: {},
                 pie_a_next_year_config: {
                     type: 'wloneyxycr',
-                    title: "各产业2020年度国内应届生需求",
+                    title: "2020年度国内应届生需求",
                     paddingTop: '8%',
                     radius: ['45%', '65%'],
                     radius2: [0, '43%'],
@@ -65,7 +65,7 @@
                 estate_salary_Data: {},
                 estate_salary_config: {
                     type: 'bndxzrc',
-                    title: '各产业2020年度外籍人才需求',
+                    title: '2020年度外籍人才需求',
                     paddingTop: '6%',
                     echartTitleShow: false,
                     left: '4%',
@@ -78,7 +78,7 @@
                 estateData: {},
                 estate_config: {
                     type: 'wlynxyrcsl',
-                    title: '各产业2020年度留学归国人才需求',
+                    title: '2020年度留学归国人才需求',
                     bar_color_l: "#00fff3",
                     bar_color_r: "transparent",
                     ispercent: true,
@@ -92,14 +92,20 @@
                 },
                 ggxq_Data: {},
                 ggxq_config: {
-                    type: 'qyzairencai',
-                    title: '各产业2020年度总体需求分析',
+                    bar_color_l: "#00fff3",
+                    bar_color_r: "transparent",
+                    ispercent: true,
+                    paddingTop: '6%',
+                    top: '15%',
+                    right: '8%',
+                    left: '12%',
+                    bottom: '20%',
+                    barWidth: '10px',
+                    isClick: false,
+                    type: 'wlynxyrcsl',
+                    title: '两江新区企业热门需求职位TOP20',
                     paddingTop: '8%',
                     echartTitleShow: false,
-                    left: '4%',
-                    right: '10%',
-                    top: '0',
-                    bottom: '-8%',
                     bh: 'bh-50',
                     isClick: false,
                 },
@@ -149,7 +155,10 @@
                         this.pie_a_nextData = data.data.B_B8_7;
                         this.estate_salary_Data = data.data.B_B8_6;
                         this.estateData = data.data.B_B8_5;
-                        this.ggxq_Data = data.data.position;
+                        this.ggxq_Data = {
+                          name:["销售代表","销售经理","会计","人事专员","市场专员","客服专员","人事行政专员","行政专员","销售助理","平面设计师","行政前台","区域销售经理","电话销售","项目经理","总经理助理","招聘专员","仓库管理员","销售主管","销售专员","出纳"],
+                          value: [844,634,516,336,297,294,263,262,254,245,244,236,236,228,220,215,210,209,200,198]
+                        };
                         this.isShow = true;
                     }
                 });

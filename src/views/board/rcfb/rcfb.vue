@@ -109,7 +109,7 @@
                     type: 'qyqk',
                     echartTitleShow: true,
                     echartTitle: "",
-                    title: "人才产业分布",
+                    title: "人才重点产业分布",
                     isScroll: true,
                     titleLeft: "行业类型分布",
                     titleRight: "行业人才分布",
@@ -132,7 +132,7 @@
         mounted() {},
         methods: {
             init() {
-                // let data = require('./data.json');
+
                 this.$http({
                     url: this.$http.adornUrl("op=dash&func=getDashData", "XZX"),
                     method: "post",
@@ -156,20 +156,20 @@
                             }
                             // this.titleData = data.data.B2_2;
 
-                        let man = (parseInt(data.data.sex.value[1]) / (parseInt(data.data.sex.value[1]) + parseInt(data.data.sex
+                        let man = (parseInt(data.data.sex.value[0]) / (parseInt(data.data.sex.value[1]) + parseInt(data.data.sex
                             .value[0])) * 100).toFixed(2);
                         man = man !== "NaN" ? man + "%" : "0%";
                         // debugger
-                        let woman = (parseInt(data.data.sex.value[0]) / (parseInt(data.data.sex.value[1]) + parseInt(data.data
+                        let woman = (parseInt(data.data.sex.value[1]) / (parseInt(data.data.sex.value[1]) + parseInt(data.data
                             .sex.value[0])) * 100).toFixed(2);
                         woman = woman !== "NaN" ? woman + "%" : "0%";
                         this.titleData = {
                             man: {
-                                number: data.data.sex.value[1],
+                                number: data.data.sex.value[0],
                                 percentage: man
                             },
                             woman: {
-                                number: data.data.sex.value[0],
+                                number: data.data.sex.value[1],
                                 percentage: woman
                             }
                         }

@@ -75,7 +75,17 @@
                             type: 'shadow',
 
                         },
-
+                        formatter: function(params) {
+                            // debugger
+                            // if(params[0].dataIndex%2 != 0){
+                            //     return ''
+                            // }
+                            if (_this.config.ispercent) {
+                                return params[0].name+'：'+params[0].value+'<br />占比：'+((params[0].value / _this.totalValue) * 100).toFixed(2) + "%"
+                            } else {
+                                return parseInt(params[0].value)
+                            }
+                        }
                     },
                     grid: {
                         left: this.config.left,
@@ -179,8 +189,10 @@
 
                                 // formatter: this.config.ispercent ? '{c}%' : "{c}",
                                 formatter: function(params) {
+                                    if(data.value.length>12 && params.dataIndex%2 != 0){
+                                        return ''
+                                    }
                                     if (_this.config.ispercent) {
-                                        // debugger
                                         return ((params.value / _this.totalValue) * 100).toFixed(2) + "%"
                                     } else {
                                         return parseInt(params.value)
@@ -188,6 +200,9 @@
                                 },
                                 color: "#fff"
                             }
+                        },
+                        tooltip:{
+
                         }
                     }]
                 };
