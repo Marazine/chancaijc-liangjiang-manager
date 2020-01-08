@@ -55,6 +55,15 @@
                             type: 'shadow'
                         }
                     },
+                    legend: {
+                        // color: ["#F58080", "#47D8BE", "#F9A589"],
+                        data: ['流入', '流出'],
+                        left: 'center',
+                        top: 'top',
+                        textStyle: {
+                            color: "#fff"
+                        }
+                    },
                     grid: {
                         top: '5%',
                         left: '3%',
@@ -125,7 +134,7 @@
                         }
                     }],
                     series: [{
-                        // name: 'FT101',
+                        name: '流入',
                         type: 'bar',
                         data: data_chart.value,
                         // barWidth: 16, //柱子宽度
@@ -152,7 +161,7 @@
                             }
                         }
                     }, {
-                        // name: 'FT102',
+                        name: '流出',
                         type: 'bar',
                         data: data_chart.value1,
                         // barWidth: 16,
@@ -387,16 +396,16 @@
 
                 this.myChart.setOption(option);
                 window.addEventListener("resize", () => {
-                    if (this.myChart) {
-                        this.myChart.resize();
-                    }
-                })
-                // if (data_chart.name.length > 2) {
-                //     let idx = 0;
-                //     setInterval(() => {
-                //         clearSelectedStatus();
-                //         option.series[0].data[idx]['selected'] = true;
-                //         this.myChart.setOption(option);
+                        if (this.myChart) {
+                            this.myChart.resize();
+                        }
+                    })
+                    // if (data_chart.name.length > 2) {
+                    //     let idx = 0;
+                    //     setInterval(() => {
+                    //         clearSelectedStatus();
+                    //         option.series[0].data[idx]['selected'] = true;
+                    //         this.myChart.setOption(option);
 
                 //         this.myChart.dispatchAction({
                 //             type: 'showTip',
