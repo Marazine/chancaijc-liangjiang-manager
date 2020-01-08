@@ -7,24 +7,36 @@
       </div>
       <img class="fuseChildrenBack" @click="$router.push({name:'board'})" src="../../../assets/img/0001.png" alt="">
       <div class="row bh-100">
-        <div class="row col-md-12 columnBox ">
+        <div class="row col-md-3">
+          <div class=" col-md-12 f-column column">
+            <Chart :initData="pie_aData" :config='pie_a_year_config'></Chart>
+            <!-- <Chart :initData="product_personData2" :config='product_person_config'></Chart> -->
+            <Chart :initData="estate_salary_Data" :config='estate_salary_config'></Chart>
+          </div>
+        </div>
+
+        <div class="row col-md-9 columnBox ">
           <div class="columnBottom row">
-            <div class=" col-md-4 column column100">
-              <Chart :initData="pie_aData" :config='pie_a_year_config'></Chart>
-            </div>
             <div class=" col-md-4 column column100">
               <Chart :initData="pie_a_nextData" :config='pie_a_next_year_config'></Chart>
             </div>
             <div class=" col-md-4 column column100">
-              <Chart :initData="estate_salary_Data" :config='estate_salary_config'></Chart>
+              <Chart :initData="estateData" :config='estate_config'></Chart>
+            </div>
+            <div class=" col-md-4 column column100">
+              <Chart :initData="ggxq_Data" :config='ggxq_config'></Chart>
+              <!-- <Chart :initData="pie_aData3" :config='pie_aconfig3'></Chart> -->
             </div>
           </div>
           <div class="columnBottom row">
-            <div class=" col-md-6 column column100">
-              <Chart :initData="estateData" :config='estate_config'></Chart>
+            <div class=" col-md-4 column column100">
+              <Chart :initData="industory_Data" :config='industory_config'></Chart>
             </div>
-            <div class=" col-md-6 column column100">
-              <Chart :initData="ggxq_Data" :config='ggxq_config'></Chart>
+            <div class=" col-md-4 column column100">
+              <Chart :initData="grade_Data" :config='grade_config'></Chart>
+            </div>
+            <div class=" col-md-4 column column100">
+              <Chart :initData="jobTypes_Data" :config='jobTypes_config'></Chart>
             </div>
           </div>
         </div>
@@ -77,7 +89,7 @@
                 },
                 estateData: {},
                 estate_config: {
-                    type: 'wlynxyrcsl',
+                    type: 'lxggrenc',
                     title: '2020年度留学归国人才需求',
                     bar_color_l: "#00fff3",
                     bar_color_r: "transparent",
@@ -129,6 +141,43 @@
                     // unomit: true,
                     // bh: 'bh-50'
                 },
+                // 行业分布
+                industory_Data: null,
+                industory_config: {
+                    type: 'rcxuqhy',
+                    title: '人才需求行业分布',
+                    ispercent: true,
+                    paddingTop: '10%',
+                },
+                // 学历分布
+                grade_Data: null,
+                grade_config: {
+                    type: 'bndxzrc',
+                    title: '人才需求学历分布',
+                    ispercent: true,
+                    paddingTop: '5%',
+                    left: '4%',
+                    right: '10%',
+                    top: '10%',
+                    bottom: '-8%',
+                },
+                // 职位类别分布
+                jobTypes_Data: null,
+                jobTypes_config: {
+                    type: 'rcxuxzwlb',
+                    title: '人才需求职位类别分布',
+                    bar_color_l: "#00b0ff",
+                    bar_color_r: "#7052f4",
+                    ispercent: true,
+                    paddingTop: '5%',
+                    ispercent: true,
+                    paddingTop: '6%',
+                    top: '15%',
+                    right: '8%',
+                    left: '12%',
+                    bottom: '23%',
+                    barWidth: '10px',
+                }
             }
         },
         created() {
@@ -155,9 +204,16 @@
                         this.pie_a_nextData = data.data.B_B8_7;
                         this.estate_salary_Data = data.data.B_B8_6;
                         this.estateData = data.data.B_B8_5;
+                        this.industory_Data = data.data.comTrade;
+                        this.grade_Data = data.data.edu;
+                        this.jobTypes_Data = data.data.jobtypes;
                         this.ggxq_Data = {
-                          name:["销售代表","销售经理","会计","人事专员","市场专员","客服专员","人事行政专员","行政专员","销售助理","平面设计师","行政前台","区域销售经理","电话销售","项目经理","总经理助理","招聘专员","仓库管理员","销售主管","销售专员","出纳"],
-                          value: [844,634,516,336,297,294,263,262,254,245,244,236,236,228,220,215,210,209,200,198]
+                            name: ["销售代表", "销售经理", "会计", "人事专员", "市场专员", "客服专员", "人事行政专员", "行政专员", "销售助理", "平面设计师", "行政前台",
+                                "区域销售经理", "电话销售", "项目经理", "总经理助理", "招聘专员", "仓库管理员", "销售主管", "销售专员", "出纳"
+                            ],
+                            value: [844, 634, 516, 336, 297, 294, 263, 262, 254, 245, 244, 236, 236, 228, 220, 215, 210, 209,
+                                200, 198
+                            ]
                         };
                         this.isShow = true;
                     }

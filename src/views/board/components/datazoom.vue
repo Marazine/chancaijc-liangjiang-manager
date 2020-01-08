@@ -24,20 +24,16 @@
         },
         beforeDestroy() {
             this.myChart.dispose();
-            clearInterval(this.mTime)
         },
         components: {},
         methods: {
             init() {
-                // console.log(this.initData);
                 if (this.initData) {
-                    // debugger
                     if (this.config.ispercent) {
                         this.sum(this.initData.value);
                         this.dataList = this.initData.value;
                         this.percent(this.initData.value);
                     }
-
                     this.estateChart("estate", this.initData);
                 } else {
                     this.estateChart("estate", this.b_age_aboard);
@@ -59,32 +55,48 @@
                 })
             },
             estateChart(id, data) {
-                let total = 0;
-                for (let i in data.value) {
-                    total += data.value[i]
-                }
-                if (total == 0) {
-                    total = 1
-                }
-                // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
-                let _this = this;
+                // var xData = function() {
+                //     var datas = [];
+                //     for (var i = 1; i < 13; i++) {
+                //         datas.push(i + "月份");
+                //     }
+                //     return datas;
+                // }();
+                var _this = this;
                 let option = {
-                    backgroundColor: 'transparent',
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-                            type: 'shadow',
+                    backgroundColor: "transparent",
+                    "title": {
+                        show: false,
+                        "text": "本年商场顾客男女人数统计",
+                        "subtext": "BY Wang Dingding",
+                        x: "4%",
 
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: '22'
+                        },
+                        subtextStyle: {
+                            color: '#90979c',
+                            fontSize: '16',
+
+                        },
+                    },
+                    "tooltip": {
+                        "trigger": "axis",
+                        "axisPointer": {
+                            "type": "shadow",
+                            textStyle: {
+                                color: "#fff"
+                            }
                         },
                         formatter: (params) => {
                             let val = null;
                             _this.initData.name.forEach((item, index) => {
-                                    if (item == params[0].name) {
-                                        val = _this.dataList[index];
-                                    }
-                                })
-                                // debugger
+                                if (item == params[0].name) {
+                                    val = _this.dataList[index];
+                                }
+                            })
                             if (_this.config.ispercent) {
                                 return params[0].name + '：' + val + '<br />占比：' + params[0].value + "%"
                             } else {
@@ -92,15 +104,19 @@
                             }
                         }
                     },
-                    grid: {
-                        left: this.config.left,
-                        right: this.config.right,
-                        top: this.config.top,
-                        bottom: this.config.bottom,
+                    "grid": {
+                        "borderWidth": 0,
+                        "top": 40,
+                        left: '12%',
+                        "bottom": 75,
+                        textStyle: {
+                            color: "#fff"
+                        }
                     },
-                    xAxis: [{
-                        type: 'category',
-                        data: data.name ? data.name : ['工作票', '操作票', '抢修', '用电调查', '设备巡视', '现场勘查', '到岗到位'],
+
+                    "calculable": true,
+                    "xAxis": [{
+                        "type": "category",
                         axisLine: {
                             show: false,
                             lineStyle: {
@@ -129,29 +145,16 @@
                             textStyle: {
                                 color: "#eee",
                                 fontSize: 12
-                            },
-                            formatter: (value) => {
-                                if (value.length > 10) {
-                                    let val = value.substring(0, 10) + ".";
-                                    return val;
-                                } else {
-                                    return value;
-                                }
-                                // return value.split("").join("\n");
                             }
                         },
-
-
+                        "data": data.name,
                     }],
-                    yAxis: [{
-
+                    "yAxis": [{
+                        "type": "value",
                         axisLabel: {
                             formatter: '{value}',
                             color: "#fff",
-                            fontSize: 12,
-                            // formatter: function(params) {
-                            //     console.log(params);
-                            // }
+                            fontSize: 12
                         },
                         axisTick: {
                             show: true,
@@ -170,68 +173,68 @@
                         splitLine: {
                             show: false
                         }
+
                     }],
-                    series: [{
-                        type: 'bar',
-                        data: data.value ? data.value : [300, 450, 770, 203, 255, 188, 156],
-                        barWidth: this.config.barWidth,
-                        itemStyle: {
-                            normal: {
-                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                    offset: 0,
-                                    color: this.config.bar_color_l ? this.config.bar_color_l : 'rgba(0,244,255,1)' // 0% 处的颜色
-                                }, {
-                                    offset: 1,
-                                    color: this.config.bar_color_r ? this.config.bar_color_r : 'rgba(0,77,167,1)' // 100% 处的颜色
-                                }], false),
-                                barBorderRadius: [30, 30, 0, 0],
-                                shadowColor: 'rgba(0,160,221,1)',
-                                shadowBlur: 2,
-                            }
-                        },
-                        label: {
-                            normal: {
-                                show: true,
-                                // lineHeight: 30,
-                                // width: 80,
-                                // height: 30,
-                                // backgroundColor: 'rgba(0,160,221,0.1)',
-                                borderRadius: 200,
-                                position: 'top',
-                                distance: 1,
+                    "dataZoom": [{
+                        "show": true,
+                        "height": 10,
+                        "xAxisIndex": [
+                            0
+                        ],
+                        bottom: 10,
+                        "start": 0,
+                        "end": 40,
+                        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+                        handleSize: '110%',
+                        handleStyle: {
+                            color: "#d3dee5",
 
-                                formatter: function(params) {
-                                    // if (data.value.length > 12 && params.dataIndex % 2 != 0) {
-                                    //     return ''
-                                    // }
-                                    if (_this.config.ispercent) {
-                                        return params.value + "%"
-                                    } else {
-                                        return params.value
+                        },
+                        textStyle: {
+                            color: "#fff"
+                        },
+                        borderColor: "#90979c"
+
+
+                    }, {
+                        "type": "inside",
+                        "show": true,
+                        "height": 15,
+                        "start": 1,
+                        "end": 35
+                    }],
+                    "series": [
+
+                        {
+                            "name": "男",
+                            "type": "bar",
+                            "stack": "总量",
+                            // barWidth: 18,
+                            barGap: 13,
+                            barCategoryGap: '40%',
+                            "itemStyle": {
+                                "normal": {
+                                    "color": "rgba(0,191,183,1)",
+                                    "barBorderRadius": 0,
+                                    "label": {
+                                        "show": true,
+                                        color: '#fff',
+                                        fontSize: 12,
+                                        "position": "top",
+                                        formatter: (p) => {
+                                            if (this.config.ispercent) {
+                                                return p.value > 0 ? (p.value) + '%' : '';
+                                            }
+                                            return p.value > 0 ? (p.value) : '';
+                                        }
                                     }
-                                },
-                                color: "#fff"
-                            }
-                        },
-                        tooltip: {
-
+                                }
+                            },
+                            "data": data.value
                         }
-                    }]
+                    ]
                 };
                 this.myChart.setOption(option);
-                // var index = 0; //播放所在下标
-                // 	this.mTime = setInterval(()=> {
-                // 		this.myChart.dispatchAction({
-                // 			type: 'showTip',
-                // 			seriesIndex: 0,
-                // 			dataIndex: index
-                // 		});
-                // 		index++;
-                // 		if(index >= data.name.length) {
-                // 			index = 0;
-                // 		}
-                // 	}, 4500);
-
                 window.addEventListener("resize", () => {
                     this.myChart.resize();
                 });

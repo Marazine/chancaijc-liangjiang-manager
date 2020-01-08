@@ -55,6 +55,13 @@
                             type: 'shadow'
                         }
                     },
+                    grid: {
+                        top: '5%',
+                        left: '3%',
+                        right: '4%',
+                        bottom: '0%',
+                        containLabel: true
+                    },
                     legend: {
                         // color: ["#F58080", "#47D8BE", "#F9A589"],
                         data: ['流入', '流出'],
@@ -63,13 +70,6 @@
                         textStyle: {
                             color: "#fff"
                         }
-                    },
-                    grid: {
-                        top: '5%',
-                        left: '3%',
-                        right: '4%',
-                        bottom: '0%',
-                        containLabel: true
                     },
                     xAxis: [{
                         // show: false,

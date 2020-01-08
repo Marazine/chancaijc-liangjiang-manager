@@ -80,7 +80,7 @@
                 },
                 estateData: {},
                 estate_config: {
-                    type: 'wlynxyrcsl',
+                    type: 'lxggrenc',
                     title: '企业下年度培训成本',
                     bar_color_l: "#00fff3",
                     bar_color_r: "transparent",

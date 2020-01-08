@@ -20,6 +20,9 @@
       <DoublePillar v-if="doublePillar" :initData="initData" :config="config"></DoublePillar>
       <DoubleBar v-if="doubleBar" :initData="initData" :config="config"></DoubleBar>
       <DoubleLine v-if="doubleLine" :initData="initData" :config="config"></DoubleLine>
+      <DataZoom v-if="DataZoom" :initData="initData" :config="config"></DataZoom>
+      <Lines v-if="lines" :initData="initData" :config="config"></Lines>
+      <barSmyble v-if="barSmyble" :initData="initData" :config="config"></barSmyble>
     </div>
   </div>
 </template>
@@ -60,8 +63,8 @@
                     this.config.type == 'qyrczyqd2';
             },
             barVer() {
-                return this.config.type == 'rczy' || this.config.type == 'qyrcfzpj' || this.config.type == 'wlynxyrcsl' || this
-                    .config.type == 'xqlx';
+                return this.config.type == 'rczy' || this.config.type == 'qyrcfzpj' || this.config.type == 'lxggrenc' || this
+                    .config.type == 'xqlx' || this.config.type == 'rcxuxzwlb';
             },
             gragh() {
                 return this.config.type == 'jndj';
@@ -77,6 +80,15 @@
             },
             doubleLine() {
                 return this.config.type == 'natureFlow';
+            },
+            DataZoom() {
+                return this.config.type == 'wlynxyrcsl';
+            },
+            lines() {
+                return this.config.type == 'rcxuqhy';
+            },
+            barSmyble() {
+                return this.config.type == 'rcxuxlfb';
             }
         },
         beforeDestroy() {

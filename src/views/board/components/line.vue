@@ -24,20 +24,16 @@
         },
         beforeDestroy() {
             this.myChart.dispose();
-            clearInterval(this.mTime)
         },
         components: {},
         methods: {
             init() {
-                // console.log(this.initData);
                 if (this.initData) {
-                    // debugger
                     if (this.config.ispercent) {
                         this.sum(this.initData.value);
                         this.dataList = this.initData.value;
                         this.percent(this.initData.value);
                     }
-
                     this.estateChart("estate", this.initData);
                 } else {
                     this.estateChart("estate", this.b_age_aboard);
@@ -59,32 +55,20 @@
                 })
             },
             estateChart(id, data) {
-                let total = 0;
-                for (let i in data.value) {
-                    total += data.value[i]
-                }
-                if (total == 0) {
-                    total = 1
-                }
-                // debugger
+                // console.log(data);
                 this.myChart = this.$echarts.init(this.$refs.estate);
-                let _this = this;
+                var _this = this;
                 let option = {
-                    backgroundColor: 'transparent',
+                    backgroundColor: "transparent",
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'shadow',
-
-                        },
                         formatter: (params) => {
                             let val = null;
                             _this.initData.name.forEach((item, index) => {
-                                    if (item == params[0].name) {
-                                        val = _this.dataList[index];
-                                    }
-                                })
-                                // debugger
+                                if (item == params[0].name) {
+                                    val = _this.dataList[index];
+                                }
+                            })
                             if (_this.config.ispercent) {
                                 return params[0].name + '：' + val + '<br />占比：' + params[0].value + "%"
                             } else {
@@ -93,14 +77,24 @@
                         }
                     },
                     grid: {
-                        left: this.config.left,
-                        right: this.config.right,
-                        top: this.config.top,
-                        bottom: this.config.bottom,
+                        top: '8%',
+                        left: '11%',
+                        right: '5%',
+                        bottom: '2%',
+                        containLabel: true,
+                    },
+                    legend: {
+                        show: false,
+                        itemGap: 50,
+                        data: ['注册总量', '最新注册量'],
+                        textStyle: {
+                            color: '#f9f9f9',
+                            borderColor: '#fff'
+                        },
                     },
                     xAxis: [{
                         type: 'category',
-                        data: data.name ? data.name : ['工作票', '操作票', '抢修', '用电调查', '设备巡视', '现场勘查', '到岗到位'],
+                        boundaryGap: true,
                         axisLine: {
                             show: false,
                             lineStyle: {
@@ -140,18 +134,14 @@
                                 // return value.split("").join("\n");
                             }
                         },
-
-
+                        data: data.name,
                     }],
                     yAxis: [{
-
+                        type: 'value',
                         axisLabel: {
                             formatter: '{value}',
                             color: "#fff",
-                            fontSize: 12,
-                            // formatter: function(params) {
-                            //     console.log(params);
-                            // }
+                            fontSize: 12
                         },
                         axisTick: {
                             show: true,
@@ -172,66 +162,59 @@
                         }
                     }],
                     series: [{
-                        type: 'bar',
-                        data: data.value ? data.value : [300, 450, 770, 203, 255, 188, 156],
-                        barWidth: this.config.barWidth,
-                        itemStyle: {
+                        name: '注册总量',
+                        type: 'line',
+                        // smooth: true, //是否平滑曲线显示
+                        // 			symbol:'circle',  // 默认是空心圆（中间是白色的），改成实心圆
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        symbolSize: 6,
+                        lineStyle: {
                             normal: {
-                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                    offset: 0,
-                                    color: this.config.bar_color_l ? this.config.bar_color_l : 'rgba(0,244,255,1)' // 0% 处的颜色
-                                }, {
-                                    offset: 1,
-                                    color: this.config.bar_color_r ? this.config.bar_color_r : 'rgba(0,77,167,1)' // 100% 处的颜色
-                                }], false),
-                                barBorderRadius: [30, 30, 0, 0],
-                                shadowColor: 'rgba(0,160,221,1)',
-                                shadowBlur: 2,
-                            }
+                                color: "#28ffb3", // 线条颜色
+                            },
+                            borderColor: '#f0f'
                         },
                         label: {
-                            normal: {
-                                show: true,
-                                // lineHeight: 30,
-                                // width: 80,
-                                // height: 30,
-                                // backgroundColor: 'rgba(0,160,221,0.1)',
-                                borderRadius: 200,
-                                position: 'top',
-                                distance: 1,
-
-                                formatter: function(params) {
-                                    // if (data.value.length > 12 && params.dataIndex % 2 != 0) {
-                                    //     return ''
-                                    // }
-                                    if (_this.config.ispercent) {
-                                        return params.value + "%"
-                                    } else {
-                                        return params.value
-                                    }
-                                },
-                                color: "#fff"
+                            show: true,
+                            position: 'top',
+                            textStyle: {
+                                color: '#fff',
+                            },
+                            formatter: (p) => {
+                                if (this.config.ispercent) {
+                                    return p.value > 0 ? (p.value) + '%' : '';
+                                }
+                                return p.value > 0 ? (p.value) : '';
                             }
                         },
-                        tooltip: {
+                        itemStyle: {
+                            normal: {
+                                color: "#28ffb3",
 
-                        }
+                            }
+                        },
+                        // tooltip: {
+                        //     show: false
+                        // },
+                        areaStyle: { //区域填充样式
+                            normal: {
+                                //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgba(0,154,120,1)'
+                                }, {
+                                    offset: 1,
+                                    color: 'rgba(0,0,0, 0)'
+                                }], false),
+                                shadowColor: 'rgba(53,142,215, 0.9)', //阴影颜色
+                                shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+                            }
+                        },
+                        data: data.value
                     }]
                 };
                 this.myChart.setOption(option);
-                // var index = 0; //播放所在下标
-                // 	this.mTime = setInterval(()=> {
-                // 		this.myChart.dispatchAction({
-                // 			type: 'showTip',
-                // 			seriesIndex: 0,
-                // 			dataIndex: index
-                // 		});
-                // 		index++;
-                // 		if(index >= data.name.length) {
-                // 			index = 0;
-                // 		}
-                // 	}, 4500);
-
                 window.addEventListener("resize", () => {
                     this.myChart.resize();
                 });

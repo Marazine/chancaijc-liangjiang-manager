@@ -68,7 +68,7 @@
                 },
                 estateData: {},
                 estate_config: {
-                    type: 'wlynxyrcsl',
+                    type: 'lxggrenc',
                     title: '对两江新区人才政策的总体满意度',
                     bar_color_l: "#00fff3",
                     bar_color_r: "transparent",

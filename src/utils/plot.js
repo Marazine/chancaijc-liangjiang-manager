@@ -35,3 +35,9 @@ import DoubleBar from '@/views/board/components/double_bar' //
 Vue.component("DoubleBar", DoubleBar)
 import DoubleLine from '@/views/board/components/double_line' //
 Vue.component("DoubleLine", DoubleLine)
+import DataZoom from '@/views/board/components/datazoom' //
+Vue.component("DataZoom", DataZoom)
+import Lines from '@/views/board/components/line' //
+Vue.component("Lines", Lines)
+import barSmyble from '@/views/board/components/barSmyble' //
+Vue.component("barSmyble", barSmyble)
