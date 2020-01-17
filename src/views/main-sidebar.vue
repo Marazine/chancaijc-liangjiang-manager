@@ -54,6 +54,14 @@
             <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
             <span slot="title">一键看板</span>
         </el-menu-item>
+        <el-menu-item index="open" @click="$router.push({ name: 'open' })">
+            <icon-svg name="system" class="site-sidebar__menu-icon"></icon-svg>
+            <span slot="title">接口管理</span>
+        </el-menu-item>
+        <el-menu-item index="user" @click="$router.push({ name: 'user' })">
+            <icon-svg name="log" class="site-sidebar__menu-icon"></icon-svg>
+            <span slot="title">用户接口管理</span>
+        </el-menu-item>
         <!-- <el-submenu index="系统管理">
           <template slot="title">
             <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>

@@ -48,6 +48,8 @@ const mainRoutes = {
         { path: '/data_list', component: _import('data/data_list'), name: 'data_list', meta: { title: '数据统计占比' } },
         { path: '/company', component: _import('company/company'), name: 'company', meta: { title: '企业查询' } },
         { path: '/analyseF', component: _import('analyseF/analyseF'), name: 'analyseF', meta: { title: '统计分析F' } },
+        { path: '/open', component: _import('intf/open-api-list'), name: 'open', meta: { title: '统计分析F' } },
+        { path: '/user', component: _import('intf/open-api-user'), name: 'user', meta: { title: '统计分析F' } },
         // { path: '/company_manage_list', component: _import('companyManage/companyManageList'), name: 'company_manage_list', meta: { title: '企业列表' } },
         // { path: '/company_manage_email', component: _import('companyManage/companyManageEmail'), name: 'company_manage_email', meta: { title: '邮件发送记录' } },
         // { path: '/user', component: _import('sys/user/user'), name: 'user', meta: { title: '用户管理' } },

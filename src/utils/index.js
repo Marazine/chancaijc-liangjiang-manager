@@ -73,3 +73,16 @@ export function previewAddress(company_id) {
 export function filterReserve(value) {
     return value.reverse();
 }
+
+/**
+ * 删除数组对象最后一层
+ */
+export function deleteChildren(arr) {
+    arr.forEach(function (item) {
+      if (item.children instanceof Array && item.children.length > 0) {
+        deleteChildren(item.children)
+      } else {
+        delete (item.children)
+      }
+    })
+  }
