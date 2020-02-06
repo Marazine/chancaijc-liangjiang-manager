@@ -5,9 +5,9 @@
       <img src="~@/assets/img/arrow.png" alt="">
       {{config&&config.title?config.title:'标题'}}
     </div>
-    <div class="s-content">
+    <div class="s-content" :style="{paddingTop:config.paddingTop?config.paddingTop:''}">
       <barFill v-if="config.type=='qyqk_hy'" :initData="initData" :config="config"></barFill>
-      <barFill v-if="config.type=='qyqk_cy'" :initData="initData" :config="config"></barFill>
+      <barFill v-if="barA" :initData="initData" :config="config"></barFill>
     </div>
   </div>
 </template>
@@ -23,10 +23,11 @@
         mounted() {
 
         },
-        beforeDestroy() {
-
+        computed: {
+            barA() {
+                return this.config.type == 'qyrczyqd' || this.config.type == 'qyqk_cy'
+            }
         },
-        components: {},
         methods: {
 
         }

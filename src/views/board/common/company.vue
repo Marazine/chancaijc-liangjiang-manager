@@ -1,16 +1,16 @@
 <template>
   <div class="my-board main">
-    <div class="title-c">
+    <!-- <div class="title-c">
       珠海产才检测看板
-    </div>
+    </div> -->
     <div class="fuse content" v-if="isShow">
-      <img class="fuseChildrenBack" @click="$router.push({name:'board'})" src="../../../assets/img/0001.png" alt="">
+      <!-- <img class="fuseChildrenBack" @click="$router.push({name:'board'})" src="../../../assets/img/0001.png" alt=""> -->
       <div class="row bh-100">
         <div class="col-md-3 f-column">
           <ChartFill :initData="PayData" :config='configure_ind'></ChartFill>
         </div>
         <div class="col-md-6" style="padding:0 10px">
-          <ns_map :initData='zhDataMap' :initmapData='initmapData' :title="'珠海地图'" :config="zhuhaimapConfig"></ns_map>
+          <!-- <ns_map :initData='zhDataMap' :initmapData='initmapData' :config="zhuhaimapConfig"></ns_map> -->
         </div>
         <div class="col-md-3 f-column">
           <ChartFill :initData="cyData" :config='configure_indcy'></ChartFill>
@@ -91,10 +91,7 @@
 
 <style lang='scss' scoped>
     .main {
-        height: 100vh;
-        background: url('~@/assets/img/background.jpg') no-repeat;
-        background-size: 100% 100%;
-        padding: 0% 2.5% 2.5% 3.5% !important;
+        height: 100%;
+        padding: 1% 2% 1%;
     }
-</style>
 </style>

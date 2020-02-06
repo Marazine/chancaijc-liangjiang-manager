@@ -1,31 +1,40 @@
 <template>
   <div class="">
+    <div class="roll1 roll" @click="$router.push({name:'qyqk'})">
+      <p>
+        <span>企业情况</span>
+      </p>
+    </div>
     <div class="roll2 roll" @click="$router.push({name:'rcfb'})">
       <p>
-        <span>人才现状</span>
+        <span>企业人员总体情况</span>
       </p>
     </div>
-    <div class="roll3 roll" @click="$router.push({name:'rcld'})">
+    <div class="roll3 roll" @click="$router.push({name:'company2'})">
       <p>
-        <span>人才流动及来源</span>
+        <span>企业分布</span>
       </p>
     </div>
-    <div class="roll4 roll" @click="$router.push({name:'xq'})">
+    <div class="roll4 roll" @click="$router.push({name:'rcpy'})">
+      <p>
+        <span>应届毕业生引进</span>
+      </p>
+    </div>
+    <div class="roll5 roll" @click="$router.push({name:'rcqk'})">
       <p>
         <span>人才需求</span>
       </p>
     </div>
-    <div class="roll5 roll" @click="$router.push({name:'qyrlfw'})">
+    <div class="roll6 roll" @click="$router.push({name:'rcyj'})">
       <p>
-        <span>人力资源服务</span>
+        <span>人才引进</span>
       </p>
     </div>
-    <div class="roll6 roll" @click="$router.push({name:'rcfzhj'})">
+    <div class="roll7 roll" @click="$router.push({name:'rlzyfw'})">
       <p>
-        <span>人才发展环境</span>
+        <span>人才服务与<br />政策</span>
       </p>
     </div>
-
   </div>
 </template>
 

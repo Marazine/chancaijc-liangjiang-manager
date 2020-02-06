@@ -35,21 +35,18 @@
             },
             estateChart(id, data) {
                 this.myChart = this.$echarts.init(this.$refs.estate);
-                let y1Data = data.value;
-                let max = JSON.parse(JSON.stringify(data.value));
 
-                max.sort((a, b) => {
+                data.value.sort((a, b) => {
                     return b - a
                 })
-                let maxValue = max[0];
-                
+                let maxValue = data.value[0];
                 let xData = data.name.map(item => {
                     return {
                         name: item,
                         max: maxValue
                     }
                 })
-                
+                let y1Data = data.value;
 
                 let option = {
 

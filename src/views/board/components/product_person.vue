@@ -34,13 +34,6 @@
                 }
             },
             estateChart(id, data) {
-                let total = 0;
-                for (let i in data.value) {
-                    total += parseInt(data.value[i])
-                }
-                if (total == 0) {
-                    total = 1
-                }
                 this.myChart = this.$echarts.init(this.$refs.estate);
                 let xData = this.$filterReserve(data.name);
                 let y1Data = this.$filterReserve(data.value);
@@ -75,29 +68,48 @@
                         type: 'category',
                         boundaryGap: true,
                         show: true,
-                        axisLabel: {
-                            formatter: '{value}',
-                            color: "#fff",
-                            fontSize: 12
-                        },
                         axisTick: {
-                            show: true,
-                            lineStyle: {
+                            show: this.config.rcqk ? true : false,
+                            lineStyle: this.config.rcqk ? {
                                 color: "#a0c0ff",
-                            }
+                                with: 3
+                            } : ''
                         },
                         axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: "rgba(0, 222, 215, 0.2)",
-                                width: 1,
-                                type: "solid"
-                            },
+                            show: this.config.rcqk || this.config.showLine ? true : false
                         },
-                        splitLine: {
-                            show: false
+                        axisLabel: {
+                            show: true,
+                            fontSize: 11,
+                            color: '#eee',
+                            textStyle: {
+                                // align: 'left',
+                                // baseline:'middle'
+                            },
+                            // interval: 0,
+                            formatter: (value) => {
+                                // if (this.config.isCut) {
+                                //     return value
+                                // }
+                                // if (value.length > 10) {
+                                //     return value.substring(0, 10) + "..";
+                                // } else {
+                                return value;
+                                // }
+                            }
                         },
                         data: xData
+                            // .map((item) => {
+                            //     // item['textStyle'] = {
+                            //     //     align:"left"
+                            //     // }
+                            //     return {
+                            //         value: item,
+                            //         textStyle: {
+                            //             align: 'left',
+                            //         }
+                            //     }
+                            // })
                     }],
                     xAxis: [{
                             show: false,
@@ -146,9 +158,6 @@
                                 position: 'right',
                                 textStyle: {
                                     color: '#ffffff'
-                                },
-                                formatter: (item) => {
-                                    return ((item.value / total) * 100).toFixed(2) + "%"
                                 }
                             }
                         },

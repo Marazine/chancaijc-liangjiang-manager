@@ -60,7 +60,7 @@
             },
             getChart(id, data) {
                 this.myChart = this.$echarts.init(this.$refs.external);
-                // console.log(data);
+
                 let option = {
                     backgroundColor: "transparent",
                     color: ['#0E7CE2', '#FF8352', '#E271DE', '#F8456B', '#00FFFF', '#4AEAB0', "#EAEA26", "#906BF9", "#FE5656",
@@ -79,7 +79,7 @@
                     // },
                     grid: {
                         left: -100,
-                        top: 50,
+                        top: '0%',
                         bottom: 10,
                         right: 10,
                         containLabel: true
@@ -194,16 +194,17 @@
                             // roseType: 'area',
                             // zlevel: 10,
                             type: 'pie',
-                            // radius: ['40%', '80%'],
-                            radius: this.config.radius,
+                            radius: ['30%', '50%'],
+                            // radius: this.config.radius,
+                            center: ["50%", "55%"],
                             // roseType: 'radius',
                             label: {
                                 normal: {
                                     show: true,
                                     // formatter: "{b}",
                                     formatter: (param) => {
-                                        if (param.name.length > 10) {
-                                            return param.name ? param.name.slice(0, 10) + "\n" + param.name.slice(10) + "\n数量: " + param
+                                        if (param.name.length > 8) {
+                                            return param.name ? param.name.slice(0, 8) + "\n" + param.name.slice(8) + "\n数量: " + param
                                                 .value : ''
                                         } else {
                                             return param.name ? param.name + "\n数量: " + param.value : ''
@@ -224,52 +225,15 @@
                                     // length: 20,
                                     // length2: 55
                                     length: 10,
-                                    length2: 15
+                                    length2: 10
                                 },
                                 emphasis: {
-                                    show: true
+                                    show: false
                                 }
                             },
                             data: data
                         },
                     ]
-                }
-                if (data.length > 2) {
-                    let idx = 0;
-                    setInterval(() => {
-                        clearSelectedStatus();
-                        option.series[0].data[idx]['selected'] = true;
-                        this.myChart.setOption(option);
-
-                        this.myChart.dispatchAction({
-                            type: 'showTip',
-                            // seriesIndex: 0,
-                            dataIndex: idx
-                        });
-                        idx++;
-
-                        if (idx >= data.length) {
-                            idx = 0;
-                        }
-                    }, 3000)
-                    let myChart = this.myChart;
-
-                    function clearSelectedStatus() {
-                        option.series[0].data = appendBaseColor(data);
-                        myChart.setOption(option);
-                    }
-                }
-
-                function appendBaseColor(data) {
-                    let c = [];
-                    for (let i = 0; i < data.length; i++) {
-                        c.push({
-                            value: data[i].value,
-                            name: data[i].name,
-                            'selected': false
-                        })
-                    }
-                    return c
                 }
                 this.myChart.setOption(option);
                 window.addEventListener("resize", () => {

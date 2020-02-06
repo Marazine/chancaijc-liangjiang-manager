@@ -27,6 +27,8 @@
         components: {},
         methods: {
             init() {
+                console.log(this.initData)
+                // debugger
                 if (this.initData.name) {
                     // debugger
                     this.estateChart("estate", JSON.parse(JSON.stringify(this.initData)));
@@ -36,15 +38,6 @@
 
             },
             estateChart(id, data) {
-                let total = 0;
-                // if(this.config.showPercent){
-                for (let i in data.value) {
-                    total += parseInt(data.value[i]);
-                }
-                if (total == 0) {
-                    total = 1
-                }
-                // }
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
                 // let xData = this.$filterReserve(data.name);
@@ -80,8 +73,8 @@
                     var tempMaxData = y1Data.pop();
                     var tempXData = xData.pop();
                 }
+
                 // let y2Data = [28,4.4,5.9,0.9,0.7,1.1,2.1,0.4,1.9,3.8,1.6,0.7,5.7,6.1];
-                let _this = this;
                 let option = {
                     grid: {
                         left: '2%',
@@ -146,8 +139,8 @@
                             0
                         ],
                         bottom: '8%',
-                        "start": 0,
-                        "end": this.config.isScroll ? 45 : 100,
+                        "start": this.config.start ? this.config.start : 0,
+                        "end": this.config.isScroll?(this.config.end ? this.config.end : 90):100,
                         handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
                         handleSize: '110%',
                         handleStyle: {
@@ -215,15 +208,6 @@
                                 position: 'right',
                                 textStyle: {
                                     color: '#ffffff'
-                                },
-                                formatter: (item) => {
-                                    return ((item.value / total) * 100).toFixed(2) + "%"
-                                    if (_this.config.showPercent) {
-                                        // debugger
-                                        return ((item.value / total) * 100).toFixed(2) + "%"
-                                    } else {
-                                        return parseInt(item.value)
-                                    }
                                 }
                             }
                         },

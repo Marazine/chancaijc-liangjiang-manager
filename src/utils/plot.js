@@ -11,8 +11,8 @@ import barFill from '@/views/board/components/barFill' //不滚动柱状图
 Vue.component("barFill", barFill)
 import ZhMap from '@/views/board/components/zh_map' //滚动柱状图
 Vue.component("ZhMap", ZhMap)
-import ns_map from "@/views/board/module/ns_map"
-Vue.component("ns_map", ns_map)
+// import ns_map from "@/views/board/module/ns_map"
+// Vue.component("ns_map", ns_map)
 import ProductPerson from '@/views/board/components/product_person' //
 Vue.component("ProductPerson", ProductPerson)
 import PieA from '@/views/board/components/pie_a' //
@@ -29,15 +29,15 @@ import Gragh from '@/views/board/components/gragh' //
 Vue.component("Gragh", Gragh)
 import Radio from '@/views/board/components/radio' //
 Vue.component("Radio", Radio)
-import DoublePillar from '@/views/board/components/double_pillar' //
-Vue.component("DoublePillar", DoublePillar)
-import DoubleBar from '@/views/board/components/double_bar' //
-Vue.component("DoubleBar", DoubleBar)
-import DoubleLine from '@/views/board/components/double_line' //
-Vue.component("DoubleLine", DoubleLine)
-import DataZoom from '@/views/board/components/datazoom' //
-Vue.component("DataZoom", DataZoom)
-import Lines from '@/views/board/components/line' //
-Vue.component("Lines", Lines)
-import barSmyble from '@/views/board/components/barSmyble' //
-Vue.component("barSmyble", barSmyble)
+// import DoublePillar from '@/views/board/components/double_pillar' //
+// Vue.component("DoublePillar", DoublePillar)
+// import DoubleBar from '@/views/board/components/double_bar' //
+// Vue.component("DoubleBar", DoubleBar)
+// import DoubleLine from '@/views/board/components/double_line' //
+// Vue.component("DoubleLine", DoubleLine)
+// import DataZoom from '@/views/board/components/datazoom' //
+// Vue.component("DataZoom", DataZoom)
+// import Lines from '@/views/board/components/line' //
+// Vue.component("Lines", Lines)
+// import barSmyble from '@/views/board/components/barSmyble' //
+// Vue.component("barSmyble", barSmyble)

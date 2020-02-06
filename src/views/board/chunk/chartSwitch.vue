@@ -8,10 +8,10 @@
       <img src="../../../assets/img/arrow.png" alt="">
       {{config&&config.title?config.title:'标题'}}
     </div>
-    <div class="switch elastic" v-if="this.initData.personBussiness">
+    <div class="switch">
       <div style="cursor: pointer;" :class="{active:isEtre}" @click="btnSwitch(1)" v-if="config.titleLeft">
         {{config.titleLeft}}</div>
-      <div style="cursor: pointer;margin-left:10px;" :class="{active:isperson}" @click="btnSwitch(2)"
+      <div style="cursor: pointer;margin-top:5px;" :class="{active:isperson}" @click="btnSwitch(2)"
         v-if="config.titleRight">
         {{config.titleRight}}</div>
     </div>
@@ -124,8 +124,8 @@
     
     .switch {
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 10px;
+        right: 10px;
         color: #fff;
         border-radius: 10px;
         height: 28px;
@@ -135,10 +135,12 @@
         z-index: 1000;
         div {
             text-align: center;
-            height: 28px;
-            line-height: 27px;
-            border-radius: 10px;
+            height: 25px;
+            line-height: 24px;
+            border-radius: 5px;
             padding: 0 5px;
+            font-size: 12px;
+            color: #00ffff;
             border: 1px solid #0ba2b0;
         }
         .active {

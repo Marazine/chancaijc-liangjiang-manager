@@ -118,11 +118,11 @@
                             },
                             // interval: 0,
                             formatter: (value) => {
-                                if (value.length > 10) {
-                                    return value.substring(0, 10) + "..";
-                                } else {
-                                    return value;
-                                }
+                                // if (value.length > 10) {
+                                //     return value.substring(0, 10) + "..";
+                                // } else {
+                                return value;
+                                // }
                                 // return value
 
                             }
@@ -233,10 +233,14 @@
                 this.myChart.on('click', (params) => {
                     if (params.componentType == 'yAxis') {
                         this.$store.commit('board/upadataValueStr', params.value) //副标题
-                        this.$store.commit('board/updataEchartTitle', this.config.echartTitle) //主标题
-                        this.$store.commit('board/updataOPt', this.config.type);
-                    }
 
+                    }
+                    if (params.componentType == 'series') {
+                        this.$store.commit('board/upadataValueStr', params.name) //副标题
+
+                    }
+                    this.$store.commit('board/updataEchartTitle', this.config.echartTitle) //主标题
+                    this.$store.commit('board/updataOPt', this.config.type);
                 })
 
                 window.addEventListener("resize", () => {

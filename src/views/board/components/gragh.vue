@@ -36,14 +36,13 @@
 
             },
             estateChart(id, data) {
-                let total = 0;
-                for (let i in data.value) {
-                    total += parseInt(data.value[i])
-                }
-                if (total == 0) {
-                    total = 1
-                }
                 // debugger
+                let total = 0;
+                for(let i in data.value){
+                    total += parseInt(data.value[i]);
+                }
+                let _this = this;
+                let symbolSize = this.config.baseNum?this.config.baseNum:80
                 this.myChart = this.$echarts.init(this.$refs.estate);
                 // var sportsIcon = {
                 //     'a': 'https://gallerybox.echartsjs.com/asset/get/s/data-1559121268278-ozjd-lXoz.png',
@@ -70,12 +69,10 @@
                     "rgb(165, 190, 198)",
                 ]
                 data.name.forEach((item, index) => {
-
                     dataList.push({
-                        "name": item + ":" + data.value[index],
+                        "name": item,
                         "value": data.value[index],
-                        // "symbolSize": 30,
-                        "symbolSize": Number(data.value[index]) > 30 ? 130 : Number(data.value[index]) + 100,
+                        "symbolSize": data.value[index] > 30 ? (data.value[index]*0.02 + symbolSize)>120?120:(data.value[index]*0.02 + symbolSize) : symbolSize,
                         "draggable": true,
                         "itemStyle": {
                             "normal": {
@@ -88,7 +85,7 @@
                         }
                     })
                 })
-                let _this = this;
+
                 // coverData(product_personData2);
                 let option = {
                     backgroundColor: 'transparent',
@@ -104,7 +101,7 @@
                         type: 'graph',
                         layout: 'force',
                         force: {
-                            repulsion: 300,
+                            repulsion: 200,
                             edgeLength: 10
                         },
                         roam: true,
@@ -112,12 +109,9 @@
                             normal: {
                                 show: true,
                                 formatter: function(params) {
-                                    return params.name.split(":")[0]+" : "+((params.value / total) * 100).toFixed(2) + "%"
+                                    return params.name + "\n" + params.value + (_this.config.danwei?_this.config.danwei:'')
                                 },
                             }
-                        },
-                        tooltip:{
-                            formatter: '{b0}'
                         },
                         data: dataList,
                         // [{

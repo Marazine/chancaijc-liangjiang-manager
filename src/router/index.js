@@ -20,13 +20,89 @@ const globalRoutes = [
     { path: '/404', component: _import('common/404'), name: '404', meta: { title: '404未找到' } },
     { path: '/login', component: _import('common/login'), name: 'login', meta: { title: '登录' } },
     { path: '/analyseF_detail/:companyId/:companyName', component: _import('analyseF/analyseF_detail'), name: 'analyseF_detail', meta: { title: '统计分析明细F' } },
-    { path: '/board', component: _import('board/board'), name: 'board', meta: { title: '看板' } },
-    { path: '/rcfb', component: _import('board/rcfb/rcfb'), name: 'rcfb', meta: { title: '人才分布' } },
-    { path: '/company2', component: _import('board/common/company'), name: 'company2', meta: { title: '企业类型分布' } },
-    { path: '/rcfzhj', component: _import('board/rcfzhj/rcfzhj'), name: 'rcfzhj', meta: { title: '人才发展环境分析' } },
-    { path: '/xq', component: _import('board/xq/xq'), name: 'xq', meta: { title: '人才需求分析' } },
-    { path: '/qyrlfw', component: _import('board/qyrlfw/qyrlfw'), name: 'qyrlfw', meta: { title: '企业人力资源服务投入及需求分析' } },
-    { path: '/rcld', component: _import('board/rcld/rcld'), name: 'rcld', meta: { title: '人才流动及来源分析' } },
+    {
+        path: '/visual',
+        component: _import('board/visual'),
+        name: 'visual',
+        meta: {
+            title: '珠海产才监测看板'
+        },
+        redirect: {
+            name: 'board',
+        },
+        children: [{
+                path: '/visual/board',
+                component: _import('board/common/board'),
+                name: 'board',
+                meta: {
+                    title: '看板'
+                }
+            },
+            {
+                path: '/visual/qyqk',
+                component: _import('board/common/qyqk'),
+                name: 'qyqk',
+                meta: {
+                    title: '企业情况'
+                }
+            },
+            {
+                path: '/visual/rcqk',
+                component: _import('board/common/rcqk'),
+                name: 'rcqk',
+                meta: {
+                    title: '人才情况'
+                }
+            },
+            {
+                path: '/visual/rcfb',
+                component: _import('board/common/rcfb'),
+                name: 'rcfb',
+                meta: {
+                    title: '人才分布'
+                }
+            },
+            {
+                path: '/visual/rcyj',
+                component: _import('board/common/rcyj'),
+                name: 'rcyj',
+                meta: {
+                    title: '人才引进'
+                }
+            },
+            {
+                path: '/visual/rcpy',
+                component: _import('board/common/rcpy'),
+                name: 'rcpy',
+                meta: {
+                    title: '人才培养'
+                }
+            },
+            {
+                path: '/visual/rlzyfw',
+                component: _import('board/common/rlzyfw'),
+                name: 'rlzyfw',
+                meta: {
+                    title: '人才资源服务与政策'
+                }
+            },
+            {
+                path: '/visual/company2',
+                component: _import('board/common/company'),
+                name: 'company2',
+                meta: {
+                    title: '企业类型分布'
+                }
+            },
+        ]
+    },
+    // { path: '/board', component: _import('board/visual'), name: 'board', meta: { title: '看板' } },
+    // { path: '/rcfb', component: _import('board/rcfb/rcfb'), name: 'rcfb', meta: { title: '人才分布' } },
+    // { path: '/company2', component: _import('board/common/company'), name: 'company2', meta: { title: '企业类型分布' } },
+    // { path: '/rcfzhj', component: _import('board/rcfzhj/rcfzhj'), name: 'rcfzhj', meta: { title: '人才发展环境分析' } },
+    // { path: '/xq', component: _import('board/xq/xq'), name: 'xq', meta: { title: '人才需求分析' } },
+    // { path: '/qyrlfw', component: _import('board/qyrlfw/qyrlfw'), name: 'qyrlfw', meta: { title: '企业人力资源服务投入及需求分析' } },
+    // { path: '/rcld', component: _import('board/rcld/rcld'), name: 'rcld', meta: { title: '人才流动及来源分析' } },
 ]
 
 // 主入口路由(需嵌套上左右整体布局)

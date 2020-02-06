@@ -14,8 +14,7 @@
                     name: ['工商管理', '金融学', '英语'],
                     value: [1419, 1326, 1412]
                 },
-                totalValue: 0,
-                dataList: null,
+                totalValue: 0
             }
         },
         props: ["config", "initData"],
@@ -34,7 +33,6 @@
                     // debugger
                     if (this.config.ispercent) {
                         this.sum(this.initData.value);
-                        this.dataList = this.initData.value;
                         this.percent(this.initData.value);
                     }
 
@@ -48,9 +46,6 @@
                 arr.forEach((val, idx, arr) => {
                     this.totalValue += parseInt(val);
                 }, 0);
-                if (this.totalValue == 0) {
-                    this.totalValue = 1
-                }
                 return this.totalValue;
             },
             percent() {
@@ -59,37 +54,15 @@
                 })
             },
             estateChart(id, data) {
-                let total = 0;
-                for (let i in data.value) {
-                    total += data.value[i]
-                }
-                if (total == 0) {
-                    total = 1
-                }
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
-                let _this = this;
+
                 let option = {
                     backgroundColor: 'transparent',
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {
-                            type: 'shadow',
-
-                        },
-                        formatter: (params) => {
-                            let val = null;
-                            _this.initData.name.forEach((item, index) => {
-                                    if (item == params[0].name) {
-                                        val = _this.dataList[index];
-                                    }
-                                })
-                                // debugger
-                            if (_this.config.ispercent) {
-                                return params[0].name + '：' + val + '<br />占比：' + params[0].value + "%"
-                            } else {
-                                return parseInt(params[0].value)
-                            }
+                            type: 'shadow'
                         }
                     },
                     grid: {
@@ -102,73 +75,37 @@
                         type: 'category',
                         data: data.name ? data.name : ['工作票', '操作票', '抢修', '用电调查', '设备巡视', '现场勘查', '到岗到位'],
                         axisLine: {
-                            show: false,
                             lineStyle: {
-                                color: "#fff",
-                                width: 1,
-                                type: "solid"
-                            },
-                        },
-                        axisTick: {
-                            show: true,
-                            lineStyle: {
-                                color: "#a0c0ff",
+                                color: 'rgba(255,255,255,0.12)'
                             }
-                        },
-                        axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: "rgba(0, 222, 215, 0.2)",
-                                width: 1,
-                                type: "solid"
-                            },
                         },
                         axisLabel: {
-                            show: true,
-                            rotate: 35,
+                            margin: 10,
+                            color: '#e2e9ff',
                             textStyle: {
-                                color: "#eee",
-                                fontSize: 12
+                                fontSize: 12,
+
                             },
+                            rotate: 35,
                             formatter: (value) => {
-                                if (value.length > 10) {
-                                    let val = value.substring(0, 10) + ".";
-                                    return val;
-                                } else {
-                                    return value;
-                                }
-                                // return value.split("").join("\n");
+                                return value
                             }
                         },
-
 
                     }],
                     yAxis: [{
-
                         axisLabel: {
                             formatter: '{value}',
-                            color: "#fff",
-                            fontSize: 12,
-                            // formatter: function(params) {
-                            //     console.log(params);
-                            // }
-                        },
-                        axisTick: {
-                            show: true,
-                            lineStyle: {
-                                color: "#a0c0ff",
-                            }
+                            color: '#e2e9ff',
                         },
                         axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: "rgba(0, 222, 215, 0.2)",
-                                width: 1,
-                                type: "solid"
-                            },
+                            show: false
                         },
                         splitLine: {
-                            show: false
+                            show: false,
+                            lineStyle: {
+                                color: 'rgba(255,255,255,0.12)'
+                            }
                         }
                     }],
                     series: [{
@@ -186,35 +123,23 @@
                                 }], false),
                                 barBorderRadius: [30, 30, 0, 0],
                                 shadowColor: 'rgba(0,160,221,1)',
-                                shadowBlur: 2,
+                                shadowBlur: 4,
                             }
                         },
                         label: {
                             normal: {
                                 show: true,
-                                // lineHeight: 30,
-                                // width: 80,
-                                // height: 30,
+                                lineHeight: 30,
+                                width: 80,
+                                height: 30,
                                 // backgroundColor: 'rgba(0,160,221,0.1)',
                                 borderRadius: 200,
                                 position: 'top',
                                 distance: 1,
 
-                                formatter: function(params) {
-                                    // if (data.value.length > 12 && params.dataIndex % 2 != 0) {
-                                    //     return ''
-                                    // }
-                                    if (_this.config.ispercent) {
-                                        return params.value + "%"
-                                    } else {
-                                        return params.value
-                                    }
-                                },
+                                formatter: this.config.ispercent ? '{c}%' : "{c}",
                                 color: "#fff"
                             }
-                        },
-                        tooltip: {
-
                         }
                     }]
                 };
