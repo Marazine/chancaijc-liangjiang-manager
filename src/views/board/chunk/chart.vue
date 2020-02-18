@@ -18,7 +18,8 @@
       <Gragh v-if="gragh" :initData="initData" :config="config"></Gragh>
       <Radio v-if="radio" :initData="initData" :config="config"></Radio>
       <pieGrand v-if="pieB" :initData="initData" :config="config"></pieGrand>
-      <liquild v-if="liquildzx" :initData="initData" :config="config"></liquild>
+      <Liquildfill v-if="liquildzx" :initData="initData" :config="config"></Liquildfill>
+      <cylinder v-if="cylinderConfig" :initData="initData" :config="config"></cylinder>
     </div>
   </div>
 </template>
@@ -52,24 +53,27 @@
                 return this.config.type == 'rchjfb' || this.config.type == 'rcxlfb' || this.config.type == 'qyljrctj' || this
                     .config.type == 'bndyjbys' || this.config.type == 'qycrny' || this.config.type == 'wloneyxycr' || this.config
                     .type == 'zcqk' || this.config.type == 'rcly' || this.config.type == 'rcqk2' || this.config.type ==
-                    'ddwsczdwbys' || this.config.type == 'xndjhyjbyssl';
+                    'ddwsczdwbys' || this.config.type == 'xndjhyjbyssl' || this.config.type == 'bussinessFlow';
             },
             barVer() {
                 return this.config.type == 'rczy' || this.config.type == 'qyrcfzpj' || this
-                    .config.type == 'xqlx' || this.config.type == 'gwlb' || this.config.type == 'qyxz';
+                    .config.type == 'xqlx' || this.config.type == 'gwlb' || this.config.type == 'qyxz' || this.config.type == 'rcpy';
             },
             gragh() {
                 return this.config.type == 'jndj';
             },
             radio() {
-                return this.config.type == 'rcpy';
+                return this.config.type == 'rcxlxqfb';
             },
             pieB() {
                 return
             },
             liquildzx() {
-                return this.config.type == 'dwcrzypy'
-            }
+                return this.config.type == 'dwcrzypy' || this.config.type == 'rcldqk'
+            },
+            cylinderConfig() {
+                return this.config.type == 'qsyqqcczlzb';
+            },
         },
         beforeDestroy() {
 

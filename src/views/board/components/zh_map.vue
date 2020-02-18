@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import '../../../../node_modules/echarts/map/js/province/shandong.js' // 引入地图数据
+    // import '../../../../node_modules/echarts/map/js/province/shandong.js' // 引入地图数据
 
     export default {
         data() {

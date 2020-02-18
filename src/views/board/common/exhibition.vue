@@ -167,7 +167,7 @@
                     if (data && data.code == 200) {
 
                         data.data.list.forEach((item, index) => {
-                            if (item.name == '现代物流') {
+                            if (item.name == '会展') {
                                 this.eduneed_aData = item.eduNeeds
                                 this.skill_Data = item.industuryFlow
                                 this.title_Data = item.skillNeeds

@@ -21,81 +21,124 @@ const globalRoutes = [
     { path: '/login', component: _import('common/login'), name: 'login', meta: { title: '登录' } },
     { path: '/analyseF_detail/:companyId/:companyName', component: _import('analyseF/analyseF_detail'), name: 'analyseF_detail', meta: { title: '统计分析明细F' } },
     {
-        path: '/visual',
-        component: _import('board/visual'),
-        name: 'visual',
+        path: '/highlevel',
+        component: _import('board/wrap/highlevel'),
+        name: 'highlevel',
         meta: {
-            title: '珠海产才监测看板'
-        },
-        redirect: {
-            name: 'board',
-        },
-        children: [{
-                path: '/visual/board',
-                component: _import('board/common/board'),
-                name: 'board',
-                meta: {
-                    title: '看板'
-                }
-            },
-            {
-                path: '/visual/qyqk',
-                component: _import('board/common/qyqk'),
-                name: 'qyqk',
-                meta: {
-                    title: '企业情况'
-                }
-            },
-            {
-                path: '/visual/rcqk',
-                component: _import('board/common/rcqk'),
-                name: 'rcqk',
-                meta: {
-                    title: '人才情况'
-                }
-            },
-            {
-                path: '/visual/rcfb',
-                component: _import('board/common/rcfb'),
-                name: 'rcfb',
-                meta: {
-                    title: '人才分布'
-                }
-            },
-            {
-                path: '/visual/rcyj',
-                component: _import('board/common/rcyj'),
-                name: 'rcyj',
-                meta: {
-                    title: '人才引进'
-                }
-            },
-            {
-                path: '/visual/rcpy',
-                component: _import('board/common/rcpy'),
-                name: 'rcpy',
-                meta: {
-                    title: '人才培养'
-                }
-            },
-            {
-                path: '/visual/rlzyfw',
-                component: _import('board/common/rlzyfw'),
-                name: 'rlzyfw',
-                meta: {
-                    title: '人才资源服务与政策'
-                }
-            },
-            {
-                path: '/visual/company2',
-                component: _import('board/common/company'),
-                name: 'company2',
-                meta: {
-                    title: '企业类型分布'
-                }
-            },
-        ]
+            title: '企业情况'
+        }
     },
+    {
+        path: '/common',
+        component: _import('board/comon'),
+        name: 'common',
+        redirect: {
+            name: 'population',
+        },
+        meta: { title: '珠海产才检测看板' },
+        children: [{
+                path: '/common/population',
+                component: _import('board/wrap/population'),
+                name: 'population',
+                meta: {
+                    title: '人才总体概况'
+                }
+            },
+            {
+                path: '/person',
+                component: _import('board/wrap/person'),
+                name: 'person',
+                meta: {
+                    title: '高层次人才情况'
+                }
+            },
+            {
+                path: '/common/visual',
+                component: _import('board/visual'),
+                name: 'visual',
+                meta: {
+                    title: '珠海产才监测看板'
+                },
+                redirect: {
+                    name: 'board',
+                },
+                children: [{
+                        path: '/common/visual/board',
+                        component: _import('board/common/board'),
+                        name: 'board',
+                        meta: {
+                            title: '看板'
+                        }
+                    },
+                    {
+                        path: '/common/visual/qyqk',
+                        component: _import('board/common/qyqk'),
+                        name: 'qyqk',
+                        meta: {
+                            title: '企业情况'
+                        }
+                    },
+                    {
+                        path: '/common/visual/rcqk',
+                        component: _import('board/common/rcqk'),
+                        name: 'rcqk',
+                        meta: {
+                            title: '人才情况'
+                        }
+                    },
+                    {
+                        path: '/common/visual/rcfb',
+                        component: _import('board/common/rcfb'),
+                        name: 'rcfb',
+                        meta: {
+                            title: '人才分布'
+                        }
+                    },
+                    {
+                        path: '/common/visual/rcyj',
+                        component: _import('board/common/rcyj'),
+                        name: 'rcyj',
+                        meta: {
+                            title: '人才引进'
+                        }
+                    },
+                    {
+                        path: '/common/visual/rcpy',
+                        component: _import('board/common/rcpy'),
+                        name: 'rcpy',
+                        meta: {
+                            title: '人才培养'
+                        }
+                    },
+                    {
+                        path: '/common/visual/rlzyfw',
+                        component: _import('board/common/rlzyfw'),
+                        name: 'rlzyfw',
+                        meta: {
+                            title: '人才资源服务与政策'
+                        }
+                    },
+                    {
+                        path: '/common/visual/company2',
+                        component: _import('board/common/company'),
+                        name: 'company2',
+                        meta: {
+                            title: '企业类型分布'
+                        }
+                    },
+                    {
+                        path: '/common/visual/exhibition',
+                        component: _import('board/common/exhibition'),
+                        name: 'exhibition',
+                        meta: {
+                            title: '会展'
+                        }
+                    },
+                ]
+            }
+        ],
+    },
+
     // { path: '/board', component: _import('board/visual'), name: 'board', meta: { title: '看板' } },
     // { path: '/rcfb', component: _import('board/rcfb/rcfb'), name: 'rcfb', meta: { title: '人才分布' } },
     // { path: '/company2', component: _import('board/common/company'), name: 'company2', meta: { title: '企业类型分布' } },
@@ -246,7 +289,7 @@ function fnAddDynamicMenuRoutes(menuList = [], routes = []) {
         sessionStorage.setItem('dynamicMenuRoutes', JSON.stringify(mainRoutes.children || '[]'))
         console.log('\n')
         console.log('%c!<-------------------- 动态(菜单)路由 s -------------------->', 'color:blue')
-        console.log(mainRoutes.children)
+            // console.log(mainRoutes.children)
         console.log('%c!<-------------------- 动态(菜单)路由 e -------------------->', 'color:blue')
     }
 }

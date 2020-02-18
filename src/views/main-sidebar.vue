@@ -18,51 +18,48 @@
             <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
             <span>企业管理</span>
           </template>
-          <el-menu-item index="company_manage_list" @click="$router.push({ name: 'company_manage_list' })">
-            <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">企业列表</span>
-          </el-menu-item>
-          <el-menu-item v-if="isAuth('sys:company:email')" index="company_manage_email" @click="$router.push({ name: 'company_manage_email' })">
-            <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">邮件发送记录</span>
-          </el-menu-item>
-        </el-submenu> -->
-        <el-submenu index="分析管理">
-          <template slot="title">
+<el-menu-item index="company_manage_list" @click="$router.push({ name: 'company_manage_list' })">
+    <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
+    <span slot="title">企业列表</span>
+</el-menu-item>
+<el-menu-item v-if="isAuth('sys:company:email')" index="company_manage_email" @click="$router.push({ name: 'company_manage_email' })">
+    <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
+    <span slot="title">邮件发送记录</span>
+</el-menu-item>
+</el-submenu> -->
+<el-submenu index="分析管理">
+    <template slot="title">
             <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
             <span>分析管理</span>
           </template>
-          <el-menu-item index="analyse" @click="$router.push({ name: 'analyse' })">
-            <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">统计分析</span>
-          </el-menu-item>
-          <el-menu-item index="data" @click="$router.push({ name: 'data' })">
-            <icon-svg name="shujutongji" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">数据统计</span>
-          </el-menu-item>
-          <el-menu-item index="company" @click="$router.push({ name: 'company' })">
-            <icon-svg name="qiyechaxun" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">企业查询</span>
-          </el-menu-item>
-        </el-submenu>
-        <sub-menu v-for="menu in menuList" 
-              :key="menu.menuId" 
-              :menu="menu" 
-              :dynamicMenuRoutes="dynamicMenuRoutes">
-        </sub-menu>
-        <el-menu-item index="board" @click="pushNewPage">
-            <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">一键看板</span>
-        </el-menu-item>
-        <el-menu-item index="open" @click="$router.push({ name: 'open' })">
-            <icon-svg name="system" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">接口管理</span>
-        </el-menu-item>
-        <el-menu-item index="user" @click="$router.push({ name: 'user' })">
-            <icon-svg name="log" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">用户接口管理</span>
-        </el-menu-item>
-        <!-- <el-submenu index="系统管理">
+    <el-menu-item index="analyse" @click="$router.push({ name: 'analyse' })">
+        <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
+        <span slot="title">统计分析</span>
+    </el-menu-item>
+    <el-menu-item index="data" @click="$router.push({ name: 'data' })">
+        <icon-svg name="shujutongji" class="site-sidebar__menu-icon"></icon-svg>
+        <span slot="title">数据统计</span>
+    </el-menu-item>
+    <el-menu-item index="company" @click="$router.push({ name: 'company' })">
+        <icon-svg name="qiyechaxun" class="site-sidebar__menu-icon"></icon-svg>
+        <span slot="title">企业查询</span>
+    </el-menu-item>
+</el-submenu>
+<sub-menu v-for="menu in menuList" :key="menu.menuId" :menu="menu" :dynamicMenuRoutes="dynamicMenuRoutes">
+</sub-menu>
+<el-menu-item index="board" @click="pushNewPage">
+    <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
+    <span slot="title">一键看板</span>
+</el-menu-item>
+<el-menu-item index="open" @click="$router.push({ name: 'open' })">
+    <icon-svg name="system" class="site-sidebar__menu-icon"></icon-svg>
+    <span slot="title">接口管理</span>
+</el-menu-item>
+<el-menu-item index="user" @click="$router.push({ name: 'user' })">
+    <icon-svg name="log" class="site-sidebar__menu-icon"></icon-svg>
+    <span slot="title">用户接口管理</span>
+</el-menu-item>
+<!-- <el-submenu index="系统管理">
           <template slot="title">
             <icon-svg name="tongjifenxi" class="site-sidebar__menu-icon"></icon-svg>
             <span>系统管理</span>
@@ -80,7 +77,7 @@
             <span slot="title">菜单管理</span>
           </el-menu-item>
         </el-submenu> -->
-        <!-- <el-submenu index="demo">
+<!-- <el-submenu index="demo">
           <template slot="title">
             <icon-svg name="shoucang" class="site-sidebar__menu-icon"></icon-svg>
             <span>demo</span>
@@ -200,8 +197,12 @@
                 }
             },
             pushNewPage() {
-              const {href} = this.$router.resolve({ name: 'board' })
-              window.open(href, '_blank')
+                const {
+                    href
+                } = this.$router.resolve({
+                    name: 'common'
+                })
+                window.open(href, '_blank')
             }
         }
     }

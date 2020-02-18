@@ -7,16 +7,22 @@
       <div class="row bh-100">
         <div class="col-md-4 f-column">
             <ul class="nums clearfix">
-                <li><p>数量{{num1}}</p><span></span></li>
-                <li><p>重点企业</p><span></span></li>
+                <li class="num-elastic">
+                    <img src="~@/assets/img/board/rcsl.png" alt="">
+                    <div>
+                       <p>数量</p>
+                        <span>{{num1}}</span> 
+                    </div>
+                </li>
+                <li>
+                    <p @click="$router.push({name: 'highlevel'})" class="industryBtn">重点企业</p>
+                </li>
             </ul>
             <Chart class="bh-40" :initData="edu_aData" :config='edu_aconfig'></Chart>
           <Chart class="bh-40" :initData="age_Data" :config='age_config'></Chart>
-          <!-- <ns_map :initData='zhDataMap' :initmapData='initmapData' :config="zhuhaimapConfig"></ns_map> -->
-          <!-- <Guide></Guide> -->
         </div>
         <div class="col-md-4 f-column" style="padding:0 10px">
-          <chartSwitch class="bh-33" :initData="people_Data" :config='people_config'></chartSwitch>
+          <Chart class="bh-33" :initData="people_Data" :config='people_config'></Chart>
           <Chart class="bh-33" :initData="title_Data" :config='title_config'></Chart>
           <Chart class="bh-33" :initData="skill_Data" :config='skill_config'></Chart>
         </div>
@@ -32,31 +38,17 @@
 </template>
 
 <script>
-    import Guide from '../chunk/guide'
-    
-    import nsMap from '../ns'
-    import nsData from '../nsData'
     export default {
         data() {
             let queryType = this.$route.query.type;
             return {
-                initmapData: nsMap.data,
+                name: '汽车',
                 num1: 0,
                 isShow: false,
-                allData: null,
-                middleData: null,
-                zhDataMap: {
-                    ns_mapData: null,
-                },
-                PayData: [],
-                pie_aData: {
-                    C1_1: '',
-                    C1_2: ''
-                },
-                eduneed_aData:null,
-                eduneed_config:{
-                    type: 'rcqk2',
-                    title: '学历需求',
+                eduneed_aData: null,
+                eduneed_config: {
+                    type: 'rcxlxqfb',
+                    title: '人才学历需求分布',
                     echartTitleShow: true,
                     echartTitle: "",
                     left: '2%',
@@ -68,10 +60,10 @@
                     radius: ['45%', '60%'],
                     radius2: [0, '42%'],
                 },
-                skill_Data:null,
-                skill_config:{
-                    type: 'rcqk2',
-                    title: '企业人才技能情况',
+                skill_Data: null,
+                skill_config: {
+                    type: 'rcldqk',
+                    title: '人才流动情况',
                     echartTitleShow: true,
                     echartTitle: "",
                     left: '2%',
@@ -83,10 +75,10 @@
                     radius: ['45%', '60%'],
                     radius2: [0, '42%'],
                 },
-                title_Data:null,
-                title_config:{
+                title_Data: null,
+                title_config: {
                     type: 'qyxz',
-                    title: '企业人才职称情况',
+                    title: '人才技能等级分布',
                     paddingTop: '5%',
                     left: '8%',
                     right: '5%',
@@ -96,21 +88,20 @@
                     bar_color_r: "#ff8352",
                     barWidth: 15,
                 },
-                people_Data:null,
-                people_config:{
+                people_Data: null,
+                people_config: {
                     type: 'bussinessFlow',
-                    title: "街道人才流动情况",
-                    type: 'bussinessFlow',
+                    title: "人才职称分布",
                     isScroll: false,
                     paddingTop: '8%',
                     c_left: "5%",
                     margin: '5%',
                     legend: ['流入', '流出']
                 },
-                age_Data:null,
+                age_Data: null,
                 age_config: {
                     type: 'qyxz',
-                    title: '年龄分布',
+                    title: '人才年龄分布',
                     paddingTop: '5%',
                     left: '8%',
                     right: '5%',
@@ -120,10 +111,10 @@
                     bar_color_r: "#ff8352",
                     barWidth: 15,
                 },
-                edu_aData:null,
+                edu_aData: null,
                 edu_aconfig: {
                     type: 'rcqk2',
-                    title: '学历情况',
+                    title: '人才学历分布',
                     echartTitleShow: true,
                     echartTitle: "",
                     left: '2%',
@@ -139,19 +130,14 @@
                     type: 'rcpy',
                     bar_color_l: "#00fff3",
                     bar_color_r: "transparent",
-                    ispercent: true,
+                    ispercent: false,
                     paddingTop: '5%',
                     top: '15%',
                     right: '5%',
                     left: '15%',
                     bottom: '25%',
                     barWidth: '10px',
-                    title: "来源需求",
-                    echartTitleShow: true,
-                    echartTitle: "",
-                    push: 'rcpy',
-                    isClick: true,
-                    radius: ['45%', '60%'],
+                    title: "人才来源需求分布",
                 }
 
             }
@@ -160,7 +146,6 @@
             this.init();
         },
         components: {
-            Guide,
             // ns_map
         },
         methods: {
@@ -179,37 +164,19 @@
                     data
                 }) => {
                     if (data && data.code == 200) {
-                        this.allData = data.data;
-                        this.PayData = {
-                            A4: data.data.A_A4_1
-                        };
-                        this.middleData = data.data.A_A2_1
-                        this.product_personData = data.data.A_A10_1;
 
-                        this.product_num = {
-                            A4: data.data.B_B1_1
-                        };
-                        // debugger
-                        this.eduneed_aData = data.data.list[0].eduNeeds
-                        this.skill_Data = data.data.list[0].skillNeeds
-                        this.title_Data = data.data.list[0].work
-                        this.people_Data = data.data.list[0].industuryFlowa
-                        this.age_Data = data.data.list[0].age
-                        this.edu_aData = data.data.list[0].edu
-                        this.resource_Data = data.data.list[0].sourceNeeds;
-                        // this.num1 = data.data.list[0].personCom;
-                        this.num1 = 56789;
-                        this.num2 = data.data.num2;
-                        this.num3 = data.data.num3;
-                        this.num4 = data.data.num4;
+                        data.data.list.forEach((item, index) => {
+                            if (item.name == '汽车') {
+                                this.eduneed_aData = item.eduNeeds
+                                this.skill_Data = item.industuryFlow
+                                this.title_Data = item.skillNeeds
+                                this.people_Data = item.work
+                                this.age_Data = item.age
+                                this.edu_aData = item.edu
+                                this.resource_Data = item.sourceNeeds;
+                            }
+                        })
 
-
-
-                        this.pie_aData = {
-                            C1_1: data.data.C1_1,
-                            C1_2: data.data.C1_2
-                        };
-                        this.zhDataMap.ns_mapData = data.data.regionDetail;
 
                         this.isShow = true;
                     }
@@ -304,29 +271,72 @@
         background-size: 100% 100%;*/
         padding: 1% 2% 1%;
     }
-    .nums{
-        height: 14%;
+    
+    .nums {
+        height: 12%;
+        .num-elastic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .industryBtn {
+            background: #33a1ff;
+            border: 1px solid #00f2f1;
+            width: 60%;
+            height: 35%;
+            color: #fff;
+            font-size: 16px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 4px;
+            margin-top: 12%;
+            cursor: pointer;
+        }
+        img {
+            width: 20%;
+            margin-right: 10px;
+        }
+        div {
+            height: 100%;
+            padding-top: 8%;
+            p {
+                font-size: 16px;
+                color: #00f2f1;
+                margin: 0;
+            }
+            span {
+                display: block !important;
+                font-size: 18px;
+                color: #fff;
+            }
+        }
     }
-    .nums li{
-         float: left;
-         width: 50%;
-         height: 100%;
+    
+    .nums li {
+        float: left;
+        width: 50%;
+        height: 100%;
     }
-    .nums li p{
+    
+    .nums li p {
         display: inline-block;
         vertical-align: middle;
     }
-    .nums li span{
+    
+    .nums li span {
         display: inline-block;
         vertical-align: middle;
         height: 100%
     }
-    .bh-40{
-        height: 42%;
+    
+    .bh-40 {
+        height: 41%;
         margin-top: -2px;
     }
-    .bh-33{
-        height: 33%;
+    
+    .bh-33 {
+        height: 32%;
         // margin-top: -2px;
     }
 </style>

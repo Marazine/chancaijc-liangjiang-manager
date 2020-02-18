@@ -1,39 +1,33 @@
 <template>
-    <div class="my-board main">
-        <!-- <div class="title-c">
-        珠海产才监测看板
-        </div> -->
-        <div class="fuse content" v-if="isShow">
-        <div class="row bh-100">
-            <div class="col-md-4 f-column">
-                <ul class="nums clearfix">
-                    <li>
-                        <img src="" alt="">
-                        <div>
-                        <p>数量{{num1}}</p>
-                            <span></span> 
-                        </div>
-                    </li>
-                    <li>
-                        <p>重点企业</p>
-                        <span></span>
-                    </li>
-                </ul>
-                <Chart class="bh-40" :initData="edu_aData" :config='edu_aconfig'></Chart>
-            <Chart class="bh-40" :initData="age_Data" :config='age_config'></Chart>
-            </div>
-            <div class="col-md-4 f-column" style="padding:0 10px">
-            <Chart class="bh-33" :initData="people_Data" :config='people_config'></Chart>
-            <Chart class="bh-33" :initData="title_Data" :config='title_config'></Chart>
-            <Chart class="bh-33" :initData="skill_Data" :config='skill_config'></Chart>
-            </div>
-    
-            <div class="col-md-4 f-column">
-            <Chart :initData="resource_Data" :config='resource_config'></Chart>
-            <Chart :initData="eduneed_aData" :config='eduneed_config'></Chart>
-            <!-- <Chart :initData="resource_Data" :config='resource_config'></Chart> -->
-            </div>
+    <div class="highlevel">
+        <div class="back" @click="$router.push({name:'population'})">
+            <p>返回</p>
         </div>
+        <div class="title-c">
+        两江新区人才发展大数据看板
+        </div>
+        <div class="fuse content" v-if="isShow">
+            <div class="row bh-100">
+                <div class="col-md-4 f-column">
+                    <div class='nums'>
+                        <span>重点企业：</span>
+                        <span>长安福特</span>
+                    </div>
+                    <Chart class="bh-40" :initData="edu_aData" :config='edu_aconfig'></Chart>
+                <Chart class="bh-40" :initData="age_Data" :config='age_config'></Chart>
+                </div>
+                <div class="col-md-4 f-column" style="padding:0 10px">
+                <Chart class="bh-33" :initData="people_Data" :config='people_config'></Chart>
+                <Chart class="bh-33" :initData="title_Data" :config='title_config'></Chart>
+                <Chart class="bh-33" :initData="skill_Data" :config='skill_config'></Chart>
+                </div>
+        
+                <div class="col-md-4 f-column">
+                <Chart :initData="resource_Data" :config='resource_config'></Chart>
+                <Chart :initData="eduneed_aData" :config='eduneed_config'></Chart>
+                <!-- <Chart :initData="resource_Data" :config='resource_config'></Chart> -->
+                </div>
+            </div>
         </div>
     </div>
     </template>
@@ -167,7 +161,7 @@
                     if (data && data.code == 200) {
 
                         data.data.list.forEach((item, index) => {
-                            if (item.name == '现代物流') {
+                            if (item.name == '汽车') {
                                 this.eduneed_aData = item.eduNeeds
                                 this.skill_Data = item.industuryFlow
                                 this.title_Data = item.skillNeeds
@@ -188,6 +182,35 @@
 </script>
 
 <style lang='scss' scoped>
+    .highlevel {
+        height: 100vh;
+        width: 100%;
+        background: url('~@/assets/img/background.jpg') no-repeat;
+        background-size: 100% 100%;
+        padding: 0% 2% 1%;
+        .fuse {
+            height: 90%;
+        }
+        .back {
+            position: absolute;
+            top: 0;
+            left: 8%;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            height: 0px;
+            line-height: 35px;
+            width: 165px;
+            cursor: pointer;
+            border-top: 40px solid #33a1ff;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            p {
+                margin-top: -40px;
+            }
+        }
+    }
+    
     .deta {
         position: absolute;
         top: 6%;
@@ -274,7 +297,10 @@
     }
     
     .nums {
+        color: #00f2f1;
+        font-size: 20px;
         height: 12%;
+        padding-top: 5%;
     }
     
     .nums li {
@@ -295,7 +321,7 @@
     }
     
     .bh-40 {
-        height: 41%;
+        height: 42%;
         margin-top: -2px;
     }
     

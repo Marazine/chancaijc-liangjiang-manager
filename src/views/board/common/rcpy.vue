@@ -1,143 +1,184 @@
 <template>
-  <div class="my-board main">
-    <!-- <div class="title-c"></div> -->
-    <div class="content" v-if="isShow">
-      <!-- <div class="title-text">
-        <img src="~@/assets/img/rcpy.png" alt="">
-      </div>
-      <img class="fuseChildrenBack" @click="$router.push({name:'board'})" src="~@/assets/img/0001.png" alt=""> -->
-      <div class="row bh-100">
-        <div class="row col-md-12 columnBox ">
-          <div class="columnBottom row">
-            <div class=" col-md-6 column column100">
-              <Chart :initData="pie_aData" :config='pie_aconfig'></Chart>
+    <div class="my-board main">
+        <!-- <div class="title-c">
+        珠海产才监测看板
+        </div> -->
+        <div class="fuse content" v-if="isShow">
+        <div class="row bh-100">
+            <div class="col-md-4 f-column">
+                <ul class="nums clearfix">
+                    <li>
+                        <img src="" alt="">
+                        <div>
+                        <p>数量{{num1}}</p>
+                            <span></span> 
+                        </div>
+                    </li>
+                    <li>
+                        <p>重点企业</p>
+                        <span></span>
+                    </li>
+                </ul>
+                <Chart class="bh-40" :initData="edu_aData" :config='edu_aconfig'></Chart>
+            <Chart class="bh-40" :initData="age_Data" :config='age_config'></Chart>
             </div>
-            <div class=" col-md-6 column column100">
-              <Chart :initData="pyfsData" :config='pyfs_config'></Chart>
+            <div class="col-md-4 f-column" style="padding:0 10px">
+            <Chart class="bh-33" :initData="people_Data" :config='people_config'></Chart>
+            <Chart class="bh-33" :initData="title_Data" :config='title_config'></Chart>
+            <Chart class="bh-33" :initData="skill_Data" :config='skill_config'></Chart>
             </div>
-            <!-- <div class=" col-md-6 column column100">
-              <Chart :initData="dwpy_Data" :config='dwpy_config'></Chart>
-            </div> -->
-          </div>
-          <div class="columnBottom row">
-            <div class=" col-md-6 column column100">
-              <Chart :initData="dyyj_Data" :config='dyyj_config'></Chart>
+    
+            <div class="col-md-4 f-column">
+            <Chart :initData="resource_Data" :config='resource_config'></Chart>
+            <Chart :initData="eduneed_aData" :config='eduneed_config'></Chart>
+            <!-- <Chart :initData="resource_Data" :config='resource_config'></Chart> -->
             </div>
-            <div class=" col-md-6 column column100">
-              <Chart :initData="liuzhu_Data" :config='liuzhu_aconfig'></Chart>
-            </div>
-          </div>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
-</template>
+    </template>
 
 <script>
     export default {
         data() {
+            let queryType = this.$route.query.type;
             return {
+                name: '汽车',
+                num1: 0,
                 isShow: false,
-                dyyj_Data: null, //下年度计划引进毕业生数量
-                xbn_Data: null, //下年度人才培养费用预算（单位：元）
-                dwpy_Data: null, //单位在人才培养方面，主要需要的政府支持
-                pyfsData: null, //单位的人才主要培养方式
-                pie_aData: null, //本年度引入毕业生数量
-                liuzhu_Data: {
-                  name: ["中山大学","暨南大学珠海校区","北京师范大学珠海分校","北京理工大学珠海学院","吉林大学珠海学院","遵义医科大学","联合国际学院","广东科学技术职业学院","珠海城市职业技术学院" ,"珠海艺术职业学院"],
-                  value: [21,6,493,263,478,11,11,599,2335,84]
-                },
-                liuzhu_aconfig: {
-                    type: 'bndyjbys',
-                    title: "近三年珠海高校毕业生留珠海就业情况",
-                    paddingTop: '10%',
-                    radius: ['50%', '70%'],
-                    radius2: [0, '48%'],
+                eduneed_aData: null,
+                eduneed_config: {
+                    type: 'rcxlxqfb',
+                    title: '人才学历需求分布',
+                    echartTitleShow: true,
+                    echartTitle: "",
                     left: '2%',
                     right: '2%',
-                    top: '0',
+                    top: '10%',
                     bottom: '0',
-                    showPercent:true
+                    isClick: true,
+                    push: 'rcqk',
+                    radius: ['45%', '60%'],
+                    radius2: [0, '42%'],
                 },
-                pie_aconfig: {
-                    type: 'bndyjbys',
-                    title: "本年度引入毕业生数量",
-                    paddingTop: '10%',
-                    radius: ['50%', '70%'],
-                    radius2: [0, '48%'],
+                skill_Data: null,
+                skill_config: {
+                    type: 'rcldqk',
+                    title: '人才流动情况',
+                    echartTitleShow: true,
+                    echartTitle: "",
                     left: '2%',
                     right: '2%',
-                    top: '0',
+                    top: '10%',
                     bottom: '0',
+                    isClick: true,
+                    push: 'rcqk',
+                    radius: ['45%', '60%'],
+                    radius2: [0, '42%'],
                 },
-                pyfs_config: {
-                    type: 'dwcrzypy',
-                    title: "在岗校招人数",
-                    paddingTop: '6%',
-                    radius: ['35%', '75%'],
+                title_Data: null,
+                title_config: {
+                    type: 'qyxz',
+                    title: '人才技能等级分布',
+                    paddingTop: '5%',
+                    left: '8%',
+                    right: '5%',
+                    top: '10%',
+                    bottom: '22%',
+                    bar_color_l: "#00ffff",
+                    bar_color_r: "#ff8352",
+                    barWidth: 15,
                 },
-                xbn_config: {
-                    type: 'xndrcfy',
-                    title: '下年度人才培养费用预算（单位：元）',
-                    paddingTop: '10%',
-                    echartTitleShow: false,
-                    left: '2%',
-                    right: '10%',
-                    top: '0',
-                    bottom: '0%',
-                    bh: 'bh-50',
-                    isClick: false,
-                },
-                dyyj_config: {
-                    type: 'xndjhyjbyssl',
-                    title: '下年度计划引进毕业生数量',
-                    paddingTop: '10%',
-                    echartTitleShow: false,
-                    left: '4%',
-                    right: '10%',
-                    top: '0',
-                    bottom: '-8%',
-                    bh: 'bh-50',
-                    isClick: false,
-                },
-                dwpy_config: {
-                    type: 'dwrcpyzfzc',
-                    title: '应届毕业生平均薪资',
+                people_Data: null,
+                people_config: {
+                    type: 'bussinessFlow',
+                    title: "人才职称分布",
+                    isScroll: false,
                     paddingTop: '8%',
-                    echartTitleShow: false,
-                    left: '5%',
-                    right: '10%',
-                    top: '0',
-                    bottom: '0%',
-                    bh: 'bh-50',
-                    isClick: false,
+                    c_left: "5%",
+                    margin: '5%',
+                    legend: ['流入', '流出']
                 },
+                age_Data: null,
+                age_config: {
+                    type: 'qyxz',
+                    title: '人才年龄分布',
+                    paddingTop: '5%',
+                    left: '8%',
+                    right: '5%',
+                    top: '10%',
+                    bottom: '22%',
+                    bar_color_l: "#00ffff",
+                    bar_color_r: "#ff8352",
+                    barWidth: 15,
+                },
+                edu_aData: null,
+                edu_aconfig: {
+                    type: 'rcqk2',
+                    title: '人才学历分布',
+                    echartTitleShow: true,
+                    echartTitle: "",
+                    left: '2%',
+                    right: '2%',
+                    top: '10%',
+                    bottom: '0',
+                    isClick: true,
+                    push: 'rcqk',
+                    radius: ['45%', '60%'],
+                    radius2: [0, '42%'],
+                },
+                resource_config: {
+                    type: 'rcpy',
+                    bar_color_l: "#00fff3",
+                    bar_color_r: "transparent",
+                    ispercent: false,
+                    paddingTop: '5%',
+                    top: '15%',
+                    right: '5%',
+                    left: '15%',
+                    bottom: '25%',
+                    barWidth: '10px',
+                    title: "人才来源需求分布",
+                }
+
             }
         },
         created() {
             this.init();
         },
-        mounted() {},
+        components: {
+            // ns_map
+        },
         methods: {
             init() {
+                // let data = require('./data.json');
                 this.$http({
-                    url: this.$http.adornUrl("op=personfusioncontroller&func=getIndexData", "CQ"),
+                    url: this.$http.adornUrl("op=dash&func=getDashData", "XZX"),
                     method: "post",
                     data: {
                         condition: JSON.stringify({
-                            index: 0,
-                            queryKeys: ["C1_3", "C6", "C1_5", "C1_4", "C11", "B9_1"]
+                            index: 3,
+                            // queryKeys: ['A_A4_1', 'A_A2_1', 'A_A10_1', 'B_B1_1', 'A_A3_1']
                         })
                     }
                 }).then(({
                     data
                 }) => {
                     if (data && data.code == 200) {
-                        this.pie_aData = data.data.C1_3;
-                        this.dyyj_Data = data.data.C1_5;
-                        this.xbn_Data = data.data.C2_4;
-                        this.dwpy_Data = data.data.C1_4;
-                        this.pyfsData = data.data.B9_1;
+
+                        data.data.list.forEach((item, index) => {
+                            if (item.name == '金融') {
+                                this.eduneed_aData = item.eduNeeds
+                                this.skill_Data = item.industuryFlow
+                                this.title_Data = item.skillNeeds
+                                this.people_Data = item.work
+                                this.age_Data = item.age
+                                this.edu_aData = item.edu
+                                this.resource_Data = item.sourceNeeds;
+                            }
+                        })
+
+
                         this.isShow = true;
                     }
                 });
@@ -146,9 +187,120 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
+    .deta {
+        position: absolute;
+        top: 6%;
+        z-index: 1;
+        &.fl {
+            left: 10%;
+        }
+        &.fr {
+            right: 10%;
+        }
+        li {
+            padding: 2vh 0;
+            width: 8vw;
+            position: relative;
+            color: #fff;
+            display: flex;
+             ::after {
+                content: '';
+                display: block;
+                width: 7.7vw;
+                height: 0.1vh;
+                background: #10d1ea;
+                position: absolute;
+                left: 0.3vw;
+                bottom: 0
+            }
+            img {
+                margin-right: 0.5vw;
+                height: auto;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            i {
+                display: inline-block;
+                vertical-align: middle;
+                width: 1px;
+                height: 100%;
+            }
+            p {
+                width: 3vw;
+                margin: 0;
+                white-space: nowrap;
+                &.num {
+                    font-size: 20px;
+                    // line-height: 1.05;
+                }
+            }
+            // border-bottom: 1px solid #fff;
+        }
+    }
+    
+    .my-ul {
+        padding-top: 40px;
+        display: flex;
+        li {
+            width: 33%;
+            text-align: center;
+            display: flex;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            .num {
+                margin-bottom: 0;
+            }
+        }
+    }
+    
+    @keyframes myfirst {
+        from {
+            transform: rotate(360deg);
+        }
+        to {
+            transform: rotate(0deg);
+        }
+    }
+    
     .main {
         height: 100%;
+        /* padding-bottom: 2%; */
+        /* padding-top: 2%; */
+        /* background: url('~@/assets/img/background.jpg') no-repeat;
+            background-size: 100% 100%;*/
         padding: 1% 2% 1%;
+    }
+    
+    .nums {
+        height: 12%;
+    }
+    
+    .nums li {
+        float: left;
+        width: 50%;
+        height: 100%;
+    }
+    
+    .nums li p {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    .nums li span {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%
+    }
+    
+    .bh-40 {
+        height: 41%;
+        margin-top: -2px;
+    }
+    
+    .bh-33 {
+        height: 32%;
+        // margin-top: -2px;
     }
 </style>

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import 'echarts-liquidfill/src/liquidFill.js'
     export default {
         data() {
             return {
@@ -22,16 +23,17 @@
         components: {},
         methods: {
             init() {
-                console.log(this.initData);
+                // console.log(this.initData);
                 this.getChart("external", this.initData);
 
             },
             getChart(id, data) {
                 this.myChart = this.$echarts.init(this.$refs.external);
-
-                var num1 = Number(da['愿意']);; //愿意
-                var num2 = Number(da['不愿意']);; //不愿意
-                var value = (num1 / (num1 + num2)).toFixed(2);
+                // console.log(data);
+                var num1 = data.inValue; //愿意
+                var num2 = data.outValue; //不愿意
+                // var value = (num1 / (num1 + num2)).toFixed(2) || 20;
+                var value = 0.2;
                 let dataObj = []
                 dataObj.push(value)
                 dataObj.push(value)
@@ -55,9 +57,9 @@
                     },
                     series: [{
                         type: 'liquidFill',
-                        radius: '60%',
-                        center: ['50%', '55%'],
-                        data: data,
+                        radius: '80%',
+                        center: ['50%', '50%'],
+                        data: dataObj,
                         backgroundStyle: {
                             borderWidth: 3,
                             borderColor: '#00F2F1',
@@ -67,7 +69,7 @@
                             normal: {
                                 formatter: function(params) {
                                     return (
-                                        "不愿意" + num2 + "\n\n\n\n\n" + "愿意" + num1
+                                        "流出" + num2 + "\n\n\n\n\n" + "流入" + num1
                                     )
                                 },
                                 textStyle: {

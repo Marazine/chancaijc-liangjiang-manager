@@ -36,9 +36,9 @@
         },
         props: ["initData", "config"],
         created() {
-            this.dataPieA = this.initData.C1_1;
-            this.qyqkData = this.initData.A4;
-            this.qyysynseData = this.initData.A8;
+            // this.dataPieA = this.initData.C1_1;
+            // this.qyqkData = this.initData.A4;
+            // this.qyysynseData = this.initData.A8;
         },
         computed: {
             productPerson() {

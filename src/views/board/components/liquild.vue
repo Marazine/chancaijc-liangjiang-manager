@@ -15,10 +15,10 @@
         props: ["initData", "config"],
         mounted() {
 
-            let value1 = this.initData.value[2];
-            let sum = this.reduce(this.initData.value);
-            console.log(value1, sum);
-            this.overseasChat(value1, sum);
+            // let value1 = this.initData.value[2];
+            // let sum = this.reduce(this.initData.value);
+            // console.log(value1, sum);
+            this.overseasChat(this.initData);
         },
         beforeDestroy() {
             // this.myChart.dispose();
@@ -32,13 +32,13 @@
                 })
                 return arrs;
             },
-            overseasChat(value1, sum) {
+            overseasChat(data) {
                 this.myChart = this.$echarts.init(document.getElementById("overseas"));
                 // let value = (this.dashboardData.split('%')[0] - 0) / 100;
-                let value = (value1 / sum).toFixed(4);
-                // var value1 = 41976;
+                let value = 0.2;
+                var value1 = 41976;
                 // var value = 0.1253;
-                var data = [value, value, value, value, value, ];
+                var data = [value, value, value, value, value];
                 var option = {
                     backgroundColor: 'transparent',
 

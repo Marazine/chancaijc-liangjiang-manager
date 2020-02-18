@@ -1,8 +1,6 @@
 <template>
   <div class="visual">
-    <div class='visual-navImg'>
-      <div>两江新区人才发展大数据平台</div>
-    </div>
+    
     <div class="visual-sideNav">
       <div v-for="item of navData" :class="{active:item.isActive}" @click="navBtn(item.id)">{{item.name}}</div>
     </div>
@@ -10,9 +8,7 @@
       <router-view></router-view>
     </div>
 
-    <el-drawer v-if="drawer" title="我是标题" :visible.sync="drawer" :with-header="false">
-      <boardDetailst></boardDetailst>
-    </el-drawer>
+    
   </div>
 </template>
 
@@ -68,7 +64,7 @@
                 }, {
                     id: 8,
                     name: "会展产业",
-                    router: 'board',
+                    router: 'exhibition',
                     isActive: false
                 }]
             }
@@ -96,10 +92,16 @@
             navBtn(ind) {
                 this.navData.forEach((item, index) => {
                     this.navData[item.id].isActive = false;
-                    if (ind == this.navData.length - 1) {
-                        this.drawer = true //打开弹框
-                        this.navData[ind].isActive = true;
-                    } else if (ind == item.id) {
+                    // if (ind == this.navData.length - 1) {
+                    //     this.drawer = true //打开弹框
+                    //     this.navData[ind].isActive = true;
+                    // } else if (ind == item.id) {
+                    //     this.navData[ind].isActive = true;
+                    //     this.$router.push({
+                    //         name: item.router
+                    //     })
+                    // }
+                    if (ind == item.id) {
                         this.navData[ind].isActive = true;
                         this.$router.push({
                             name: item.router
@@ -114,31 +116,17 @@
 <style lang='scss' scoped>
     .visual {
         color: #818181;
-        height: 100vh;
+        /* height: 100vh; */
         width: 100%;
-        background: url('~@/assets/img/background.jpg') no-repeat;
+        /* background: url('~@/assets/img/background.jpg') no-repeat; */
         background-size: 100% 100%;
-        .visual-navImg {
-            height: 10%;
-            width: 100%;
-            background: url('~@/assets/img/board/nav.png') no-repeat;
-            background-size: 150% 100%;
-            div {
-                /* font-size: 3rem; */
-                font-weight: 600;
-                color: #00f2f1;
-                height: 100%;
-                line-height: 2;
-                padding-left: 2%;
-            }
-        }
         /* 侧边导航 */
         .visual-sideNav {
             position: fixed;
             top: 10%;
             left: 0;
             width: 8%;
-            height: 90%;
+            height: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
