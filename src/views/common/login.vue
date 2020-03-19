@@ -200,7 +200,7 @@ export default {
       let url = this.$http.adornUrl("/user/initCaptcha", "CQ");
       this.$http({
         url: url,
-        method: "get",
+        method: "post",
         data: {}
       }).then(({ data }) => {
         if (data && data.code == 200) {

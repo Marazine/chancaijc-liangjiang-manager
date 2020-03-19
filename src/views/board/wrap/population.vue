@@ -5,24 +5,24 @@
                     <div class='elastic-c'>
                         <img src="~@/assets/img/board/biao.png" alt="">
                         <p>党政人才</p>
-                        <p class="number">998</p>
+                        <p class="number">1041</p>
                     </div>
                     <div class='elastic-c'>
                         <img src="~@/assets/img/board/qyjyglrc.png" alt="">
                         <p>企业经营管理人才</p>
-                        <p class="number">998</p>
+                        <p class="number">46000</p>
                     </div>
                 </div>
                 <div class="left-wrap-box elastic">
                     <div class='elastic-c'>
                         <img src="~@/assets/img/board/zyjsrc.png" alt="">
                         <p>专业技术人才</p>
-                        <p class="number">998</p>
+                        <p class="number">75000</p>
                     </div>
                     <div class='elastic-c'>
                         <img src="~@/assets/img/board/gjnrc.png" alt="">
                         <p>高技能人才</p>
-                        <p class="number">998</p>
+                        <p class="number">66000</p>
                     </div>
                 </div>
                 <div class="left-wrap-box elastic">
@@ -34,7 +34,7 @@
                     <div class='elastic-c'>
                         <img src="~@/assets/img/board/shgzrc.png" alt="">
                         <p>社会工作人才</p>
-                        <p class="number">998</p>
+                        <p class="number">6546</p>
                     </div>
                 </div>
             </div>
@@ -53,8 +53,8 @@
         data() {
             return {
                 people_Data: {
-                    name: ['阿萨德', '电饭锅', '梵蒂冈', '水电费'],
-                    value: [234, 234, 567, 345]
+                    name: ['市级高层次人才', '英才计划', '鸿雁计划', '留创计划'],
+                    value: [77, 20, 111, 46]
                 },
                 people_config: {
                     type: 'bussinessFlow',
@@ -65,7 +65,11 @@
                     margin: '5%',
                     legend: ['流入', '流出']
                 },
-                city_Data: null,
+                city_Data: {
+                        name: ['全市人才总量', '全区人才总量'],
+                        value: [662500, 194587],
+                        propor:['12.7%','3.7%'],
+                    },
                 city_config: {
                     type: 'qsyqqcczlzb',
                     title: "全市与全区人才总量占比",

@@ -1,6 +1,6 @@
 <template>
     <div class="highlevel">
-        <div class="back" @click="$router.push({name:'population'})">
+        <div class="back" @click="$router.push({name:'board'})">
             <p>返回</p>
         </div>
         <div class="title-c">

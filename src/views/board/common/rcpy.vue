@@ -7,16 +7,15 @@
         <div class="row bh-100">
             <div class="col-md-4 f-column">
                 <ul class="nums clearfix">
-                    <li>
-                        <img src="" alt="">
+                    <li class="num-elastic">
+                        <img src="~@/assets/img/board/rcsl.png" alt="">
                         <div>
-                        <p>数量{{num1}}</p>
-                            <span></span> 
+                        <p>数量</p>
+                            <span>{{num1}}</span> 
                         </div>
                     </li>
                     <li>
-                        <p>重点企业</p>
-                        <span></span>
+                        <p @click="$router.push({name: 'highlevel'})" class="industryBtn">重点企业</p>
                     </li>
                 </ul>
                 <Chart class="bh-40" :initData="edu_aData" :config='edu_aconfig'></Chart>

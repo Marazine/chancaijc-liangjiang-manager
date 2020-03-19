@@ -20,7 +20,7 @@
                 },
             }
         },
-        props: ["estateData", "config"],
+        props: ["initData", "config"],
         mounted() {
             this.init();
         },
@@ -30,8 +30,8 @@
         components: {},
         methods: {
             init() {
-                if (this.estateData) {
-                    this.estateChart("estate", this.estateData, this.config);
+                if (this.initData) {
+                    this.estateChart("estate", this.initData, this.config);
                 } else {
                     this.estateChart("estate", this.b_age_aboard, this.config);
                 }
@@ -185,9 +185,11 @@
                                 "normal": {
                                     fontSize: 14,
                                     "show": true,
+                                    lineHeight: 18,
                                     "position": ['130%', '40%'],
                                     "formatter": function(params) {
-                                        return params.name + ":" + params.value
+                                        console.log(params);
+                                        return params.name + ":" + params.value + '\n'+params.data.propor
                                     }
                                 }
                             },
@@ -197,6 +199,7 @@
                             "data": [{
                                 "value": parseInt(parseInt(data.value[0])),
                                 name: data.name[0],
+                                propor:data.propor[0],
                                 "itemStyle": {
                                     "color": "#4ae6ff"
                                 }
@@ -217,9 +220,10 @@
                                     'color': '#ffffff',
                                     fontSize: 14,
                                     opacity: 1,
+                                    lineHeight: 18,
                                     "position": ['130%', '40%'],
                                     "formatter": function(params) {
-                                        return params.name + ":" + params.value
+                                        return params.name + ":" + params.value + '\n'+params.data.propor
                                     }
                                 }
                             },
@@ -230,8 +234,9 @@
                             "data": [{
                                 "value": parseInt(parseInt(data.value[1])),
                                 name: data.name[1],
+                                propor:data.propor[1],
                                 "itemStyle": {
-                                    "color": "#beff3f"
+                                    "color": "#beff3f",
                                 }
                             }],
 

@@ -452,3 +452,61 @@ $content--background-color: #f1f4f5;
         }
     }
 }
+
+.nums {
+    height: 12%;
+    .num-elastic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .industryBtn {
+        background: #33a1ff;
+        border: 1px solid #00f2f1;
+        width: 60%;
+        height: 35%;
+        color: #fff;
+        font-size: 16px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 4px;
+        margin-top: 12%;
+        cursor: pointer;
+    }
+    img {
+        width: 20%;
+        margin-right: 10px;
+    }
+    div {
+        height: 100%;
+        padding-top: 8%;
+        p {
+            font-size: 16px;
+            color: #00f2f1;
+            margin: 0;
+        }
+        span {
+            display: block !important;
+            font-size: 18px;
+            color: #fff;
+        }
+    }
+}
+
+.nums li {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.nums li p {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nums li span {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%
+}

@@ -115,7 +115,7 @@
 
 <style lang='scss' scoped>
     .visual {
-        color: #818181;
+        color: #cccccc;
         /* height: 100vh; */
         width: 100%;
         /* background: url('~@/assets/img/background.jpg') no-repeat; */

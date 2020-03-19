@@ -104,6 +104,7 @@
                                 show: true,
                                 position: 'outside', //标签的位置
                                 // formatter: "{b}\n数量: {c}",
+                                lineHeight: 16,
                                 formatter: (param) => {
                                     if(config_chart.showPercent){
                                         return  param.name ? param.name + "\n比例: " + ((param.value/total)*100).toFixed(2)+"%" : ''
