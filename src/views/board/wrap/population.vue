@@ -29,7 +29,7 @@
                     <div class='elastic-c'>
                         <img src="~@/assets/img/board/ncsyrc.png" alt="">
                         <p>农村实用人才</p>
-                        <p class="number">998</p>
+                        <p class="number">0</p>
                     </div>
                     <div class='elastic-c'>
                         <img src="~@/assets/img/board/shgzrc.png" alt="">
