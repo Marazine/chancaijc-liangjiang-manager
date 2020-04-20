@@ -31,10 +31,9 @@
                 // console.log(this.initData);
                 if (this.initData) {
                     // debugger
-                    if (this.config.ispercent) {
-                        this.sum(this.initData.value);
-                        this.percent(this.initData.value);
-                    }
+
+                    this.sum(this.initData.value);
+
 
                     this.estateChart("estate", this.initData);
                 } else {
@@ -56,6 +55,9 @@
             estateChart(id, data) {
                 // debugger
                 this.myChart = this.$echarts.init(this.$refs.estate);
+                let total = data.value.reduce((prev, next) => {
+                    return Number(prev) + Number(next)
+                })
 
                 let option = {
                     backgroundColor: 'transparent',
@@ -137,7 +139,9 @@
                                 position: 'top',
                                 distance: 1,
 
-                                formatter: this.config.ispercent ? '{c}%' : "{c}",
+                                formatter: function(params) {
+                                    return params.value != 0 ? (((Number(params.value) / total) * 100).toFixed(1) + "%") : '0%'
+                                },
                                 color: "#fff"
                             }
                         }

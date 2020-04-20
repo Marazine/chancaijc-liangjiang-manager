@@ -34,9 +34,9 @@
             },
             pie_aChart(id, data_chart, config_chart) {
                 let total = 0;
-                if(config_chart.showPercent){
-                    for(let i in data_chart.value){
-                         total += parseInt(data_chart.value[i]);
+                if (config_chart.showPercent) {
+                    for (let i in data_chart.value) {
+                        total += parseInt(data_chart.value[i]);
                     }
                 }
                 this.myChart = this.$echarts.init(this.$refs.pie_a);
@@ -57,7 +57,7 @@
                     backgroundColor: 'transparent',
                     tooltip: {
                         trigger: 'item',
-                        formatter: "{b} : {d}%"
+                        formatter: "{b} : {c}"
                     },
                     color: ['#FF8352', '#E271DE', '#F8456B', '#00FFFF', "#EAEA26", "#906BF9", "#FE5656", "#01E17E", "#3DD1F9",
                         "#FFAD05", 'rgb(254,67,101)', 'rgb(252,157,154)', 'rgb(249,205,173)', 'rgb(200,200,169)',
@@ -106,10 +106,11 @@
                                 // formatter: "{b}\n数量: {c}",
                                 lineHeight: 16,
                                 formatter: (param) => {
-                                    if(config_chart.showPercent){
-                                        return  param.name ? param.name + "\n比例: " + ((param.value/total)*100).toFixed(2)+"%" : ''
-                                    }
-                                    return param.name ? param.name + "\n数量: " + param.value : ''
+                                    // if (config_chart.showPercent) {
+                                    //     return param.name ? param.name + "\n比例: " + ((param.value / total) * 100).toFixed(2) + "%" : ''
+                                    // }
+                                    // return param.name ? param.name + "\n数量: " + param.value : ''
+                                    return param.name + ' ' + param.percent + "%"
 
                                 },
                                 textStyle: {

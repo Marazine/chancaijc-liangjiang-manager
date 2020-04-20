@@ -11,11 +11,11 @@
                         <img src="~@/assets/img/board/rcsl.png" alt="">
                         <div>
                         <p>数量</p>
-                            <span>{{num1}}</span> 
+                            <span>{{num1||0}}</span> 
                         </div>
                     </li>
                     <li>
-                        <p @click="$router.push({name: 'highlevel'})" class="industryBtn">重点企业</p>
+                        <!-- <p @click="$router.push({name: 'highlevel'})" class="industryBtn">重点企业</p> -->
                     </li>
                 </ul>
                 <Chart class="bh-40" :initData="edu_aData" :config='edu_aconfig'></Chart>
@@ -157,7 +157,8 @@
                     data: {
                         condition: JSON.stringify({
                             index: 3,
-                            // queryKeys: ['A_A4_1', 'A_A2_1', 'A_A10_1', 'B_B1_1', 'A_A3_1']
+                            industrySelect: 9
+                                // queryKeys: ['A_A4_1', 'A_A2_1', 'A_A10_1', 'B_B1_1', 'A_A3_1']
                         })
                     }
                 }).then(({
@@ -174,6 +175,7 @@
                                 this.age_Data = item.age
                                 this.edu_aData = item.edu
                                 this.resource_Data = item.sourceNeeds;
+                                this.num1 = item.comNum
                             }
                         })
 

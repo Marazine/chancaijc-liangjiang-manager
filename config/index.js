@@ -24,10 +24,10 @@ module.exports = {
             '/proxyCQ': {
                 // target: 'http://192.168.60.25:8081/',
                 // target: 'http://192.168.60.129:8080/',
-                target: 'http://192.168.60.115:8200/',
+                // target: 'http://192.168.60.115:8200/',
                 // target: 'http://192.168.60.159:8200/',
                 // target: 'https://lj-chancaijctest.yl1001.com/',
-                // target: 'https://lj-chancaijc.yl1001.com/',
+                target: 'https://lj-chancaijc.yl1001.com/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/proxyCQ': '/'
@@ -36,10 +36,10 @@ module.exports = {
             '/proxyXZX': {
                 // target: 'http://192.168.60.25:8081/',
                 // target: 'http://192.168.60.129:8080/',
-                target: 'http://192.168.60.115:8200/',
+                // target: 'http://192.168.60.115:8200/',
                 // target: 'http://192.168.60.159:8200/',
                 // target: 'https://lj-chancaijctest.yl1001.com/',
-                // target: 'https://lj-chancaijc.yl1001.com/',
+                target: 'https://lj-chancaijc.yl1001.com/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/proxyXZX': '/'

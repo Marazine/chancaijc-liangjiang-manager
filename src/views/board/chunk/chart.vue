@@ -12,6 +12,7 @@
       <BarScroll v-if="barScroll" :initData="initData" :config="config"></BarScroll>
       <ProductPerson v-if="productPerson" :initData="initData" :config="config"></ProductPerson>
       <PieA v-if="pieA" :initData="initData" :config="config"></PieA>
+      <PieC v-if="PieC" :initData="initData" :config="config"></PieC>
       <BarVer v-if="barVer" :initData="initData" :config="config"></BarVer>
       <Sex v-if="sex" :initData="initData" :config="config"></Sex>
       <ExternalF v-if="externalF" :initData="initData" :config="config"></ExternalF>
@@ -54,6 +55,9 @@
                     .config.type == 'bndyjbys' || this.config.type == 'qycrny' || this.config.type == 'wloneyxycr' || this.config
                     .type == 'zcqk' || this.config.type == 'rcly' || this.config.type == 'rcqk2' || this.config.type ==
                     'ddwsczdwbys' || this.config.type == 'xndjhyjbyssl' || this.config.type == 'bussinessFlow';
+            },
+            PieC() {
+                return this.config.type == 'personEdu'
             },
             barVer() {
                 return this.config.type == 'rczy' || this.config.type == 'qyrcfzpj' || this

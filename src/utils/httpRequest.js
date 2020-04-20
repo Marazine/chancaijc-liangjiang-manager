@@ -29,7 +29,7 @@ import {
 //                 let tempParam = JSON.parse(data[it])
 //                 if ((typeof tempParam) == 'object') {
 //                     if (globalTimeObj == undefined || globalTimeObj == null || globalTimeObj == '') { // 时间戳无值
-        
+
 //                         tempParam.globalStartTime = ''
 //                         tempParam.globalEndTime = ''
 //                     } else {
@@ -53,20 +53,20 @@ const http = axios.create({
     timeout: 1000 * 30,
     withCredentials: true,
     headers: {
-      //'Content-Type': 'application/json; charset=utf-8'
-      "Content-Type": "application/x-www-form-urlencoded"
+        //'Content-Type': 'application/json; charset=utf-8'
+        "Content-Type": "application/x-www-form-urlencoded"
     },
     transformRequest: [
-      function(data) {
-        let ret = "";
-        for (let it in data) {
-          ret +=
-            encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
+        function(data) {
+            let ret = "";
+            for (let it in data) {
+                ret +=
+                    encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
+            }
+            return ret;
         }
-        return ret;
-      }
     ]
-  });
+});
 
 /**
  * 请求拦截
@@ -104,10 +104,10 @@ http.adornUrl = (actionName, who) => {
         if (who) {
             switch (who) {
                 case 'CQ':
-                    proxyApi = '/proxyCQ'
+                    proxyApi = '/proxyCQ/'
                     break
                 case 'XZX':
-                    proxyApi = '/proxyXZX'
+                    proxyApi = '/proxyXZX/'
                     break
                 default:
                     break
@@ -118,8 +118,8 @@ http.adornUrl = (actionName, who) => {
         // return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? proxyApi : window.SITE_CONFIG.baseUrl) + '/nsbigdata_api/webservice/index.jsp?user=bigtable&pwd=bigtable1001&gtype=http&' + actionName
         // return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? proxyApi : window.SITE_CONFIG.baseUrl) + '/webservice/index.php?user=bigtablesys&pwd=bigtable1001&gtype=http&' + actionName
         // return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? proxyApi : '/') + 'webservice/data_analysis/index.jsp/v1/sys' + newName + '?token=dXNlcj1kYXRhX2FuYWx5c2lzJnB3ZD1kYXRhX2FuYWx5c2lzXzEwMDE=' // product本地连接测试库
-        return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? proxyApi : '/') + 'webservice/liangjiang_naire_analysis/index.jsp/v1/sys' + newName + '?token=dXNlcj1saWFuZ2ppYW5nX25haXJlX2FuYWx5c2lzJnB3ZD1saWFuZ2ppYW5nX25haXJlX2FuYWx5c2lzXzEwMDE=' // 重庆两江市
-        //     return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? proxyApi : '/') + 'webservice/shishi_naire_analysis/index.jsp/v1/sys' + newName + '?token=dXNlcj1zaGlzaGlfbmFpcmVfYW5hbHlzaXMmcHdkPXNoaXNoaV9uYWlyZV9hbmFseXNpc18xMDAx' // shishi本地连接测试库
+        return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? proxyApi : '') + '/webservice/liangjiang_naire_analysis/index.jsp/v1/sys' + newName + '?token=dXNlcj1saWFuZ2ppYW5nX25haXJlX2FuYWx5c2lzJnB3ZD1saWFuZ2ppYW5nX25haXJlX2FuYWx5c2lzXzEwMDE=' // 重庆两江市
+            //     return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? proxyApi : '/') + 'webservice/shishi_naire_analysis/index.jsp/v1/sys' + newName + '?token=dXNlcj1zaGlzaGlfbmFpcmVfYW5hbHlzaXMmcHdkPXNoaXNoaV9uYWlyZV9hbmFseXNpc18xMDAx' // shishi本地连接测试库
             // return '/nsbigdata_api/webservice/index.jsp?user=bigtablesys&pwd=bigtable1001&gtype=http&version=v3&' + actionName // 上线
     }
     // /proxyApi/

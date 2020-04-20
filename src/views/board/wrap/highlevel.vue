@@ -1,6 +1,6 @@
 <template>
     <div class="highlevel">
-        <div class="back" @click="$router.push({name:'board'})">
+        <div class="back" @click="$router.push({name:'population'})">
             <p>返回</p>
         </div>
         <div class="title-c">
@@ -11,7 +11,7 @@
                 <div class="col-md-4 f-column">
                     <div class='nums'>
                         <span>重点企业：</span>
-                        <span>长安福特</span>
+                        <span>{{opra}}</span>
                     </div>
                     <Chart class="bh-40" :initData="edu_aData" :config='edu_aconfig'></Chart>
                 <Chart class="bh-40" :initData="age_Data" :config='age_config'></Chart>
@@ -39,6 +39,7 @@
             return {
                 name: '汽车',
                 num1: 0,
+                opra: '',
                 isShow: false,
                 eduneed_aData: null,
                 eduneed_config: {
@@ -137,7 +138,13 @@
 
             }
         },
+        computed: {
+            industrySelect() {
+                return this.$route.query.industrySelect
+            }
+        },
         created() {
+            this.opra = this.$route.query.opra
             this.init();
         },
         components: {
@@ -146,13 +153,17 @@
         methods: {
             init() {
                 // let data = require('./data.json');
+                let company_id = this.$route.query.company
+                this.name = this.$route.query.name
                 this.$http({
                     url: this.$http.adornUrl("op=dash&func=getDashData", "XZX"),
                     method: "post",
                     data: {
                         condition: JSON.stringify({
                             index: 3,
-                            // queryKeys: ['A_A4_1', 'A_A2_1', 'A_A10_1', 'B_B1_1', 'A_A3_1']
+                            companyId: company_id,
+                            industrySelect: this.industrySelect
+                                // queryKeys: ['A_A4_1', 'A_A2_1', 'A_A10_1', 'B_B1_1', 'A_A3_1']
                         })
                     }
                 }).then(({
@@ -161,7 +172,7 @@
                     if (data && data.code == 200) {
 
                         data.data.list.forEach((item, index) => {
-                            if (item.name == '汽车') {
+                            if (item.name == this.name) {
                                 this.eduneed_aData = item.eduNeeds
                                 this.skill_Data = item.industuryFlow
                                 this.title_Data = item.skillNeeds

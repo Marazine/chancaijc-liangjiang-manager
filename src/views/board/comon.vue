@@ -5,17 +5,19 @@
         </div>
         <div class="nav-bar">
             <div class="my-button">
-                <div class="my-react" @click="allInfo" :class="one ? 'my-bgc': ''">
+                <div class="my-react" @click="allInfo" :class="boartStatus==1 ? 'my-bgc': ''">
                     <span class="my-react-text">人才整体概况</span>
                 </div>
-                <div class="my-react" @click="obtain" :class="two ? 'my-bgc': ''">
-                    <span class="my-react-text">高层次人才情况</span>
-                </div>
-                <div class="my-react" @click="entr" :class="three ? 'my-bgc': ''">
+                
+                <div class="my-react" @click="entr" :class="boartStatus==2 ? 'my-bgc': ''">
                     <span class="my-react-text">重点产业人才</span>
+                </div>
+                <div class="my-react" @click="obtain" :class="boartStatus==3 ? 'my-bgc': ''">
+                    <span class="my-react-text">数据动态更新</span>
                 </div>
             </div>
         </div>
+        <div class="timewrap">{{time}}</div>
         <div class="comon-wrap">
         <router-view></router-view>
         </div>
@@ -38,11 +40,47 @@
                 one: true,
                 two: false,
                 three: false,
+                time: '',
+            }
+        },
+        watch: {
+            $route: {
+                handler: function(val, oldVal) {
+                    // console.log(val);
+                },
+                // 深度观察监听
+                deep: true
+            }
+        },
+        computed: {
+            boartStatus() {
+                return this.$store.state.common.boartStatus
             }
         },
         created() {
-            this.init();
-            // this.isShow = true;
+            switch (this.boartStatus) {
+                case 1:
+                    this.one = true;
+                    this.two = false;
+                    this.three = false;
+                    break;
+                case 2:
+                    this.one = false;
+                    this.two = true;
+                    this.three = false;
+                    break;
+                case 3:
+                    this.one = false;
+                    this.two = false;
+                    this.three = true;
+                    break;
+                default:
+                    break;
+            }
+            setInterval(() => {
+                this.timedata();
+            }, 1000)
+            this.timedata();
         },
         components: {
             boardDetails,
@@ -52,6 +90,17 @@
         methods: {
             init() {
 
+            },
+            timedata() {
+                let weekarr = new Array("日", "一", "二", "三", "四", "五", "六");
+                let nowtime = new Date();
+                let year = nowtime.getFullYear();
+                let month = nowtime.getMonth() + 1;
+                let date = nowtime.getDate();
+                let week = String(nowtime.getDay());
+                let time_text = year + "年" + month + "月" + date + "日 星期" + weekarr[week] + " " +
+                    nowtime.toTimeString().substring(0, 8);
+                this.time = time_text;
             },
             handleClose(done) {
                 this.$confirm('确认关闭？')
@@ -96,38 +145,40 @@
         background: url('~@/assets/img/background.jpg') no-repeat;
         background-size: 100% 100%;
         .comon-navImg {
-            height: 10%;
+            height: 9%;
             width: 100%;
-            background: url('~@/assets/img/board/nav.png') no-repeat;
-            background-size: 150% 100%;
+            background: url('~@/assets/img/borad/nav.png') no-repeat;
+            background-size: 100% 100%;
             div {
                 /* font-size: 3rem; */
                 font-weight: 600;
                 color: #00f2f1;
                 height: 100%;
-                line-height: 2;
-                padding-left: 2%;
+                line-height: 1.8;
+                text-align: center;
+                /* padding-left: 2%; */
             }
         }
         .nav-bar {
             position: absolute;
-            top: 0;
-            right: 2%;
+            top: 3%;
+            left: 3.5%;
             .my-button {
                 display: flex;
                 .my-react {
-                    margin-right: 7px;
+                    margin-right: 15px;
                     /* width: 112px; */
                     /* width: 100%; */
-                    height: 40px;
-                    line-height: 40px;
-                    padding: 0 10px;
+                    height: 55px;
+                    line-height: 55px;
+                    padding: 0 20px;
                     text-align: center;
                     font-size: 16px;
                     font-weight: 700;
                     color: #00f1f0;
-                    background: transparent;
-                    border: 1px solid #01f1f0;
+                    background: url('~@/assets/img/borad/navkuang.png') no-repeat;
+                    background-size: 100% 100%;
+                    /* border: 1px solid #01f1f0; */
                     &-text {
                         display: inline-block;
                     }
@@ -139,15 +190,16 @@
                     }
                 }
                 .my-bgc {
-                    color: #000;
-                    background-color: #01f1f0;
+                    /* color: #000; */
+                    background: url('~@/assets/img/borad/navback.png') no-repeat;
+                    background-size: 100% 100%;
                 }
             }
         }
         /* 侧边导航 */
         .comon-sideNav {
             position: fixed;
-            top: 10%;
+            top: 9%;
             left: 0;
             width: 8%;
             height: 90%;
@@ -174,11 +226,17 @@
         }
         /* 看板内容 */
         .comon-wrap {
-            height: 90%;
+            height: 91%;
             width: 100%;
             /* position: fixed;
             top: 10%;
             left: 8%; */
+        }
+        .timewrap {
+            position: absolute;
+            top: 5%;
+            right: 2.3%;
+            color: #fff;
         }
     }
 </style>

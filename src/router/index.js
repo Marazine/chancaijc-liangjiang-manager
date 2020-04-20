@@ -60,9 +60,16 @@ const globalRoutes = [
                     title: '珠海产才监测看板'
                 },
                 redirect: {
-                    name: 'board',
+                    name: 'boardHome',
                 },
                 children: [{
+                        path: '/common/visual/home',
+                        component: _import('board/common/home'),
+                        name: 'boardHome',
+                        meta: {
+                            title: '首页'
+                        }
+                    }, {
                         path: '/common/visual/board',
                         component: _import('board/common/board'),
                         name: 'board',

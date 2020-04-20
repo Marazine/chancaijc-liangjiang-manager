@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Chart from '@/views/board/chunk/chart'
 Vue.component("Chart", Chart)
+import ChartNew from '@/views/board/chunk/chartNew'
+Vue.component("ChartNew", ChartNew)
 import ChartFill from '@/views/board/chunk/chartFill'
 Vue.component("ChartFill", ChartFill)
 import chartSwitch from '@/views/board/chunk/chartSwitch'
@@ -18,6 +20,7 @@ Vue.component("ProductPerson", ProductPerson)
 import PieA from '@/views/board/components/pie_a' //
 Vue.component("PieA", PieA)
 import BarVer from '@/views/board/components/bar_ver' //
+
 Vue.component("BarVer", BarVer)
 import Sex from '@/views/board/components/sex' //
 Vue.component("Sex", Sex)
@@ -45,3 +48,23 @@ Vue.component("cylinder", cylinder)
     // Vue.component("Lines", Lines)
     // import barSmyble from '@/views/board/components/barSmyble' //
     // Vue.component("barSmyble", barSmyble)
+import PieC from '@/views/board/component/pieA' //
+Vue.component("PieC", PieC)
+import PieNew from '@/views/board/component/pie' //
+Vue.component("PieNew", PieNew)
+import manyPie from '@/views/board/component/manyPie' //
+Vue.component("manyPie", manyPie)
+import chartTable from '@/views/board/component/table' //
+Vue.component("chartTable", chartTable)
+import moreLine from '@/views/board/component/moreLine' //
+Vue.component("moreLine", moreLine)
+import barOverlap from '@/views/board/component/barOverlap' //
+Vue.component("barOverlap", barOverlap)
+import barMore from '@/views/board/component/barMore' //
+Vue.component("barMore", barMore)
+import LineCh from '@/views/board/component/line' //
+Vue.component("LineCh", LineCh)
+import barNew from '@/views/board/component/bar' //
+Vue.component("barNew", barNew)
+import barFillNew from '@/views/board/component/barFill' //
+Vue.component("barFillNew", barFillNew)

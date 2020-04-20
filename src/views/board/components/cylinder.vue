@@ -96,7 +96,7 @@
                     "series": [{
                             "name": "",
                             type: 'pictorialBar',
-                            symbolSize: [60, 16],
+                            symbolSize: [100, 16],
                             symbolOffset: [0, -10],
                             silent: true,
                             symbolPosition: 'end',
@@ -112,7 +112,7 @@
                         }, {
                             "name": "",
                             type: 'pictorialBar',
-                            symbolSize: [60, 16],
+                            symbolSize: [100, 16],
                             symbolOffset: [0, -10],
                             silent: true,
                             symbolPosition: 'end',
@@ -122,7 +122,7 @@
                             "data": [{
                                 "value": part2,
                                 "itemStyle": {
-                                    "color": "#beff3f"
+                                    "color": "rgba(51,127,178,0.8)"
                                 }
                             }]
                         },
@@ -144,7 +144,7 @@
                         {
                             name: '',
                             type: 'pictorialBar',
-                            symbolSize: [60, 16],
+                            symbolSize: [100, 16],
                             silent: true,
                             symbolOffset: [0, 10],
                             // "barWidth": "20",
@@ -158,8 +158,9 @@
                         }, {
                             name: '',
                             type: 'pictorialBar',
-                            symbolSize: [90, 30],
+                            symbolSize: [140, 30],
                             symbolOffset: [0, 20],
+                            symbolRotate: [0, 45],
                             silent: true,
                             z: 10,
                             itemStyle: {
@@ -178,7 +179,7 @@
                             itemStyle: {
                                 normal: {
                                     //color: '#14b1eb',
-                                    opacity: .5
+                                    opacity: 1
                                 }
                             },
                             "label": {
@@ -188,20 +189,19 @@
                                     lineHeight: 18,
                                     "position": ['130%', '40%'],
                                     "formatter": function(params) {
-                                        console.log(params);
-                                        return params.name + ":" + params.value + '\n'+params.data.propor
+                                        return params.name + ":" + params.value + '\n' + params.data.propor
                                     }
                                 }
                             },
                             //silent: true,
-                            "barWidth": "60",
+                            "barWidth": "100",
                             //barGap: '-100%', // Make series be overlap
                             "data": [{
                                 "value": parseInt(parseInt(data.value[0])),
                                 name: data.name[0],
-                                propor:data.propor[0],
+                                propor: data.propor[0],
                                 "itemStyle": {
-                                    "color": "#4ae6ff"
+                                    "color": "rgba(74,230,255,0.6)"
                                 }
                             }],
 
@@ -211,7 +211,7 @@
                             itemStyle: {
                                 normal: {
                                     //color: '#14b1eb',
-                                    opacity: .5
+                                    opacity: 1
                                 }
                             },
                             "label": {
@@ -223,20 +223,20 @@
                                     lineHeight: 18,
                                     "position": ['130%', '40%'],
                                     "formatter": function(params) {
-                                        return params.name + ":" + params.value + '\n'+params.data.propor
+                                        return params.name + ":" + params.value + '\n' + params.data.propor
                                     }
                                 }
                             },
                             stack: 'sad',
                             //silent: true,
-                            "barWidth": "60",
+                            "barWidth": "100",
                             //barGap: '-100%', // Make series be overlap
                             "data": [{
                                 "value": parseInt(parseInt(data.value[1])),
                                 name: data.name[1],
-                                propor:data.propor[1],
+                                propor: data.propor[1],
                                 "itemStyle": {
-                                    "color": "#beff3f",
+                                    "color": "rgba(51,127,178,0.5)",
                                 }
                             }],
 
